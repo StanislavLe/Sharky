@@ -28,12 +28,10 @@ class World {
         this.ctx.drawImage(this.mountain2.img, this.mountain2.x, this.mountain2.y, this.mountain2.width, this.mountain2.height)
         this.ctx.drawImage(this.floor.img, this.floor.x, this.floor.y, this.floor.width, this.floor.height)
         this.ctx.drawImage(this.lightRight.img, this.lightRight.x, this.lightRight.y, this.lightRight.width, this.lightRight.height)
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height)
         this.enemies.forEach(PufferFish => {
-            this.ctx.drawImage(PufferFish.img, PufferFish.x, PufferFish.y, PufferFish.width, PufferFish.height)
-        })
- 
-
+            this.addToMap(PufferFish)
+            this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height)
+        });
 
         //draw wird immer wiedr auffgerufen
         let self = this;
@@ -41,4 +39,8 @@ class World {
             self.draw();
         });
     }
+
+    addToMap(mo) {
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height)
+    };
 }

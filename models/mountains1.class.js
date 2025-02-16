@@ -1,5 +1,5 @@
 class Mountain1 extends MovableObject {
-    y = 80;
+    y = 0;
     x = 0;
     width = 720;
     height = 400;
