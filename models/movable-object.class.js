@@ -6,7 +6,8 @@ class MovableObject {
     width = 100;
     imageCache = {};
     currentImage = 0;
-
+    speed = 2; // Geschwindigkeit der Bewegung (wie schnell das Objekt nach links geht)
+    otherDirection = false;
 
 
     loadImage(path) {
@@ -28,8 +29,8 @@ class MovableObject {
     }
 
     moveLeft() {
-
+        setInterval(() => {
+            this.x -= this.speed; // Verringere die x-Koordinate um die Geschwindigkeit
+        }, 1000 / 60); // 60 FPS, damit die Bewegung flüssig ist
     }
-
-
 }
