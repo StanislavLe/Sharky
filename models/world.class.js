@@ -1,41 +1,7 @@
 class World {
     character = new Character();
-    enemies = [
-        new PufferFish(),
-        new PufferFish(),
-        new PufferFish(),
-        new JellyFish(),
-        new FinalBoss(),
-    ];
+    level = level1;
     lightRight = new LightRight();
-    
-    backgroundObjects = [
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/5. Water/D.png', -720, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/4.Fondo 2/D.png', -720, 80),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/3.Fondo 1/D.png', -720, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/2. Floor/D.png', -720, 80),
-
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/5. Water/D.png', 0, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/4.Fondo 2/D.png', 0, 80),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/3.Fondo 1/D.png', 0, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/2. Floor/D.png', 0, 80),
-
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/5. Water/D.png', 720, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/4.Fondo 2/D.png', 720, 80),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/3.Fondo 1/D.png', 720, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/2. Floor/D.png', 720, 80),
-    
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/5. Water/D.png', 720*2, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/4.Fondo 2/D.png', 720*2, 80),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/3.Fondo 1/D.png', 720*2, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/2. Floor/D.png', 720*2, 80),
-
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/5. Water/D.png', 720*3, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/4.Fondo 2/D.png', 720*3, 80),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/3.Fondo 1/D.png', 720*3, 0),
-        new BackgroundObject('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/2. Floor/D.png', 720*3, 80)
-    ];
-
     canvas;
     ctx;
     keyboard;
@@ -54,12 +20,12 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         // Hintergrund zeichnen
-        this.backgroundObjects.forEach(bg => {
+        this.level.backgroundObjects.forEach(bg => {
             this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
         });
 
         this.addToMap(this.character); 
-        this.enemies.forEach(enemy => {
+        this.level.enemies.forEach(enemy => {
             this.addToMap(enemy);
         });
 
