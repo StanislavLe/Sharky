@@ -8,7 +8,21 @@ class MovableObject {
     currentImage = 0;
     speed = 2; // Geschwindigkeit der Bewegung (wie schnell das Objekt nach links geht)
     otherDirection = false;
+    speedY = 0;
+    acceleration = 2.5;
 
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25);
+    }
+
+    isAboveGround() {
+        return this.y < 180;
+    }
 
     loadImage(path) {
         this.img = new Image();
@@ -24,21 +38,24 @@ class MovableObject {
     }
 
     playAnimation(images) {
-                    //Walk animation 
-                    let i = this.currentImage % this.IMAGES_WALKING.length;
-                    let path = images[i];
-                    this.img = this.imageCache[path];
-                    this.currentImage++;
+        //Walk animation 
+        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
 
+    jump() {
+        this.speedY = 30;
+    }
 
     moveRight() {
-        console.log('Moving Right')
+        this.x += this.speed;
+        console.log("Bewegung nach rechts");
     }
 
     moveLeft() {
-        setInterval(() => {
-            this.x -= this.speed; // Verringere die x-Koordinate um die Geschwindigkeit
-        }, 1000 / 60); // 60 FPS, damit die Bewegung flüssig ist
+        this.x -= this.speed;
+        console.log("Bewegung nach links");
     }
 }
