@@ -24,7 +24,7 @@ class World {
             this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
         });
 
-        this.addToMap(this.character); 
+        this.addToMap(this.character);
         this.level.enemies.forEach(enemy => {
             this.addToMap(enemy);
         });
@@ -39,18 +39,22 @@ class World {
     }
 
     addToMap(mo) {
-        this.ctx.save();  
-
+        mo.drawFrame(this.ctx);
+        this.ctx.save();
         if (mo.otherDirection) {
-            this.ctx.translate(mo.x + mo.width, mo.y);
-            this.ctx.scale(-1, 1);
-            this.ctx.drawImage(mo.img, 0, 0, mo.width, mo.height);
+            this.flipImage(mo);
         } else {
-            this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+            mo.draw(this.ctx);
         }
-
-        this.ctx.restore();  
+        this.ctx.restore();
     }
+
+    flipImage(mo) {
+        this.ctx.translate(mo.x + mo.width, mo.y);
+        this.ctx.scale(-1, 1);
+        this.ctx.drawImage(mo.img, 0, 0, mo.width, mo.height);
+    }
+
 
     setWorld() {
         this.character.world = this;
