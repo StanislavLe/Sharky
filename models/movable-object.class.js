@@ -10,6 +10,8 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
+    energy = 100;
+    lastHit = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -39,7 +41,7 @@ class MovableObject {
 
     playAnimation(images) {
         //Walk animation 
-        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
@@ -59,7 +61,32 @@ class MovableObject {
             ctx.stroke();
         }
     }
-    
+
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
+    }
+
+    hit() {
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
+    }
 
     jump() {
         this.speedY = 30;
@@ -67,11 +94,11 @@ class MovableObject {
 
     moveRight() {
         this.x += this.speed;
-        console.log("Bewegung nach rechts");
+        //console.log("Bewegung nach rechts");
     }
 
     moveLeft() {
         this.x -= this.speed;
-        console.log("Bewegung nach links");
+        //console.log("Bewegung nach links");
     }
 }
