@@ -6,6 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -19,19 +20,19 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-
         // Hintergrund zeichnen
         this.level.backgroundObjects.forEach(bg => {
             this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
         });
-
+        // position for fixed objects
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.level.enemies.forEach(enemy => {
             this.addToMap(enemy);
         });
-
         this.ctx.translate(-this.camera_x, 0);
-
         //draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
@@ -45,6 +46,7 @@ class World {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
                     //console.log('collision with Character', enemy, this.character.energy);
+                    this.statusBar.setPercentage(this.character.energy)
                 }
             })
         }, 200);

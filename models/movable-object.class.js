@@ -1,11 +1,4 @@
-class MovableObject {
-    x = 60;
-    y = 350;
-    img;
-    height = 100;
-    width = 100;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject {
     speed = 2; // Geschwindigkeit der Bewegung (wie schnell das Objekt nach links geht)
     otherDirection = false;
     speedY = 0;
@@ -26,18 +19,6 @@ class MovableObject {
         return this.y < 180;
     }
 
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
 
     playAnimation(images) {
         //Walk animation 
@@ -47,20 +28,8 @@ class MovableObject {
         this.currentImage++;
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof PufferFish) {
-            // Blue rectangle
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
+
 
     isColliding(mo) {
         return this.x + this.width > mo.x &&
