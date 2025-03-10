@@ -2,8 +2,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: swimmingPool;
+    background-image: url('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
 }
 
 canvas {
     background-color: black;
+}
+
+@font-face {
+    font-family: swimmingPool;
+    src: url('fonts/swimmingPool.ttf');
+}
+
+h1 {
+    font-size: 68px;
 }
