@@ -37,9 +37,12 @@ class World {
         this.addToMap(this.statusBar);
         this.ctx.translate(this.camera_x, 0);
     
-        console.log("Coins im Level:", this.level.coins);
         this.level.coins.forEach(coin => {
             this.addToMap(coin);
+        });
+
+        this.level.bubbles.forEach(bubble => {
+            this.addToMap(bubble);
         });
 
         this.throwableObjects.forEach(bg => {

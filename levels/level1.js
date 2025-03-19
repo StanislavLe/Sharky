@@ -41,5 +41,12 @@ const level1 = new Level(
         new Coin(),
         new Coin(),
         new Coin(),
+    ],
+
+    [
+        new Bubble(),
+        new Bubble(),
+        new Bubble(),
+        new Bubble(),
     ]
 );
