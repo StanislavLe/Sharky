@@ -1,8 +1,6 @@
-class Coins extends MovableObject {
+class Coin extends MovableObject {
     width = 50;
     height = 50;
-    x = 200;
-    y = 150;
 
     WARPING_COINS = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/1. Coins/1.png',
@@ -14,6 +12,8 @@ class Coins extends MovableObject {
 
     constructor() {
         super().loadImage(this.WARPING_COINS[0]); // Starte mit erstem Bild
+        this.x = 200 + Math.random() * 500;
+        this.y = 80  + Math.random() * 350;
         this.loadImages(this.WARPING_COINS);
         this.animateCoins();
     }

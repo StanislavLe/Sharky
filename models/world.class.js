@@ -9,6 +9,7 @@ class World {
     statusBar = new StatusBar();
     throwableObjects = [];
 
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -36,6 +37,11 @@ class World {
         this.addToMap(this.statusBar);
         this.ctx.translate(this.camera_x, 0);
     
+        console.log("Coins im Level:", this.level.coins);
+        this.level.coins.forEach(coin => {
+            this.addToMap(coin);
+        });
+
         this.throwableObjects.forEach(bg => {
             this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
         });
