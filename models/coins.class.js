@@ -1,4 +1,4 @@
-class Coin extends MovableObject {
+class Coin extends CollectableObject {
     width = 50;
     height = 50;
 
@@ -12,8 +12,6 @@ class Coin extends MovableObject {
 
     constructor() {
         super().loadImage(this.WARPING_COINS[0]); // Starte mit erstem Bild
-        this.x = 200 + Math.random() * 900;
-        this.y = 80  + Math.random() * 350;
         this.loadImages(this.WARPING_COINS);
         this.animateCoins();
     }

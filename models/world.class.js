@@ -8,6 +8,7 @@ class World {
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
+    CollectableObject = new CollectableObject();
 
 
     constructor(canvas, keyboard) {
