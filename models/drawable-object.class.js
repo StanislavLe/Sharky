@@ -19,7 +19,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof PufferFish) {
+        if (this instanceof Character || this instanceof PufferFish || this instanceof Coin || this instanceof Bubble) {
             // Blue rectangle
             ctx.beginPath();
             ctx.lineWidth = '5';

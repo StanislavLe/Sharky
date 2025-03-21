@@ -113,7 +113,7 @@ class Character extends MovableObject {
                 this.moveLeft();
                 this.idleTimer = 0;  // 🔥 Reset bei Bewegung
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
                 this.idleTimer = 0;  // 🔥 Reset bei Sprung
             }
