@@ -6,4 +6,6 @@ class CollectableObject extends MovableObject {
         this.y = 80  + Math.random() * 350;
     }
 
+    
+
 }
