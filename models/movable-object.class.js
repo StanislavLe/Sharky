@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     score = 0;
+    ammo = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -33,6 +34,9 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    increaseAmmo() {
+        this.ammo += 1;
+    }
 
     increaseScore() {
        this.score += 1; 

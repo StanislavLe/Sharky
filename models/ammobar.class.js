@@ -1,12 +1,12 @@
-class ScoreBar extends DrawableObject {
+class AmmoBar extends DrawableObject {
 
     IMAGES = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/green/Coin/0_  copia 4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/green/Coin/20_  copia 2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/green/Coin/40_  copia 4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/green/Coin/60_  copia 4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/green/Coin/80_  copia 4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/green/Coin/100_ copia 4.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/0_ copia.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/20_ copia.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/40_ copia.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/60_ copia.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/80_ copia.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/100_ copia.png',
     ];
 
     percentage = 0;
@@ -15,7 +15,7 @@ class ScoreBar extends DrawableObject {
         super();
         this.loadImages(this.IMAGES);
         this.x = 10;
-        this.y = 50;
+        this.y = 100;
         this.width = 200;
         this.height = 60;
         this.setPercentage(0);
@@ -27,7 +27,6 @@ class ScoreBar extends DrawableObject {
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
-
 
 
 
@@ -46,5 +45,6 @@ class ScoreBar extends DrawableObject {
             return 0;
         }
     }
+
 
 }

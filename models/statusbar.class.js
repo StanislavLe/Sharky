@@ -1,4 +1,5 @@
 class StatusBar extends DrawableObject {
+
     IMAGES = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/0_ .png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/20__1.png',

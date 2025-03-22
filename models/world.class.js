@@ -7,7 +7,8 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
-    scorebar = new Scorebar();
+    scoreBar = new ScoreBar();
+    ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
 
@@ -37,7 +38,8 @@ class World {
         // Position für feste Objekte
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
-        this.addToMap(this.scorebar);
+        this.addToMap(this.scoreBar);
+        this.addToMap(this.ammoBar);
         this.ctx.translate(this.camera_x, 0);
     
         this.level.coins.forEach(coin => {
@@ -73,6 +75,7 @@ class World {
             this.checkCollisions();
             this.checkThrowObject();
             this.collectCoin();
+            this.checkAmmo();
         }, 200);
     }
 
@@ -101,7 +104,18 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.character.increaseScore(); // Score +1
                 this.level.coins.splice(index, 1); // Coin entfernen
-                this.scorebar.setPercentage(this.character.score * 10); // Umrechnen auf % für 10 Coins max
+                this.scoreBar.setPercentage(this.character.score * 10); // Umrechnen auf % für 10 Coins max
+            }
+        });
+    }
+
+
+    checkAmmo() {
+        this.level.bubbles.forEach((bubble, index) => {
+            if (this.character.isColliding(bubble)) {
+                this.character.increaseAmmo(); // Score +1
+                this.level.bubbles.splice(index, 1); // Coin entfernen
+                this.ammoBar.setPercentage(this.character.ammo * 10); // Umrechnen auf % für 10 Coins max
             }
         });
     }
