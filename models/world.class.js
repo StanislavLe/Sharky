@@ -7,6 +7,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    bossStatusBar = new BossStatusBar();
     scoreBar = new ScoreBar();
     ammoBar = new AmmoBar();
     throwableObjects = [];
@@ -38,6 +39,7 @@ class World {
         // Position für feste Objekte
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
+        this.addToMap(this.bossStatusBar);
         this.addToMap(this.scoreBar);
         this.addToMap(this.ammoBar);
         this.ctx.translate(this.camera_x, 0);
