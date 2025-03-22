@@ -27,15 +27,15 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-    
+
         // Hintergrund zeichnen
         this.level.backgroundObjects.forEach(bg => {
             this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
         });
-    
+
         // 🔥 Füge `LightRight` hinzu
         this.addToMap(this.lightRight);
-    
+
         // Position für feste Objekte
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
@@ -43,7 +43,7 @@ class World {
         this.addToMap(this.scoreBar);
         this.addToMap(this.ammoBar);
         this.ctx.translate(this.camera_x, 0);
-    
+
         this.level.coins.forEach(coin => {
             this.addToMap(coin);
         });
@@ -55,21 +55,19 @@ class World {
         this.throwableObjects.forEach(bg => {
             this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
         });
-    
+
         this.addToMap(this.character);
         this.level.enemies.forEach(enemy => {
             this.addToMap(enemy);
         });
-    
+
         this.ctx.translate(-this.camera_x, 0);
-    
-        // draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
     }
-    
+
 
 
     run() {
@@ -77,9 +75,26 @@ class World {
             this.checkCollisions();
             this.checkThrowObject();
             this.collectCoin();
-            this.checkAmmo();
+            this.collectAmmo();
         }, 200);
     }
+
+    stompEnemy(enemy, index) {
+        if (this.character.isAboveEnemy(enemy)) {
+            this.killEnemy(index); // ❗index muss übergeben werden
+            this.character.speedY = 10; // Bounce nach oben
+        } else {
+            this.character.hit(); // Schaden nehmen
+            this.statusBar.setPercentage(this.character.energy); // Statusbar aktualisieren!
+        }
+    }
+    
+    
+    
+    killEnemy(index) {
+        this.level.enemies.splice(index, 1);
+    }
+    
 
 
     checkThrowObject() {
@@ -87,43 +102,42 @@ class World {
             let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bubble);
             this.character.ammo -= 1;
-            this.ammoBar.setPercentage(this.character.ammo * 10); // ⬅️ Anzeige aktualisieren
+            this.ammoBar.setPercentage(this.character.ammo * 10);
         }
     }
 
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                //console.log('collision with Character', enemy, this.character.energy);
-                this.statusBar.setPercentage(this.character.energy)
+                this.stompEnemy(enemy, index);
             }
-        })
+        });
+        
     }
 
 
     collectCoin() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
-                this.character.increaseScore(); // Score +1
-                this.level.coins.splice(index, 1); // Coin entfernen
-                this.scoreBar.setPercentage(this.character.score * 10); // Umrechnen auf % für 10 Coins max
+                this.character.increaseScore();
+                this.level.coins.splice(index, 1);
+                this.scoreBar.setPercentage(this.character.score * 10);
             }
         });
     }
 
 
-    checkAmmo() {
+    collectAmmo() {
         this.level.bubbles.forEach((bubble, index) => {
             if (this.character.isColliding(bubble)) {
-                this.character.increaseAmmo(); // Score +1
-                this.level.bubbles.splice(index, 1); // Coin entfernen
-                this.ammoBar.setPercentage(this.character.ammo * 10); // Umrechnen auf % für 10 Coins max
+                this.character.increaseAmmo();
+                this.level.bubbles.splice(index, 1);
+                this.ammoBar.setPercentage(this.character.ammo * 10);
             }
         });
     }
-    
+
 
     addToMap(mo) {
         mo.drawFrame(this.ctx);
@@ -146,4 +160,6 @@ class World {
     setWorld() {
         this.character.world = this;
     }
+
+
 }

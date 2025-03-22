@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     score = 0;
-    ammo = 0;
+    ammo = 10;
 
     applyGravity() {
         setInterval(() => {
@@ -25,6 +25,10 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    isAboveEnemy(enemy) {
+        return this.y + this.height < enemy.y + enemy.height && this.speedY < 0;
+    }
+
 
     playAnimation(images) {
         //Walk animation 
@@ -39,7 +43,7 @@ class MovableObject extends DrawableObject {
     }
 
     increaseScore() {
-       this.score += 1; 
+        this.score += 1;
     }
 
 
