@@ -81,10 +81,12 @@ class World {
 
 
     checkThrowObject() {
-            if (this.keyboard.SPACE) {
-                let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-                this.throwableObjects.push(bottle);
-            }
+        if (this.keyboard.SPACE && this.character.ammo > 0) {
+            let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bubble);
+            this.character.ammo -= 1;
+            this.ammoBar.setPercentage(this.character.ammo * 10); // ⬅️ Anzeige aktualisieren
+        }
     }
 
 
