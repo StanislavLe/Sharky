@@ -18,12 +18,20 @@ class ThrowableObject extends MovableObject {
     
             this.world.level.enemies.forEach(enemy => {
                 if (!enemy.isDying && this.isColliding(enemy) && this.isAboveEnemy(enemy)) {
-                    enemy.die();
-                    this.removeFromWorld();
+    
+                    // ✅ Check: Endboss oder normaler Gegner?
+                    if (enemy instanceof FinalBoss) {
+                        enemy.hit(); // Nur Schaden
+                    } else {
+                        enemy.die(); // Direkt töten
+                    }
+    
+                    this.removeFromWorld(); // Bubble verschwindet immer
                 }
             });
         }, 25);
     }
+    
     
 
     removeFromWorld() {

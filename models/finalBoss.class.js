@@ -77,4 +77,9 @@ class FinalBoss extends MovableObject {
             this.playAnimation(this.BOSS_WALKING);
         }, 1000 / 20);
     }
+
+    die() {
+        this.isDying = true;
+        // Hier kannst du später Boss-Death-Animation einfügen
+    }
 }

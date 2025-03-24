@@ -1,7 +1,6 @@
 class JellyFish extends MovableObject{
 
-    direction = -1; // -1 = links, 1 = rechts
-    isDying = false;
+    direction = -1; 
     currentDirectionTime = 0;
     
     JELLYFISH_WALKING = [
@@ -32,23 +31,18 @@ class JellyFish extends MovableObject{
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.JELLYFISH_DIE);
-                this.isDying = true;
                 this.removeEnemy();
             } else {
-                // Bewegungslogik basierend auf Richtung
                 if (this.direction === -1) {
                     this.moveLeft();
                 } else {
                     this.moveRight();
                 }
-
                 this.playAnimation(this.JELLYFISH_WALKING);
-
-                // Timer erhöhen und alle 3 Sekunden Richtung wechseln
                 this.currentDirectionTime += 150;
-                if (this.currentDirectionTime >= 3000) { // alle 3 Sekunden
-                    this.direction *= -1; // Richtung umkehren
-                    this.otherDirection = this.direction === 1; // für Spiegelung
+                if (this.currentDirectionTime >= 3000) { 
+                    this.direction *= -1; 
+                    this.otherDirection = this.direction === 1; 
                     this.currentDirectionTime = 0;
                 }
             }
