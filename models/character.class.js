@@ -6,6 +6,7 @@ class Character extends MovableObject {
     speed = 10;
     idleTimer = 0;
 
+
     IMAGES_WALKING = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/1.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/2.png',
@@ -124,26 +125,26 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.idleTimer = 0;
-            } 
-            else if (this.isHurt()) {
+            }
+            else if (this.isHurt() && !this.enemy?.isDying) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.idleTimer = 0;
-            } 
+            }
             else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
                 this.idleTimer = 0;
-            } 
+            }
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.idleTimer = 0;
-            } 
+            }
             else {
                 this.idleTimer += 1;
                 this.checkIdleTimer();  // 🔥 Timer wird hier geprüft
             }
         }, 150);
     }
-    
+
     checkIdleTimer() {
         if (this.idleTimer > 100) {
             this.playAnimation(this.IMAGES_LONG_IDLE, 350);

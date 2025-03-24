@@ -12,6 +12,7 @@ class World {
     ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
+    
 
 
     constructor(canvas, keyboard) {
@@ -79,23 +80,17 @@ class World {
         }, 200);
     }
 
-    stompEnemy(enemy, index) {
+    stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
-            this.killEnemy(index); // ❗index muss übergeben werden
-            this.character.speedY = 10; // Bounce nach oben
+            this.character.speedY = 25;
+            enemy.die(); 
         } else {
-            this.character.hit(); // Schaden nehmen
-            this.statusBar.setPercentage(this.character.energy); // Statusbar aktualisieren!
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
         }
     }
     
     
-    
-    killEnemy(index) {
-        this.level.enemies.splice(index, 1);
-    }
-    
-
 
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
@@ -115,6 +110,9 @@ class World {
         });
         
     }
+    
+    
+    
 
 
     collectCoin() {
@@ -159,6 +157,10 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.level.enemies.forEach(enemy => {
+            enemy.world = this;
+        });
+        
     }
 
 

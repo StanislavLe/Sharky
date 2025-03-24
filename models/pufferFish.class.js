@@ -1,5 +1,6 @@
 class PufferFish extends MovableObject {
-    IMAGES_WALKING = [
+    isDying = false;
+    PUFFERFISH_WALKING = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
@@ -7,22 +8,59 @@ class PufferFish extends MovableObject {
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
     ];
 
+    PUFFERFISH_DIE = [
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.2.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.3.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.png',
+    ];
+
 
     constructor() {
-        super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
+        super().loadImage(this.PUFFERFISH_WALKING[0]);
         this.x = 200 + Math.random() * 1500;
         this.speed = 0.15 + Math.random() * 0.25;
-        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.PUFFERFISH_WALKING);
+        this.loadImages(this.PUFFERFISH_DIE);
         this.animate();
     }
 
 
     animate() {
         setInterval(() => {
-            this.moveLeft(); // Verringere die x-Koordinate um die Geschwindigkeit
-        }, 1000 / 60); // 60 FPS, damit die Bewegung flüssig ist
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 1000 / 6)
+            if (this.isDead()) {
+                this.playAnimation(this.PUFFERFISH_DIE);
+                this.isDying = true;
+                this.removeEnemy();
+            }
+            else {
+                this.moveLeft(); // Optional: KI oder Richtungswechsel
+                this.playAnimation(this.PUFFERFISH_WALKING);
+            }
+        }, 150);
     }
+    
+    
+
+    die() {
+        this.energy = 0;
+    }
+    
+    
+
+    removeEnemy() {
+        setTimeout(() => {
+            const index = this.world.level.enemies.indexOf(this);
+            if (index !== -1) {
+                this.world.level.enemies.splice(index, 1);
+            }
+        }, this.PUFFERFISH_DIE.length * 150); // Zeit basierend auf Frames
+    }
+    
+    
+    
+    
+
+
+
+
 }
