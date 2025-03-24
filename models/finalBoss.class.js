@@ -62,20 +62,16 @@ class FinalBoss extends MovableObject {
     startIntro() {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
-        this.introFrame = 0;
-
+        this.currentImage = 0; 
         this.introInterval = setInterval(() => {
-            if (this.introFrame < this.BOSS_INTRO.length) {
-                const path = this.BOSS_INTRO[this.introFrame];
-                this.img = this.imageCache[path];
-                this.introFrame++;
-            } else {
+            this.playAnimation(this.BOSS_INTRO);
+                if (this.currentImage >= this.BOSS_INTRO.length) {
                 clearInterval(this.introInterval);
-                this.animate(); // 🚶 Boss normal bewegen nach Intro
+                this.animate(); // 🔁 danach normale Animation starten
             }
-        }, 50);
+        }, 50); 
     }
-
+    
     animate() {
         this.walkingInterval = setInterval(() => {
             this.playAnimation(this.BOSS_WALKING);
