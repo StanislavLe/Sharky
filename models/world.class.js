@@ -28,15 +28,25 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-
         // Hintergrund zeichnen
         this.level.backgroundObjects.forEach(bg => {
             this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
         });
-
         // 🔥 Füge `LightRight` hinzu
         this.addToMap(this.lightRight);
-
+        this.level.coins.forEach(coin => {
+            this.addToMap(coin);
+        });
+        this.level.bubbles.forEach(bubble => {
+            this.addToMap(bubble);
+        });
+        this.throwableObjects.forEach(bg => {
+            this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
+        });
+        this.addToMap(this.character);
+        this.level.enemies.forEach(enemy => {
+            this.addToMap(enemy);
+        });
         // Position für feste Objekte
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
@@ -44,24 +54,6 @@ class World {
         this.addToMap(this.scoreBar);
         this.addToMap(this.ammoBar);
         this.ctx.translate(this.camera_x, 0);
-
-        this.level.coins.forEach(coin => {
-            this.addToMap(coin);
-        });
-
-        this.level.bubbles.forEach(bubble => {
-            this.addToMap(bubble);
-        });
-
-        this.throwableObjects.forEach(bg => {
-            this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
-        });
-
-        this.addToMap(this.character);
-        this.level.enemies.forEach(enemy => {
-            this.addToMap(enemy);
-        });
-
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function () {
