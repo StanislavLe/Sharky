@@ -13,10 +13,25 @@ class ThrowableObject extends MovableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
-        setInterval(() => {
+        this.moveInterval = setInterval(() => {
             this.x += 10;
-        }, 25)
-    }
-
     
+            this.world.level.enemies.forEach(enemy => {
+                if (!enemy.isDying && this.isColliding(enemy) && this.isAboveEnemy(enemy)) {
+                    enemy.die();
+                    this.removeFromWorld();
+                }
+            });
+        }, 25);
+    }
+    
+
+    removeFromWorld() {
+        clearInterval(this.moveInterval);
+        const index = this.world?.throwableObjects.indexOf(this);
+        if (index !== -1) {
+            this.world.throwableObjects.splice(index, 1);
+        }
+    }
 }
+    

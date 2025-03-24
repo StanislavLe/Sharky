@@ -12,7 +12,7 @@ class World {
     ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
-    
+
 
 
     constructor(canvas, keyboard) {
@@ -83,23 +83,26 @@ class World {
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
             this.character.speedY = 25;
-            enemy.die(); 
+            enemy.die();
         } else {
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
         }
     }
-    
-    
+
+
 
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
             let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            bubble.world = this; // ✅ Referenz zur Welt setzen
             this.throwableObjects.push(bubble);
             this.character.ammo -= 1;
             this.ammoBar.setPercentage(this.character.ammo * 10);
         }
     }
+    
+
 
 
     checkCollisions() {
@@ -108,11 +111,11 @@ class World {
                 this.stompEnemy(enemy, index);
             }
         });
-        
+
     }
-    
-    
-    
+
+
+
 
 
     collectCoin() {
@@ -160,7 +163,7 @@ class World {
         this.level.enemies.forEach(enemy => {
             enemy.world = this;
         });
-        
+
     }
 
 
