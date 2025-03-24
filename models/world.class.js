@@ -69,6 +69,7 @@ class World {
             this.checkThrowObject();
             this.collectCoin();
             this.collectAmmo();
+            this.checkBossIntro();
         }, 200);
     }
 
@@ -93,7 +94,7 @@ class World {
             this.ammoBar.setPercentage(this.character.ammo * 10);
         }
     }
-    
+
 
 
 
@@ -107,6 +108,15 @@ class World {
     }
 
 
+    checkBossIntro() {
+        if (this.character.x > 1530) {
+            const boss = this.level.enemies.find(e => e instanceof FinalBoss);
+            if (boss) {
+                boss.startIntro(); // 🔥 Intro starten (einmalig)
+            }
+        }
+    }
+    
 
 
 

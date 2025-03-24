@@ -1,10 +1,25 @@
 class FinalBoss extends MovableObject {
-width = 500;
-height = 500;
-x = 200;
-y = 10;
+    width = 500;
+    height = 500;
+    x = 200;
+    y = 10;
+    isIntroPlayed = false;
+    introFrame = 0;
 
-    IMAGES_WALKING = [
+    BOSS_INTRO = [
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/1.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/2.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/3.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/4.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/5.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/6.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/7.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/8.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/9.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/10.png'
+    ]
+
+    BOSS_WALKING = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/1.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/2.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/3.png',
@@ -20,18 +35,50 @@ y = 10;
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/13.png',
     ]
 
+    BOSS_HURT = [
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/1.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/2.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/3.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/4.png',
+    ]
+
+    BOSS_DEAD = [
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
+        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
+    ]
+
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
-        this.loadImages(this.IMAGES_WALKING);
+        super().loadImage(this.BOSS_INTRO[0]);
+        this.loadImages(this.BOSS_INTRO);
+        this.loadImages(this.BOSS_WALKING);
+        this.loadImages(this.BOSS_HURT);
+        this.loadImages(this.BOSS_DEAD);
         this.x = 1900;
-        this.animate();
+    }
+
+    startIntro() {
+        if (this.isIntroPlayed) return;
+        this.isIntroPlayed = true;
+        this.introFrame = 0;
+
+        this.introInterval = setInterval(() => {
+            if (this.introFrame < this.BOSS_INTRO.length) {
+                const path = this.BOSS_INTRO[this.introFrame];
+                this.img = this.imageCache[path];
+                this.introFrame++;
+            } else {
+                clearInterval(this.introInterval);
+                this.animate(); // 🚶 Boss normal bewegen nach Intro
+            }
+        }, 50);
     }
 
     animate() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
+        this.walkingInterval = setInterval(() => {
+            this.playAnimation(this.BOSS_WALKING);
         }, 1000 / 20);
     }
-
-
 }
