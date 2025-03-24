@@ -1,6 +1,6 @@
 class BossStatusBar extends DrawableObject {
 
-    IMAGES = [
+    BOSS_STATUS_BAR = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/0_ .png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/20__1.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/40_ .png',
@@ -13,7 +13,7 @@ class BossStatusBar extends DrawableObject {
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES);
+        this.loadImages(this.BOSS_STATUS_BAR);
         this.x = 500;
         this.y = 0;
         this.width = 200;
@@ -24,7 +24,7 @@ class BossStatusBar extends DrawableObject {
 
     setPercentage(percentage) {
         this.percentage = percentage;
-        let path = this.IMAGES[this.resolveImageIndex()]
+        let path = this.BOSS_STATUS_BAR[this.resolveImageIndex()]
         this.img = this.imageCache[path];
     }
 

@@ -54,14 +54,24 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height
     }
 
-    hit() {
-        this.energy -= 5;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+    hit(damage = 5) {
+        this.energy -= damage;
+        if (this.energy < 0) this.energy = 0;
+        this.lastHit = new Date().getTime();
+    
+        // 🟦 Für Character
+        if (this instanceof Character) {
+            this.updateStatusBar(this.world?.statusBar);
+        }
+    
+        // 🟪 Für FinalBoss
+        if (this instanceof FinalBoss) {
+            this.updateStatusBar(this.world?.bossStatusBar);
         }
     }
+    
+    
+    
 
     isDead() {
         return this.energy == 0;

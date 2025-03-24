@@ -76,12 +76,19 @@ class World {
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
             this.character.speedY = 25;
-            enemy.die();
+    
+            if (enemy instanceof FinalBoss) {
+                enemy.hit(); // 🔥 Treffer auf FinalBoss → Energie verringern + Statusbar aktualisieren
+            } else {
+                enemy.die(); // 💀 Andere Gegner sofort töten
+            }
+    
         } else {
-            this.character.hit();
-            this.statusBar.setPercentage(this.character.energy);
+            this.character.hit(); // 🔴 Sharkie wird getroffen
         }
     }
+    
+    
 
 
 

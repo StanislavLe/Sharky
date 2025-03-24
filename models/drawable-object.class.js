@@ -29,6 +29,14 @@ class DrawableObject {
         }
     }
 
+    updateStatusBar(statusBar) {
+        if (statusBar && typeof statusBar.setPercentage === 'function') {
+            statusBar.setPercentage(this.energy);
+        }
+    }
+    
+    
+
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();

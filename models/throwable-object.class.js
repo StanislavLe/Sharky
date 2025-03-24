@@ -17,11 +17,12 @@ class ThrowableObject extends MovableObject {
             this.x += 10;
     
             this.world.level.enemies.forEach(enemy => {
-                if (!enemy.isDying && this.isColliding(enemy) && this.isAboveEnemy(enemy)) {
+                if (!enemy.isDying && this.isColliding(enemy) || this.isAboveEnemy(enemy)) {
     
                     // ✅ Check: Endboss oder normaler Gegner?
                     if (enemy instanceof FinalBoss) {
                         enemy.hit(); // Nur Schaden
+                        
                     } else {
                         enemy.die(); // Direkt töten
                     }

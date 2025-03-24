@@ -4,6 +4,7 @@ class FinalBoss extends MovableObject {
     x = 200;
     y = 10;
     isIntroPlayed = false;
+    isActive = false; // 💡 wird true, wenn Intro durch ist
     introFrame = 0;
 
     BOSS_INTRO = [
@@ -62,24 +63,37 @@ class FinalBoss extends MovableObject {
     startIntro() {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
-        this.currentImage = 0; 
+        this.currentImage = 0;
+    
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
-                if (this.currentImage >= this.BOSS_INTRO.length) {
+    
+            if (this.currentImage >= this.BOSS_INTRO.length) {
                 clearInterval(this.introInterval);
-                this.animate(); // 🔁 danach normale Animation starten
+                this.isActive = true; // ✅ Jetzt angreifbar!
+                this.animate();
             }
-        }, 50); 
+        }, 150);
     }
     
+    
+
     animate() {
-        this.walkingInterval = setInterval(() => {
-            this.playAnimation(this.BOSS_WALKING);
-        }, 1000 / 20);
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.BOSS_DEAD);
+                this.isDying = true;
+            }
+            else {
+                this.playAnimation(this.BOSS_WALKING);
+            }
+        }, 150);
     }
 
     die() {
         this.isDying = true;
-        // Hier kannst du später Boss-Death-Animation einfügen
+        this.playAnimation(this.BOSS_DEAD);
+        clearInterval(this.walkingInterval);
     }
+    
 }
