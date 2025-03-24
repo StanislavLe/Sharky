@@ -13,26 +13,26 @@ class ThrowableObject extends MovableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
+    
         this.moveInterval = setInterval(() => {
             this.x += 10;
     
-            this.world.level.enemies.forEach(enemy => {
-                if (!enemy.isDying && this.isColliding(enemy) || this.isAboveEnemy(enemy)) {
+            for (let i = 0; i < this.world.level.enemies.length; i++) {
+                const enemy = this.world.level.enemies[i];
     
-                    // ✅ Check: Endboss oder normaler Gegner?
+                if (!enemy.isDying && this.isColliding(enemy)) {
                     if (enemy instanceof FinalBoss) {
-                        enemy.hit(); // Nur Schaden
-                        
+                        enemy.hit();
                     } else {
-                        enemy.die(); // Direkt töten
+                        enemy.die();
                     }
     
-                    this.removeFromWorld(); // Bubble verschwindet immer
+                    this.removeFromWorld(); // 💥 Bubble zerstört
+                    break; // 🛑 Nur ein Gegner wird getroffen
                 }
-            });
+            }
         }, 25);
     }
-    
     
 
     removeFromWorld() {

@@ -69,7 +69,7 @@ class MovableObject extends DrawableObject {
             this.updateStatusBar(this.world?.bossStatusBar);
         }
     }
-    
+      
     
     
 

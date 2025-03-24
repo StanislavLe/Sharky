@@ -87,10 +87,7 @@ class World {
             this.character.hit(); // 🔴 Sharkie wird getroffen
         }
     }
-    
-    
-
-
+     
 
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
