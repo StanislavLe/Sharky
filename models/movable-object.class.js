@@ -76,6 +76,24 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    punch() {
+        if (this.isPunching) return; // 🛑 Punch läuft schon
+    
+        this.isPunching = true;
+        this.currentImage = 0;
+    
+        let punchInterval = setInterval(() => {
+            if (this.currentImage < this.IMAGES_PUNCH.length) {
+                this.playAnimation(this.IMAGES_PUNCH);
+            } else {
+                clearInterval(punchInterval);
+                this.isPunching = false; // ✅ Punch vorbei
+                this.currentImage = 0;
+            }
+        }, 120); // 🐢 Langsamer (120ms pro Frame)
+    }
+    
+
     isDead() {
         return this.energy == 0;
     }
