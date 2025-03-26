@@ -1,10 +1,12 @@
 class SoundManager {
     backgroundAudio;
+    bossAudio;
 
     constructor() {
         this.initBackgroundMusik();
     }
 
+    // === Background-Musik ===
     initBackgroundMusik(path = '../audio/backgroundMusik.mp3') {
         this.backgroundAudio = new Audio(path);
         this.backgroundAudio.loop = true;
@@ -12,24 +14,53 @@ class SoundManager {
     }
 
     playBackgroundMusik() {
+        if (!this.backgroundAudio) this.initBackgroundMusik();
         this.backgroundAudio.play().catch(e => {
             console.warn("Autoplay blockiert – User muss zuerst interagieren", e);
         });
     }
 
     stopBackgroundMusik() {
-        this.backgroundAudio.pause();
-        this.backgroundAudio.currentTime = 0;
+        if (this.backgroundAudio) {
+            this.backgroundAudio.pause();
+            this.backgroundAudio.currentTime = 0;
+        }
     }
 
     toggleBackgroundMusik() {
-        if (this.backgroundAudio.paused) {
+        if (this.backgroundAudio?.paused) {
             this.backgroundAudio.play();
         } else {
             this.backgroundAudio.pause();
         }
     }
 
+    // === Boss-Musik ===
+    initBossMusik(path = '../audio/bossMusik.mp3') {
+        this.bossAudio = new Audio(path);
+        this.bossAudio.loop = true;
+        this.bossAudio.volume = 0.5;
+    }
+
+    playBossMusik() {
+        if (this.backgroundAudio) {
+            this.stopBackgroundMusik(); // 🔇 normale Musik aus
+        }
+
+        if (!this.bossAudio) this.initBossMusik();
+        this.bossAudio.play().catch(e => {
+            console.warn("Bossmusik konnte nicht abgespielt werden:", e);
+        });
+    }
+
+    stopBossMusik() {
+        if (this.bossAudio) {
+            this.bossAudio.pause();
+            this.bossAudio.currentTime = 0;
+        }
+    }
+
+    // === Soundeffekte ===
     playSound(path, volume = 1.0) {
         const audio = new Audio(path);
         audio.volume = volume;
@@ -52,5 +83,17 @@ class SoundManager {
 
     stompEnemy() {
         this.playSound('../audio/stompEnemy.mp3', 1.0);
+    }
+
+    bruhRetry() {
+        this.playSound('../audio/bruhRetry.mp3', 1.0);
+    }
+
+    gameLose() {
+        this.playSound('../audio/gameLose.mp3', 1.0);
+    }
+
+    ouch() {
+        this.playSound('../audio/ouch.mp3', 1.0);
     }
 }

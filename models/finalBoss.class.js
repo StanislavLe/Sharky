@@ -7,6 +7,7 @@ class FinalBoss extends MovableObject {
     isActive = false; // 💡 wird true, wenn Intro durch ist
     introFrame = 0;
 
+
     BOSS_INTRO = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/1.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/2.png',
@@ -65,35 +66,55 @@ class FinalBoss extends MovableObject {
         this.isIntroPlayed = true;
         this.currentImage = 0;
     
+        this.world.soundManager.stopBackgroundMusik();  // ✅ zentrales Objekt
+        this.world.soundManager.playBossMusik();        // ✅ Bossmusik starten
+    
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
     
             if (this.currentImage >= this.BOSS_INTRO.length) {
                 clearInterval(this.introInterval);
-                this.isActive = true; // ✅ Jetzt angreifbar!
+                this.isActive = true;
                 this.animate();
             }
         }, 150);
     }
     
-    
 
     animate() {
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.BOSS_DEAD);
-                this.isDying = true;
-            }
-            else {
+                if (!this.isDying) {
+                    this.isDying = true;                  
+                    this.playAnimation(this.BOSS_DEAD);
+                    this.dieBoss(); 
+                    this.startAscend();      
+                }
+            } else {
                 this.playAnimation(this.BOSS_WALKING);
             }
         }, 150);
     }
+    
 
-    die() {
-        this.isDying = true;
-        this.playAnimation(this.BOSS_DEAD);
-        clearInterval(this.walkingInterval);
+    dieBoss() {
+        this.world.soundManager.ouch(); 
+        this.world.soundManager.stopBossMusik(); 
+        setTimeout(() => {
+            this.world.soundManager.playBackgroundMusik(); 
+        }, 1000); 
+    }
+    
+    
+    startAscend() {
+        const ascendSpeed = 1; 
+        const ascendInterval = setInterval(() => {
+            this.y -= ascendSpeed;
+    
+            if (this.y + this.height < 0) { 
+                clearInterval(ascendInterval);
+            }
+        }, 30); 
     }
     
 }
