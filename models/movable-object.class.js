@@ -7,17 +7,22 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     score = 0;
     ammo = 100;
-
+    hasPlayedDeathSound = false;
+    hasPlayedDeathAnimation = false;
+    isAscending = false;
 
 
     applyGravity() {
         setInterval(() => {
+            if (this.isAscending) return; // 🛑 Keine Schwerkraft beim Aufsteigen!
+    
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25);
     }
+    
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
@@ -59,12 +64,12 @@ class MovableObject extends DrawableObject {
         this.world.soundManager.punch();
         if (this.energy < 0) this.energy = 0;
         this.lastHit = new Date().getTime();
-    
+
         // 🟦 Für Character
         if (this instanceof Character) {
             this.updateStatusBar(this.world?.statusBar);
         }
-    
+
         // 🟪 Für FinalBoss
         if (this instanceof FinalBoss) {
             this.updateStatusBar(this.world?.bossStatusBar);
@@ -94,4 +99,17 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
         //console.log("Bewegung nach links");
     }
+
+
+    startAscend() {
+        this.ascendInterval = setInterval(() => {
+            this.y -= 1;
+    
+            if (this.y + this.height < 0) {
+                clearInterval(this.ascendInterval);
+            }
+        }, 30);
+    }
+    
+
 }

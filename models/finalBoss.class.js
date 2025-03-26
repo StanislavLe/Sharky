@@ -105,16 +105,6 @@ class FinalBoss extends MovableObject {
         }, 1000); 
     }
     
-    
-    startAscend() {
-        const ascendSpeed = 1; 
-        const ascendInterval = setInterval(() => {
-            this.y -= ascendSpeed;
-    
-            if (this.y + this.height < 0) { 
-                clearInterval(ascendInterval);
-            }
-        }, 30); 
-    }
+
     
 }

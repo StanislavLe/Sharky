@@ -123,9 +123,30 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
+                if (!this.hasPlayedDeathSound) {
+                    this.world.soundManager.gameLose(); 
+                    this.hasPlayedDeathSound = true;
+                }
+        
+                if (!this.hasPlayedDeathAnimation) {
+                    this.playAnimation(this.IMAGES_DEAD);
+        
+                    if (this.currentImage >= this.IMAGES_DEAD.length) {
+                        this.currentImage = this.IMAGES_DEAD.length - 1; // 🧊 freeze auf letztem Frame
+                        this.hasPlayedDeathAnimation = true;
+                        this.isAscending = true;                         // 🛑 andere Animationen blockieren
+                        this.startAscend();                              // 🚀
+                    }
+                }
+        
                 this.idleTimer = 0;
+                return; // 🔁 alles danach skippen, solange dead
             }
+        
+            // Andere Zustände:
+            if (this.isAscending) return; // ✅ blockiere alle Animationen danach
+        
+            
             else if (this.isHurt() && !this.enemy?.isDying) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.idleTimer = 0;
@@ -153,5 +174,6 @@ class Character extends MovableObject {
             this.idleTimer++;
         }
     }
+    
 }
 

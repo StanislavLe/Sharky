@@ -1,6 +1,7 @@
 class SoundManager {
     backgroundAudio;
     bossAudio;
+    isGameOver = false;
 
     constructor() {
         this.initBackgroundMusik();
@@ -13,6 +14,7 @@ class SoundManager {
         this.backgroundAudio.volume = 0.5;
     }
 
+    
     playBackgroundMusik() {
         if (!this.backgroundAudio) this.initBackgroundMusik();
         this.backgroundAudio.play().catch(e => {
@@ -20,12 +22,14 @@ class SoundManager {
         });
     }
 
+
     stopBackgroundMusik() {
         if (this.backgroundAudio) {
             this.backgroundAudio.pause();
             this.backgroundAudio.currentTime = 0;
         }
     }
+
 
     toggleBackgroundMusik() {
         if (this.backgroundAudio?.paused) {
@@ -35,6 +39,7 @@ class SoundManager {
         }
     }
 
+
     // === Boss-Musik ===
     initBossMusik(path = '../audio/bossMusik.mp3') {
         this.bossAudio = new Audio(path);
@@ -42,16 +47,16 @@ class SoundManager {
         this.bossAudio.volume = 0.5;
     }
 
-    playBossMusik() {
-        if (this.backgroundAudio) {
-            this.stopBackgroundMusik(); // 🔇 normale Musik aus
-        }
 
+    playBossMusik() {
+        if (this.backgroundAudio) this.stopBackgroundMusik();
         if (!this.bossAudio) this.initBossMusik();
+
         this.bossAudio.play().catch(e => {
             console.warn("Bossmusik konnte nicht abgespielt werden:", e);
         });
     }
+
 
     stopBossMusik() {
         if (this.bossAudio) {
@@ -78,8 +83,10 @@ class SoundManager {
     }
 
     punch() {
+        if (this.isGameOver) return; // ❌ Kein Punch erlaubt
         this.playSound('../audio/punch.mp3', 0.8);
     }
+
 
     stompEnemy() {
         this.playSound('../audio/stompEnemy.mp3', 1.0);
@@ -90,8 +97,10 @@ class SoundManager {
     }
 
     gameLose() {
+        this.isGameOver = true;
         this.playSound('../audio/gameLose.mp3', 1.0);
     }
+
 
     ouch() {
         this.playSound('../audio/ouch.mp3', 1.0);
