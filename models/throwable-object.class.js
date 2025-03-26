@@ -23,8 +23,10 @@ class ThrowableObject extends MovableObject {
                 if (!enemy.isDying && this.isColliding(enemy)) {
                     if (enemy instanceof FinalBoss) {
                         enemy.hit();
+                        this.world.soundManager.stompEnemy();
                     } else {
                         enemy.die();
+                        this.world.soundManager.stompEnemy();
                     }
     
                     this.removeFromWorld(); // 💥 Bubble zerstört

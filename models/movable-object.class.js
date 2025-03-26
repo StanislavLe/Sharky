@@ -8,6 +8,8 @@ class MovableObject extends DrawableObject {
     score = 0;
     ammo = 100;
 
+
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -29,7 +31,6 @@ class MovableObject extends DrawableObject {
         return this.y + this.height < enemy.y + enemy.height && this.speedY < 0;
     }
 
-
     playAnimation(images) {
         //Walk animation 
         let i = this.currentImage % images.length;
@@ -46,7 +47,6 @@ class MovableObject extends DrawableObject {
         this.score += 1;
     }
 
-
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -56,6 +56,7 @@ class MovableObject extends DrawableObject {
 
     hit(damage = 5) {
         this.energy -= damage;
+        this.world.soundManager.punch();
         if (this.energy < 0) this.energy = 0;
         this.lastHit = new Date().getTime();
     
@@ -69,9 +70,6 @@ class MovableObject extends DrawableObject {
             this.updateStatusBar(this.world?.bossStatusBar);
         }
     }
-      
-    
-    
 
     isDead() {
         return this.energy == 0;

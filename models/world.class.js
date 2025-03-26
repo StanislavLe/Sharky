@@ -12,18 +12,20 @@ class World {
     ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
-
+    soundManager = new SoundManager(); 
 
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.soundManager.playBackgroundMusik(); 
         this.draw();
         this.setWorld();
         this.checkCollisions();
         this.run();
     }
+    
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -62,7 +64,6 @@ class World {
     }
 
 
-
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -76,18 +77,22 @@ class World {
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
             this.character.speedY = 25;
-    
+
             if (enemy instanceof FinalBoss) {
                 enemy.hit(); // 🔥 Treffer auf FinalBoss → Energie verringern + Statusbar aktualisieren
+                this.soundManager.punch();
+
             } else {
                 enemy.die(); // 💀 Andere Gegner sofort töten
+                this.soundManager.stompEnemy();
+
             }
-    
+
         } else {
             this.character.hit(); // 🔴 Sharkie wird getroffen
         }
     }
-     
+
 
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
@@ -120,7 +125,7 @@ class World {
             }
         }
     }
-    
+
 
 
 
@@ -129,6 +134,7 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.character.increaseScore();
                 this.level.coins.splice(index, 1);
+                this.soundManager.collectCoin();
                 this.scoreBar.setPercentage(this.character.score * 10);
             }
         });
@@ -140,6 +146,7 @@ class World {
             if (this.character.isColliding(bubble)) {
                 this.character.increaseAmmo();
                 this.level.bubbles.splice(index, 1);
+                this.soundManager.collectBubble();
                 this.ammoBar.setPercentage(this.character.ammo * 10);
             }
         });
