@@ -41,12 +41,6 @@ class PufferFish extends MovableObject {
     
     
 
-    die() {
-        this.energy = 0;
-    }
-    
-    
-
     removeEnemy() {
         setTimeout(() => {
             const index = this.world.level.enemies.indexOf(this);

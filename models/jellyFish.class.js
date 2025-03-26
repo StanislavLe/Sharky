@@ -20,7 +20,7 @@ class JellyFish extends MovableObject{
     constructor() {
         super().loadImage(this.JELLYFISH_WALKING[0]);
         this.x = 200 + Math.random() * 1500;
-        this.y = 200 + Math.random() * 20;
+        this.y = 100 + Math.random() * 300;  // 🎯 vertikale Streuung verbessert        
         this.speed = 5 + Math.random() * 0.25;
         this.loadImages(this.JELLYFISH_WALKING);
         this.loadImages(this.JELLYFISH_DIE);
@@ -48,14 +48,6 @@ class JellyFish extends MovableObject{
             }
         }, 150);
     }
-
-    
-    
-
-    die() {
-        this.energy = 0;
-    }
-    
     
 
     removeEnemy() {

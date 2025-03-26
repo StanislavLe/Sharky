@@ -80,6 +80,12 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
+    
+    die() {
+        this.energy = 0;
+    }
+    
+
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
@@ -104,7 +110,6 @@ class MovableObject extends DrawableObject {
     startAscend() {
         this.ascendInterval = setInterval(() => {
             this.y -= 1;
-    
             if (this.y + this.height < 0) {
                 clearInterval(this.ascendInterval);
             }
