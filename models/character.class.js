@@ -5,7 +5,7 @@ class Character extends MovableObject {
     x = 0;
     speed = 10;
     idleTimer = 0;
-
+    hasSnored = false;
 
     IMAGES_WALKING = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/1.png',
@@ -184,13 +184,18 @@ class Character extends MovableObject {
     checkIdleTimer() {
         if (this.idleTimer > 100) {
             this.playAnimation(this.IMAGES_LONG_IDLE, 350);
+    
+            if (!this.hasSnored) {
+                this.world.soundManager.snoring();
+                this.hasSnored = true;
+            }
         } else if (this.idleTimer > 0) {
             this.playAnimation(this.IMAGES_IDLE);
             this.idleTimer++;
+            this.hasSnored = false; // Reset wenn man zurück in IDLE kommt
         }
     }
-
-
+    
 
 }
 

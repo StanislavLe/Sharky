@@ -105,4 +105,12 @@ class SoundManager {
     ouch() {
         this.playSound('../audio/ouch.mp3', 1.0);
     }
+
+
+    snoring() {
+        const audio = new Audio('../audio/snoring.mp3');
+        audio.volume = 0.25;
+        audio.play();
+    }
+    
 }
