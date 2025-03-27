@@ -86,6 +86,18 @@ class MovableObject extends DrawableObject {
                 this.currentImage = 0;
             }
         }, 100); 
+        this.world.level.enemies.forEach((enemy) => {
+            const withinXRange = enemy.x > this.x && enemy.x < this.x + this.width * 1.10;
+            const sameHeight = enemy.y < this.y + this.height && enemy.y + enemy.height > this.y;
+            if (withinXRange && sameHeight && !enemy.isDead?.()) {
+                if (enemy instanceof FinalBoss) {
+                    enemy.hit();
+                } else {
+                    enemy.die();
+                }
+            }
+        });
+        
     }
     
     

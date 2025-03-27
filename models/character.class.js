@@ -99,10 +99,8 @@ class Character extends MovableObject {
 
     world;
 
-
-
     constructor() {
-        super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/1.png');
+        super().loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -119,16 +117,16 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.moveRight();
-                this.idleTimer = 0;  
+                this.idleTimer = 0;
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
                 this.moveLeft();
-                this.idleTimer = 0;  
+                this.idleTimer = 0;
             }
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
-                this.idleTimer = 0;  
+                this.idleTimer = 0;
             }
             if (this.world.keyboard.D && !this.isPunching) {
                 this.punch();
@@ -149,17 +147,16 @@ class Character extends MovableObject {
                     if (this.currentImage >= this.IMAGES_DEAD.length) {
                         this.currentImage = this.IMAGES_DEAD.length - 1;
                         this.hasPlayedDeathAnimation = true;
-                        this.isAscending = true;                        
-                        this.startAscend();                              
+                        this.isAscending = true;
+                        this.startAscend();
                     }
                 }
 
                 this.idleTimer = 0;
-                return; 
+                return;
             }
 
-            // Andere Zustände:
-            if (this.isAscending) return; 
+            if (this.isAscending) return;
 
             else if (this.isPunching) {
                 return;
@@ -179,7 +176,7 @@ class Character extends MovableObject {
             }
             else {
                 this.idleTimer += 1;
-                this.checkIdleTimer(); 
+                this.checkIdleTimer();
             }
         }, 150);
     }
