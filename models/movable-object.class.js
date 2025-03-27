@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-    speed = 2; // Geschwindigkeit der Bewegung (wie schnell das Objekt nach links geht)
+    speed = 2; 
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
@@ -14,7 +14,7 @@ class MovableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAscending) return; // 🛑 Keine Schwerkraft beim Aufsteigen!
+            if (this.isAscending) return; 
     
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
@@ -64,34 +64,30 @@ class MovableObject extends DrawableObject {
         this.world.soundManager.punch();
         if (this.energy < 0) this.energy = 0;
         this.lastHit = new Date().getTime();
-
-        // 🟦 Für Character
         if (this instanceof Character) {
             this.updateStatusBar(this.world?.statusBar);
         }
-
-        // 🟪 Für FinalBoss
         if (this instanceof FinalBoss) {
             this.updateStatusBar(this.world?.bossStatusBar);
         }
     }
 
     punch() {
-        if (this.isPunching) return; // 🛑 Punch läuft schon
-    
+        if (this.isPunching || this.isDead()) return; 
         this.isPunching = true;
         this.currentImage = 0;
-    
-        let punchInterval = setInterval(() => {
+        this.world.soundManager.punch?.(); 
+        const punchInterval = setInterval(() => {
             if (this.currentImage < this.IMAGES_PUNCH.length) {
                 this.playAnimation(this.IMAGES_PUNCH);
             } else {
                 clearInterval(punchInterval);
-                this.isPunching = false; // ✅ Punch vorbei
+                this.isPunching = false;
                 this.currentImage = 0;
             }
-        }, 120); // 🐢 Langsamer (120ms pro Frame)
+        }, 100); 
     }
+    
     
 
     isDead() {
@@ -116,12 +112,10 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
-        //console.log("Bewegung nach rechts");
     }
 
     moveLeft() {
         this.x -= this.speed;
-        //console.log("Bewegung nach links");
     }
 
 

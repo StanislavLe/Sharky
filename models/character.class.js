@@ -119,20 +119,20 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.moveRight();
-                this.idleTimer = 0;  // 🔥 Reset bei Bewegung
+                this.idleTimer = 0;  
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
                 this.moveLeft();
-                this.idleTimer = 0;  // 🔥 Reset bei Bewegung
+                this.idleTimer = 0;  
             }
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
-                this.idleTimer = 0;  // 🔥 Reset bei Sprung
+                this.idleTimer = 0;  
             }
-            if (this.world.keyboard.D) {
+            if (this.world.keyboard.D && !this.isPunching) {
                 this.punch();
-                this.idleTimer = 0;  // 🔥 Reset bei Sprung
+                this.idleTimer = 0;
             }
             this.world.camera_x = -this.x;
         }, 1000 / 60);
@@ -140,29 +140,31 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 if (!this.hasPlayedDeathSound) {
-                    this.world.soundManager.gameLose(); 
+                    this.world.soundManager.gameLose();
                     this.hasPlayedDeathSound = true;
                 }
-        
                 if (!this.hasPlayedDeathAnimation) {
                     this.playAnimation(this.IMAGES_DEAD);
-        
+
                     if (this.currentImage >= this.IMAGES_DEAD.length) {
-                        this.currentImage = this.IMAGES_DEAD.length - 1; // 🧊 freeze auf letztem Frame
+                        this.currentImage = this.IMAGES_DEAD.length - 1;
                         this.hasPlayedDeathAnimation = true;
-                        this.isAscending = true;                         // 🛑 andere Animationen blockieren
-                        this.startAscend();                              // 🚀
+                        this.isAscending = true;                        
+                        this.startAscend();                              
                     }
                 }
-        
+
                 this.idleTimer = 0;
-                return; // 🔁 alles danach skippen, solange dead
+                return; 
             }
-        
+
             // Andere Zustände:
-            if (this.isAscending) return; // ✅ blockiere alle Animationen danach
-        
-            
+            if (this.isAscending) return; 
+
+            else if (this.isPunching) {
+                return;
+            }
+
             else if (this.isHurt() && !this.enemy?.isDying) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.idleTimer = 0;
@@ -177,7 +179,7 @@ class Character extends MovableObject {
             }
             else {
                 this.idleTimer += 1;
-                this.checkIdleTimer();  // 🔥 Timer wird hier geprüft
+                this.checkIdleTimer(); 
             }
         }, 150);
     }
@@ -192,6 +194,6 @@ class Character extends MovableObject {
     }
 
 
-    
+
 }
 
