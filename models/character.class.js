@@ -111,6 +111,7 @@ class Character extends MovableObject {
         this.applyGravity();
         this.animate();
     }
+    
 
     animate() {
         setInterval(() => {
@@ -180,6 +181,7 @@ class Character extends MovableObject {
             }
         }, 150);
     }
+
 
     checkIdleTimer() {
         if (this.idleTimer > 100) {

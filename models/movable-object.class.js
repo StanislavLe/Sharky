@@ -76,7 +76,12 @@ class MovableObject extends DrawableObject {
         if (this.isPunching || this.isDead()) return; 
         this.isPunching = true;
         this.currentImage = 0;
-        this.world.soundManager.punch?.(); 
+        this.world.soundManager.punch?.();
+    
+        const punchOffset = 15; // Wie weit er nach vorne schwingt
+        const originalX = this.x;  
+        this.x += punchOffset; // Bewegung nach vorne
+    
         const punchInterval = setInterval(() => {
             if (this.currentImage < this.IMAGES_PUNCH.length) {
                 this.playAnimation(this.IMAGES_PUNCH);
@@ -84,8 +89,10 @@ class MovableObject extends DrawableObject {
                 clearInterval(punchInterval);
                 this.isPunching = false;
                 this.currentImage = 0;
+                this.x = originalX; // Zurück zur alten Position
             }
-        }, 100); 
+        }, 100);
+    
         this.world.level.enemies.forEach((enemy) => {
             const withinXRange = enemy.x > this.x && enemy.x < this.x + this.width * 1.10;
             const sameHeight = enemy.y < this.y + this.height && enemy.y + enemy.height > this.y;
@@ -97,8 +104,8 @@ class MovableObject extends DrawableObject {
                 }
             }
         });
-        
     }
+    
     
     
 

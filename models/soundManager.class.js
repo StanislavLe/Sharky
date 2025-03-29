@@ -65,6 +65,7 @@ class SoundManager {
         }
     }
 
+
     // === Soundeffekte ===
     playSound(path, volume = 1.0) {
         const audio = new Audio(path);
@@ -74,16 +75,19 @@ class SoundManager {
         });
     }
 
+    
     collectBubble() {
         this.playSound('../audio/collectBubble.mp3', 0.5);
     }
+
 
     collectCoin() {
         this.playSound('../audio/collectCoin.mp3', 0.8);
     }
 
+
     punch() {
-        if (this.isGameOver) return; // ❌ Kein Punch erlaubt
+        if (this.isGameOver) return; 
         this.playSound('../audio/punch.mp3', 0.8);
     }
 
@@ -92,9 +96,11 @@ class SoundManager {
         this.playSound('../audio/stompEnemy.mp3', 1.0);
     }
 
+
     bruhRetry() {
         this.playSound('../audio/bruhRetry.mp3', 1.0);
     }
+
 
     gameLose() {
         this.isGameOver = true;
@@ -112,5 +118,5 @@ class SoundManager {
         audio.volume = 0.25;
         audio.play();
     }
-    
+       
 }

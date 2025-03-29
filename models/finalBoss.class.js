@@ -183,22 +183,28 @@ class FinalBoss extends MovableObject {
     
     
     
-
     playAnimationOnce(images, frameDuration = 100, callback = () => {}) {
         this.currentImage = 0;
         let frame = 0;
+        const originalX = this.x; 
+        const moveDistance = this.width * 0.15;
+        const movePerFrame = moveDistance / images.length; 
     
         const interval = setInterval(() => {
             if (frame >= images.length) {
                 clearInterval(interval);
+                this.x = originalX; 
                 callback();
             } else {
                 const path = images[frame];
                 this.img = this.imageCache[path];
+                this.x -= movePerFrame; 
                 frame++;
             }
         }, frameDuration);
     }
+    
+    
     
 
 }
