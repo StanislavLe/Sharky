@@ -90,7 +90,6 @@ class World {
     }
 
 
-
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
             let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -109,11 +108,10 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isColliding(enemy)) {
+            if (!enemy.isDead() && this.character.isColliding(enemy)) {
                 this.stompEnemy(enemy, index);
             }
         });
-
     }
 
 

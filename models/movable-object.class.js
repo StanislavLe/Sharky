@@ -54,10 +54,11 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(mo) {
+        if (this.isAscending || this.isDead()) return false; // Keine Kollision, wenn der Endboss aufsteigt oder tot ist
         return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
+               this.y + this.height > mo.y &&
+               this.x < mo.x &&
+               this.y < mo.y + mo.height;
     }
 
     hit(damage = 5) {
@@ -105,6 +106,7 @@ class MovableObject extends DrawableObject {
 
 
     startAscend() {
+        this.isAscending = true; // Flag setzen, um Kollisionen zu deaktivieren
         this.ascendInterval = setInterval(() => {
             this.y -= 1;
             if (this.y + this.height < 0) {
@@ -112,6 +114,4 @@ class MovableObject extends DrawableObject {
             }
         }, 30);
     }
-    
-
 }

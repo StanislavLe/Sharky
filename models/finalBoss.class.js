@@ -7,6 +7,7 @@ class FinalBoss extends MovableObject {
     isActive = false; // 💡 wird true, wenn Intro durch ist
     introFrame = 0;
     behaviorActive = false;
+    isDying = false; // Flag to indicate the boss is dying
 
 
 
@@ -99,10 +100,12 @@ class FinalBoss extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 if (!this.isDying) {
-                    this.isDying = true;
-                    this.playAnimation(this.BOSS_DEAD);
-                    this.dieBoss();
-                    this.startAscend();
+                    this.isDying = true; 
+                    this.playAnimationOnce(this.BOSS_DEAD, 100, () => {
+                        this.img = this.imageCache[this.BOSS_DEAD[this.BOSS_DEAD.length - 1]]; // Ensure the last frame stays visible
+                        this.dieBoss();
+                        this.startAscend();
+                    });
                 }
             } else if (this.isHurt()) {
                 this.playAnimation(this.BOSS_HURT);
@@ -111,7 +114,6 @@ class FinalBoss extends MovableObject {
             }
         }, 150);
     }
-
 
 
     dieBoss() {
@@ -124,22 +126,21 @@ class FinalBoss extends MovableObject {
     }
     
 
-
     startBossBehavior() {
         this.behaviorActive = true;
     
         const loop = () => {
-            if (!this.behaviorActive || this.isDead() || this.world.character.isDead()) return;
+            if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return; // Stop behavior if dying
     
             this.state = 'idle';
     
             setTimeout(() => {
-                if (!this.behaviorActive || this.isDead() || this.world.character.isDead()) return;
+                if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
     
                 this.state = 'moveLeft';
     
                 const moveInterval = setInterval(() => {
-                    if (!this.behaviorActive || this.isDead() || this.world.character.isDead()) {
+                    if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) {
                         clearInterval(moveInterval);
                         return;
                     }
@@ -148,7 +149,7 @@ class FinalBoss extends MovableObject {
     
                 setTimeout(() => {
                     clearInterval(moveInterval);
-                    if (!this.behaviorActive || this.isDead() || this.world.character.isDead()) return;
+                    if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
     
                     this.state = 'attack';
     
@@ -168,6 +169,8 @@ class FinalBoss extends MovableObject {
     
 
     checkAttackHit() {
+        if (this.isDying || this.isDead()) return; // Prevent damage if dying or dead
+
         const character = this.world.character;
     
         const withinXRange = character.x + character.width > this.x - this.width * 0.15 && 
@@ -188,17 +191,19 @@ class FinalBoss extends MovableObject {
         let frame = 0;
         const originalX = this.x; 
         const moveDistance = this.width * 0.15;
-        const movePerFrame = moveDistance / images.length; 
-    
+        const movePerFrame = moveDistance / (images.length - 1); // Offset nach links
+
         const interval = setInterval(() => {
             if (frame >= images.length) {
                 clearInterval(interval);
-                this.x = originalX; 
+                this.x = originalX; // Offset sauber zurücksetzen
                 callback();
             } else {
                 const path = images[frame];
                 this.img = this.imageCache[path];
-                this.x -= movePerFrame; 
+                if (frame > 0) { // Bewegung nur ab dem zweiten Frame
+                    this.x -= movePerFrame;
+                }
                 frame++;
             }
         }, frameDuration);
