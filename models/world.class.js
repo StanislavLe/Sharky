@@ -93,6 +93,7 @@ class World {
         }
     }
 
+    
 
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
@@ -101,10 +102,13 @@ class World {
             this.throwableObjects.push(bubble);
             this.character.ammo -= 1;
             this.ammoBar.setPercentage(this.character.ammo * 10);
+    
+            // Reset idleTimer und hasSnored
+            this.character.idleTimer = 0;
+            this.character.hasSnored = false;
+            this.soundManager.stopSnoreSound(); // Stoppe Schnarch-Sound
         }
     }
-
-
 
 
     checkCollisions() {

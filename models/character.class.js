@@ -111,27 +111,32 @@ class Character extends MovableObject {
         this.applyGravity();
         this.animate();
     }
-    
+
+    resetIdleState() {
+        this.idleTimer = 0;
+        this.hasSnored = false;
+        this.world.soundManager.stopSnoreSound(); // Schnarch-Sound stoppen
+    }
 
     animate() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.moveRight();
-                this.idleTimer = 0;
+                this.resetIdleState(); // Idle-Zustand zurücksetzen
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
                 this.moveLeft();
-                this.idleTimer = 0;
+                this.resetIdleState(); // Idle-Zustand zurücksetzen
             }
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
-                this.idleTimer = 0;
+                this.resetIdleState(); // Idle-Zustand zurücksetzen
             }
             if (this.world.keyboard.D && !this.isPunching) {
                 this.punch();
-                this.idleTimer = 0;
+                this.resetIdleState(); // Idle-Zustand zurücksetzen
             }
             this.world.camera_x = -this.x;
         }, 1000 / 60);
@@ -182,11 +187,10 @@ class Character extends MovableObject {
         }, 150);
     }
 
-
     checkIdleTimer() {
         if (this.idleTimer > 100) {
             this.playAnimation(this.IMAGES_LONG_IDLE, 350);
-    
+
             if (!this.hasSnored) {
                 this.world.soundManager.snoring();
                 this.hasSnored = true;
@@ -197,7 +201,49 @@ class Character extends MovableObject {
             this.hasSnored = false; // Reset wenn man zurück in IDLE kommt
         }
     }
-    
 
+    punch() {
+        if (this.isPunching || this.isDead()) return;
+        this.isPunching = true;
+        this.currentImage = 0;
+        this.world.soundManager.punch?.();
+
+        const punchOffset = 15; // Wie weit Sharky visuell nach vorne rückt
+        const punchEndTime = 100 * this.IMAGES_PUNCH.length; // Gesamtdauer der Punch-Animation
+
+        // Reset idleTimer und hasSnored
+        this.resetIdleState();
+
+        // Temporäres Offset für die visuelle Darstellung
+        this.visualOffsetX = punchOffset;
+
+        const punchInterval = setInterval(() => {
+            if (this.currentImage < this.IMAGES_PUNCH.length) {
+                this.playAnimation(this.IMAGES_PUNCH);
+            } else {
+                clearInterval(punchInterval);
+                this.isPunching = false;
+                this.currentImage = 0;
+                this.visualOffsetX = 0; // Offset zurücksetzen
+            }
+        }, 100);
+
+        this.world.level.enemies.forEach((enemy) => {
+            const withinXRange = enemy.x > this.x + punchOffset && enemy.x < this.x + punchOffset + this.width * 1.10;
+            const sameHeight = enemy.y < this.y + this.height && enemy.y + enemy.height > this.y;
+            if (withinXRange && sameHeight && !enemy.isDead?.()) {
+                if (enemy instanceof FinalBoss) {
+                    enemy.hit();
+                } else {
+                    enemy.die();
+                }
+            }
+        });
+
+        // Reset the punching state after the animation ends
+        setTimeout(() => {
+            this.isPunching = false;
+        }, punchEndTime);
+    }
 }
 
