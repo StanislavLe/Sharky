@@ -154,8 +154,12 @@ class World {
 
 
     addToMap(mo) {
-        mo.drawFrame(this.ctx);
         this.ctx.save();
+        if (mo === this.character && mo.visualOffsetX) {
+            // Wende das visuelle Offset nur für den Charakter an
+            this.ctx.translate(mo.visualOffsetX, 0);
+        }
+        mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImage(mo);
         } else {

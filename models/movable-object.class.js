@@ -78,9 +78,11 @@ class MovableObject extends DrawableObject {
         this.currentImage = 0;
         this.world.soundManager.punch?.();
     
-        const punchOffset = 15; // Wie weit er nach vorne schwingt
-        const originalX = this.x;  
-        this.x += punchOffset; // Bewegung nach vorne
+        const punchOffset = 15; // Wie weit Sharky visuell nach vorne rückt
+        const punchEndTime = 100 * this.IMAGES_PUNCH.length; // Gesamtdauer der Punch-Animation
+    
+        // Temporäres Offset für die visuelle Darstellung
+        this.visualOffsetX = punchOffset;
     
         const punchInterval = setInterval(() => {
             if (this.currentImage < this.IMAGES_PUNCH.length) {
@@ -89,12 +91,12 @@ class MovableObject extends DrawableObject {
                 clearInterval(punchInterval);
                 this.isPunching = false;
                 this.currentImage = 0;
-                this.x = originalX; // Zurück zur alten Position
+                this.visualOffsetX = 0; // Offset zurücksetzen
             }
         }, 100);
     
         this.world.level.enemies.forEach((enemy) => {
-            const withinXRange = enemy.x > this.x && enemy.x < this.x + this.width * 1.10;
+            const withinXRange = enemy.x > this.x + punchOffset && enemy.x < this.x + punchOffset + this.width * 1.10;
             const sameHeight = enemy.y < this.y + this.height && enemy.y + enemy.height > this.y;
             if (withinXRange && sameHeight && !enemy.isDead?.()) {
                 if (enemy instanceof FinalBoss) {
@@ -104,6 +106,11 @@ class MovableObject extends DrawableObject {
                 }
             }
         });
+    
+        // Reset the punching state after the animation ends
+        setTimeout(() => {
+            this.isPunching = false;
+        }, punchEndTime);
     }
     
     
