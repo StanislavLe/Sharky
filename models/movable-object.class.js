@@ -36,6 +36,7 @@ class MovableObject extends DrawableObject {
         return this.y + this.height < enemy.y + enemy.height && this.speedY < 0;
     }
 
+                                  
     playAnimation(images) {
         //Walk animation 
         let i = this.currentImage % images.length;

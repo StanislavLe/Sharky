@@ -12,20 +12,20 @@ class World {
     ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
-    soundManager = new SoundManager(); 
+    soundManager = new SoundManager();
 
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.soundManager.playBackgroundMusik(); 
+        this.soundManager.playBackgroundMusik();
         this.draw();
         this.setWorld();
         this.checkCollisions();
         this.run();
     }
-    
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -76,24 +76,20 @@ class World {
 
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
-            this.character.speedY = 25;
-
-            if (enemy instanceof FinalBoss) {
-                enemy.hit(); // 🔥 Treffer auf FinalBoss → Energie verringern + Statusbar aktualisieren
-                this.soundManager.punch();
-
-            } else {
+            if (!(enemy instanceof FinalBoss)) {
+                this.character.speedY = 25; // Nur bei normalen Gegnern hochspringen
                 enemy.die(); // 💀 Andere Gegner sofort töten
                 this.soundManager.stompEnemy();
-
+            } else {
+                this.character.hit(); // 🔥 Treffer auf FinalBoss → Energie verringern + Statusbar aktualisieren
+                this.soundManager.punch();
             }
-
         } else {
             this.character.hit(); // 🔴 Sharkie wird getroffen
         }
     }
 
-    
+
 
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
@@ -102,7 +98,7 @@ class World {
             this.throwableObjects.push(bubble);
             this.character.ammo -= 1;
             this.ammoBar.setPercentage(this.character.ammo * 10);
-    
+
             // Reset idleTimer und hasSnored
             this.character.idleTimer = 0;
             this.character.hasSnored = false;
