@@ -109,7 +109,7 @@ class FinalBoss extends MovableObject {
                 }
             } else if (this.isHurt()) {
                 this.playAnimation(this.BOSS_HURT);
-            } else {
+            } else if (!this.isDying) { // 🔥 Nur abspielen, wenn nicht sterbend
                 this.playAnimation(this.BOSS_WALKING);
             }
         }, 150);
@@ -194,6 +194,11 @@ class FinalBoss extends MovableObject {
         const movePerFrame = moveDistance / (images.length - 1); // Offset nach links
 
         const interval = setInterval(() => {
+            if (this.isDead()) { // 🔥 Abbrechen, wenn der Boss stirbt
+                clearInterval(interval);
+                callback(); // Optional: Callback trotzdem ausführen
+                return;
+            }
             if (frame >= images.length) {
                 clearInterval(interval);
                 this.x = originalX; // Offset sauber zurücksetzen

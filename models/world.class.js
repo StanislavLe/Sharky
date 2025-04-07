@@ -2,6 +2,7 @@ class World {
     character = new Character();
     level = level1;
     lightRight = new LightRight();
+    lightLeft = new LightLeft();
     canvas;
     ctx;
     keyboard;
@@ -36,6 +37,7 @@ class World {
         });
         // 🔥 Füge `LightRight` hinzu
         this.addToMap(this.lightRight);
+        this.addToMap(this.lightLeft);
         this.level.coins.forEach(coin => {
             this.addToMap(coin);
         });
