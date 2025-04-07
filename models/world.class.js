@@ -14,6 +14,9 @@ class World {
     throwableObjects = [];
     CollectableObject = new CollectableObject();
     soundManager = new SoundManager();
+    endscreen = new Endscreen(); // Endscreen-Objekt hinzufügen
+    endscreenManager = new EndscreenManager(); // Ensure proper initialization
+    fadeOpacity = 1; // Initial opacity for the game
 
 
     constructor(canvas, keyboard) {
@@ -21,6 +24,8 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.soundManager.playBackgroundMusik();
+        this.endscreen = new Endscreen(); // Initialisierung sicherstellen
+        this.endscreenManager = new EndscreenManager(); // Ensure proper initialization
         this.draw();
         this.setWorld();
         this.checkCollisions();
@@ -30,50 +35,96 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this.camera_x, 0);
-        // Hintergrund zeichnen
-        this.level.backgroundObjects.forEach(bg => {
-            this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
-        });
-        // 🔥 Füge `LightRight` hinzu
-        this.addToMap(this.lightRight);
-        this.addToMap(this.lightLeft);
-        this.level.coins.forEach(coin => {
-            this.addToMap(coin);
-        });
-        this.level.bubbles.forEach(bubble => {
-            this.addToMap(bubble);
-        });
-        this.throwableObjects.forEach(bg => {
-            this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
-        });
-        this.addToMap(this.character);
-        this.level.enemies.forEach(enemy => {
-            this.addToMap(enemy);
-        });
-        // Position für feste Objekte
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
-        this.addToMap(this.bossStatusBar);
-        this.addToMap(this.scoreBar);
-        this.addToMap(this.ammoBar);
-        this.ctx.translate(this.camera_x, 0);
-        this.ctx.translate(-this.camera_x, 0);
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
+
+        if (!this.endscreenManager.isVisible() || this.fadeOpacity > 0) {
+            this.ctx.save();
+            this.ctx.globalAlpha = this.fadeOpacity; // Apply fade-out effect to the game
+            this.ctx.translate(this.camera_x, 0);
+
+            // Hintergrund zeichnen
+            this.level.backgroundObjects.forEach(bg => {
+                this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
+            });
+            // 🔥 Füge `LightRight` hinzu
+            this.addToMap(this.lightRight);
+            this.addToMap(this.lightLeft);
+            this.level.coins.forEach(coin => {
+                this.addToMap(coin);
+            });
+            this.level.bubbles.forEach(bubble => {
+                this.addToMap(bubble);
+            });
+            this.throwableObjects.forEach(bg => {
+                this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
+            });
+            this.addToMap(this.character);
+            this.level.enemies.forEach(enemy => {
+                this.addToMap(enemy);
+            });
+            // Position für feste Objekte
+            this.ctx.translate(-this.camera_x, 0);
+            this.addToMap(this.statusBar);
+            this.addToMap(this.bossStatusBar);
+            this.addToMap(this.scoreBar);
+            this.addToMap(this.ammoBar);
+            this.ctx.translate(this.camera_x, 0);
+            this.ctx.translate(-this.camera_x, 0);
+            this.ctx.restore();
+
+            // Gradually reduce game opacity if an end screen is visible
+            if (this.endscreenManager.isVisible() && this.fadeOpacity > 0) {
+                this.fadeOpacity -= 0.02; // Gradually decrease opacity
+                if (this.fadeOpacity < 0) this.fadeOpacity = 0; // Ensure it doesn't go below 0
+            }
+        }
+
+        // Draw the end screen with its fade-in effect
+        this.endscreenManager.draw(this.ctx);
+
+        // Continue the animation loop
+        requestAnimationFrame(() => this.draw());
     }
 
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
-            this.checkThrowObject();
-            this.collectCoin();
-            this.collectAmmo();
-            this.checkBossIntro();
+            if (!this.endscreenManager.isVisible()) { // Check if no endscreen is visible
+                this.checkCollisions();
+                this.checkThrowObject();
+                this.collectCoin();
+                this.collectAmmo();
+                this.checkBossIntro();
+                this.checkGameOver();   // 🔥 Verlust
+                this.checkVictory();    // 🏁 Sieg
+            }
         }, 200);
+    }
+
+     
+    checkVictory() {
+        const boss = this.level.enemies.find(e => e instanceof FinalBoss);
+        if (boss && boss.isDead() && !this.endscreenManager.isVisible()) {
+            this.endscreenManager.showWin(); // Show win screen
+            this.freezeGame();
+        }
+    }
+
+    checkGameOver() {
+        if (this.character.isDead() && !this.endscreenManager.isVisible()) {
+            this.endscreenManager.showLose(); // Show lose screen
+            this.freezeGame();
+        }
+    }
+
+    
+    freezeGame() {
+        // ⏸️ Optional: Bewegung und Input stoppen
+        this.character.speed = 0;
+        this.character.isPunching = false;
+        this.keyboard.RIGHT = false;
+        this.keyboard.LEFT = false;
+        this.keyboard.UP = false;
+        this.keyboard.SPACE = false;
     }
 
     stompEnemy(enemy) {
