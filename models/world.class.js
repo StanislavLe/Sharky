@@ -35,9 +35,8 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        if (!this.endscreenManager.isVisible() || this.fadeOpacity > 0) {
+        if (!this.endscreenManager.isVisible()) {
             this.ctx.save();
-            this.ctx.globalAlpha = this.fadeOpacity; // Apply fade-out effect to the game
             this.ctx.translate(this.camera_x, 0);
 
             // Hintergrund zeichnen
@@ -74,15 +73,9 @@ class World {
             this.ctx.translate(this.camera_x, 0);
             this.ctx.translate(-this.camera_x, 0);
             this.ctx.restore();
-
-            // Gradually reduce game opacity if an end screen is visible
-            if (this.endscreenManager.isVisible() && this.fadeOpacity > 0) {
-                this.fadeOpacity -= 0.02; // Gradually decrease opacity
-                if (this.fadeOpacity < 0) this.fadeOpacity = 0; // Ensure it doesn't go below 0
-            }
         }
 
-        // Draw the end screen with its fade-in effect
+        // Draw the end screen
         this.endscreenManager.draw(this.ctx);
 
         // Continue the animation loop
@@ -119,7 +112,6 @@ class World {
             this.freezeGame();
         }
     }
-
     
     freezeGame() {
         // ⏸️ Optional: Bewegung und Input stoppen
