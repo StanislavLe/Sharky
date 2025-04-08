@@ -55,6 +55,7 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         if (this.isAscending || this.isDead()) return false; // Keine Kollision, wenn der Endboss aufsteigt oder tot ist
+        if (mo instanceof FinalBoss && !mo.isCollidable()) return false; // 🔥 No collision if boss is not collidable
         return this.x + this.width > mo.x &&
                this.y + this.height > mo.y &&
                this.x < mo.x &&

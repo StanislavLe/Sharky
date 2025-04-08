@@ -18,7 +18,7 @@ class PufferFish extends MovableObject {
     constructor() {
         super().loadImage(this.PUFFERFISH_WALKING[0]);
         this.x = 200 + Math.random() * 1500;
-        this.speed = 0.5 + Math.random() * 0.25;
+        this.speed = 5.5 + Math.random() * 1.25;
         this.loadImages(this.PUFFERFISH_WALKING);
         this.loadImages(this.PUFFERFISH_DIE);
         this.animate();
@@ -39,7 +39,6 @@ class PufferFish extends MovableObject {
         }, 150);
     }
     
-    
 
     removeEnemy() {
         setTimeout(() => {
@@ -50,11 +49,4 @@ class PufferFish extends MovableObject {
         }, this.PUFFERFISH_DIE.length * 150); // Zeit basierend auf Frames
     }
     
-    
-    
-    
-
-
-
-
 }

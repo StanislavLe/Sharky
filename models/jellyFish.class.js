@@ -40,7 +40,7 @@ class JellyFish extends MovableObject{
                 }
                 this.playAnimation(this.JELLYFISH_WALKING);
                 this.currentDirectionTime += 150;
-                if (this.currentDirectionTime >= 3000) { 
+                if (this.currentDirectionTime >= 6000) { 
                     this.direction *= -1; 
                     this.otherDirection = this.direction === 1; 
                     this.currentDirectionTime = 0;

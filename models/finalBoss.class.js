@@ -88,13 +88,16 @@ class FinalBoss extends MovableObject {
 
             if (this.currentImage >= this.BOSS_INTRO.length) {
                 clearInterval(this.introInterval);
-                this.isActive = true;
+                this.isActive = true; // 🔥 Boss becomes active after intro
                 this.startBossBehavior();
                 this.animate();
             }
         }, 150);
     }
 
+    isCollidable() {
+        return this.isActive && !this.isDying && !this.isDead(); // 🔥 Only collidable when active and not dying or dead
+    }
 
     animate() {
         setInterval(() => {
@@ -189,9 +192,6 @@ class FinalBoss extends MovableObject {
     playAnimationOnce(images, frameDuration = 100, callback = () => {}) {
         this.currentImage = 0;
         let frame = 0;
-        const originalX = this.x; 
-        const moveDistance = this.width * 0.15;
-        const movePerFrame = moveDistance / (images.length - 1); // Offset nach links
 
         const interval = setInterval(() => {
             if (this.isDead()) { // 🔥 Abbrechen, wenn der Boss stirbt
@@ -201,14 +201,10 @@ class FinalBoss extends MovableObject {
             }
             if (frame >= images.length) {
                 clearInterval(interval);
-                this.x = originalX; // Offset sauber zurücksetzen
                 callback();
             } else {
                 const path = images[frame];
                 this.img = this.imageCache[path];
-                if (frame > 0) { // Bewegung nur ab dem zweiten Frame
-                    this.x -= movePerFrame;
-                }
                 frame++;
             }
         }, frameDuration);
