@@ -10,6 +10,12 @@ world = new World(canvas, keyboard);
 console.log('My character is', world.character)
 }
 
+function startGame() {
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
+    init();
+}
+
 addEventListener("keydown", (event) => {
     if(event.keyCode == 39){
         keyboard.RIGHT = true;
@@ -68,5 +74,5 @@ addEventListener("keyup", (event) => {
 
 
 
-       
+
 

@@ -36,7 +36,7 @@
 
 <body onload="init()">
     <div>
-        <div class="startScreen">
+        <div class="startScreen" id="startScreen">
             <h2>Welcome to Sharky!</h2>
             <p>Help Sharky collect coins and avoid enemies!</p>
             <button id="startButton" onclick="startGame()">Start Game</button>
@@ -53,11 +53,10 @@
             <button id="restartButtonPause" onclick="restartGame()">Restart Game</button>
         </div>
 
-        <canvas id="canvas" width="720" height="480">
-
+        <canvas id="canvas" width="720" height="480" style="display: none;">
         </canvas>
 
-        <div class="endScreen">
+        <div class="endScreen" style="display: none;">
             <button id="restartButton" onclick="restartGame()">Restart</button>
             <button id="backHomeButton" onclick="goHome()">Back Home </button>
         </div>
