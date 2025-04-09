@@ -1,4 +1,5 @@
 body {
+    color: white;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -35,5 +36,15 @@ h1 {
 }
 
 .startScreen {
-    background-image: url('img/gameCover.webp');
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/gameCover.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    height: 720px;
+    width: 720px;
+    color: white;
+    justify-content: start;
+    align-items: center;
 }
