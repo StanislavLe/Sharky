@@ -1,5 +1,6 @@
 body {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
     font-family: swimmingPool;
@@ -31,4 +32,8 @@ canvas {
 
 h1 {
     font-size: 68px;
+}
+
+.startScreen {
+    background-image: url('img/gameCover.webp');
 }

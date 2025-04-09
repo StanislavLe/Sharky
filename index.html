@@ -36,6 +36,21 @@
 
 <body onload="init()">
     <h1>Sharky</h1>
+
+<div>
+    <div class="startScreen">
+        <h2>Welcome to Sharky!</h2>
+        <p>Help Sharky collect coins and avoid enemies!</p>
+        <button id="startButton" onclick="startGame()">Start Game</button>
+    </div>
+
+    <div class="pauseScreen" id="pauseScreen" style="display: none;">
+        <h2>Game Paused</h2>
+        <button id="resumeButton" onclick="resumeGame()">Resume Game</button>
+        <button id="restartButtonPause" onclick="restartGame()">Restart Game</button>
+    </div>
+</div>
+
     <canvas id="canvas" width="720" height="480"></canvas>
     
     </canvas>
