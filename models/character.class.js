@@ -115,7 +115,7 @@ class Character extends MovableObject {
     resetIdleState() {
         this.idleTimer = 0;
         this.hasSnored = false;
-        this.world.soundManager.stopSnoreSound(); // Schnarch-Sound stoppen
+        this.world.soundManager.stopSnoreSound(); 
     }
 
     animate() {
@@ -123,20 +123,20 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.moveRight();
-                this.resetIdleState(); // Idle-Zustand zurücksetzen
+                this.resetIdleState(); 
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
                 this.moveLeft();
-                this.resetIdleState(); // Idle-Zustand zurücksetzen
+                this.resetIdleState(); 
             }
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
-                this.resetIdleState(); // Idle-Zustand zurücksetzen
+                this.resetIdleState(); 
             }
             if (this.world.keyboard.D && !this.isPunching) {
                 this.punch();
-                this.resetIdleState(); // Idle-Zustand zurücksetzen
+                this.resetIdleState(); 
             }
             this.world.camera_x = -this.x;
         }, 1000 / 60);
@@ -198,7 +198,7 @@ class Character extends MovableObject {
         } else if (this.idleTimer > 0) {
             this.playAnimation(this.IMAGES_IDLE);
             this.idleTimer++;
-            this.hasSnored = false; // Reset wenn man zurück in IDLE kommt
+            this.hasSnored = false; 
         }
     }
 
@@ -207,16 +207,10 @@ class Character extends MovableObject {
         this.isPunching = true;
         this.currentImage = 0;
         this.world.soundManager.punch?.();
-
-        const punchOffset = 15; // Wie weit Sharky visuell nach vorne rückt
-        const punchEndTime = 100 * this.IMAGES_PUNCH.length; // Gesamtdauer der Punch-Animation
-
-        // Reset idleTimer und hasSnored
+        const punchOffset = 15; 
+        const punchEndTime = 100 * this.IMAGES_PUNCH.length;
         this.resetIdleState();
-
-        // Temporäres Offset für die visuelle Darstellung
         this.visualOffsetX = punchOffset;
-
         const punchInterval = setInterval(() => {
             if (this.currentImage < this.IMAGES_PUNCH.length) {
                 this.playAnimation(this.IMAGES_PUNCH);
@@ -224,10 +218,9 @@ class Character extends MovableObject {
                 clearInterval(punchInterval);
                 this.isPunching = false;
                 this.currentImage = 0;
-                this.visualOffsetX = 0; // Offset zurücksetzen
+                this.visualOffsetX = 0;
             }
         }, 100);
-
         this.world.level.enemies.forEach((enemy) => {
             const withinXRange = enemy.x > this.x + punchOffset && enemy.x < this.x + punchOffset + this.width * 1.10;
             const sameHeight = enemy.y < this.y + this.height && enemy.y + enemy.height > this.y;
@@ -239,8 +232,6 @@ class Character extends MovableObject {
                 }
             }
         });
-
-        // Reset the punching state after the animation ends
         setTimeout(() => {
             this.isPunching = false;
         }, punchEndTime);

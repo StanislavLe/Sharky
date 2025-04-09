@@ -4,12 +4,10 @@ class FinalBoss extends MovableObject {
     x = 200;
     y = 10;
     isIntroPlayed = false;
-    isActive = false; // 💡 wird true, wenn Intro durch ist
+    isActive = false; 
     introFrame = 0;
     behaviorActive = false;
-    isDying = false; // Flag to indicate the boss is dying
-
-
+    isDying = false;
 
     BOSS_INTRO = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/1.png',
@@ -79,16 +77,13 @@ class FinalBoss extends MovableObject {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
         this.currentImage = 0;
-
-        this.world.soundManager.stopBackgroundMusik();  // ✅ zentrales Objekt
-        this.world.soundManager.playBossMusik();        // ✅ Bossmusik starten
-
+        this.world.soundManager.stopBackgroundMusik();  
+        this.world.soundManager.playBossMusik();        
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
-
             if (this.currentImage >= this.BOSS_INTRO.length) {
                 clearInterval(this.introInterval);
-                this.isActive = true; // 🔥 Boss becomes active after intro
+                this.isActive = true; 
                 this.startBossBehavior();
                 this.animate();
             }
@@ -96,7 +91,7 @@ class FinalBoss extends MovableObject {
     }
 
     isCollidable() {
-        return this.isActive && !this.isDying && !this.isDead(); // 🔥 Only collidable when active and not dying or dead
+        return this.isActive && !this.isDying && !this.isDead(); 
     }
 
     animate() {
@@ -112,7 +107,7 @@ class FinalBoss extends MovableObject {
                 }
             } else if (this.isHurt()) {
                 this.playAnimation(this.BOSS_HURT);
-            } else if (!this.isDying) { // 🔥 Nur abspielen, wenn nicht sterbend
+            } else if (!this.isDying) {
                 this.playAnimation(this.BOSS_WALKING);
             }
         }, 150);
@@ -131,17 +126,12 @@ class FinalBoss extends MovableObject {
 
     startBossBehavior() {
         this.behaviorActive = true;
-    
         const loop = () => {
-            if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return; // Stop behavior if dying
-    
+            if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
             this.state = 'idle';
-    
             setTimeout(() => {
                 if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
-    
                 this.state = 'moveLeft';
-    
                 const moveInterval = setInterval(() => {
                     if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) {
                         clearInterval(moveInterval);
@@ -149,54 +139,39 @@ class FinalBoss extends MovableObject {
                     }
                     this.moveLeft();
                 }, 60);
-    
                 setTimeout(() => {
                     clearInterval(moveInterval);
                     if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
-    
                     this.state = 'attack';
-    
                     this.playAnimationOnce(this.BOSS_ATTACK, 200, () => {
-                        this.checkAttackHit(); // 💥 Sharkie treffen, falls in Range
-                        loop(); // ⏭️ Weiter im Verhalten
+                        this.checkAttackHit(); 
+                        loop();
                     });
-                    
-    
                 }, 2000);
-    
             }, 500);
         };
-    
         loop();
     }
     
-
     checkAttackHit() {
-        if (this.isDying || this.isDead()) return; // Prevent damage if dying or dead
-
+        if (this.isDying || this.isDead()) return; 
         const character = this.world.character;
-    
         const withinXRange = character.x + character.width > this.x - this.width * 0.15 && 
                              character.x < this.x;
-                             
         const sameHeight = character.y < this.y + this.height &&
                            character.y + character.height > this.y;
-    
         if (withinXRange && sameHeight && !character.isDead()) {
             character.hit();
         }
     }
     
-    
-    
     playAnimationOnce(images, frameDuration = 100, callback = () => {}) {
         this.currentImage = 0;
         let frame = 0;
-
         const interval = setInterval(() => {
-            if (this.isDead()) { // 🔥 Abbrechen, wenn der Boss stirbt
+            if (this.isDead()) { 
                 clearInterval(interval);
-                callback(); // Optional: Callback trotzdem ausführen
+                callback(); 
                 return;
             }
             if (frame >= images.length) {
@@ -209,8 +184,6 @@ class FinalBoss extends MovableObject {
             }
         }, frameDuration);
     }
-    
-    
     
 
 }

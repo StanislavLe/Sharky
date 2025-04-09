@@ -21,14 +21,11 @@ class AmmoBar extends DrawableObject {
         this.setPercentage(0);
     }
 
-
     setPercentage(percentage) {
         this.percentage = Math.min(100, percentage);
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
-
-
 
     resolveImageIndex() {
         if (this.percentage == 100) {

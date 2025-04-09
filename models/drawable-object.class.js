@@ -13,7 +13,6 @@ class DrawableObject {
         this.img.src = path;
     }
 
-
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
@@ -35,8 +34,6 @@ class DrawableObject {
         }
     }
     
-    
-
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();

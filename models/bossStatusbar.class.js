@@ -21,14 +21,11 @@ class BossStatusBar extends DrawableObject {
         this.setPercentage(100);
     }
 
-
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.BOSS_STATUS_BAR[this.resolveImageIndex()]
         this.img = this.imageCache[path];
     }
-
-
 
     resolveImageIndex() {
         if (this.percentage == 100) {

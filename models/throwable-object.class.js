@@ -13,13 +13,10 @@ class ThrowableObject extends MovableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
-    
         this.moveInterval = setInterval(() => {
             this.x += 10;
-    
             for (let i = 0; i < this.world.level.enemies.length; i++) {
                 const enemy = this.world.level.enemies[i];
-    
                 if (!enemy.isDying && this.isColliding(enemy)) {
                     if (enemy instanceof FinalBoss) {
                         enemy.hit();
@@ -28,14 +25,12 @@ class ThrowableObject extends MovableObject {
                         enemy.die();
                         this.world.soundManager.stompEnemy();
                     }
-    
                     this.removeFromWorld(); // 💥 Bubble zerstört
                     break; // 🛑 Nur ein Gegner wird getroffen
                 }
             }
         }, 25);
     }
-    
 
     removeFromWorld() {
         clearInterval(this.moveInterval);
@@ -45,4 +40,3 @@ class ThrowableObject extends MovableObject {
         }
     }
 }
-    

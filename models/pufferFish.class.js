@@ -14,7 +14,6 @@ class PufferFish extends MovableObject {
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.png',
     ];
 
-
     constructor() {
         super().loadImage(this.PUFFERFISH_WALKING[0]);
         this.x = 200 + Math.random() * 1500;
@@ -24,7 +23,6 @@ class PufferFish extends MovableObject {
         this.animate();
     }
 
-
     animate() {
         setInterval(() => {
             if (this.isDead()) {
@@ -33,20 +31,19 @@ class PufferFish extends MovableObject {
                 this.removeEnemy();
             }
             else {
-                this.moveLeft(); // Optional: KI oder Richtungswechsel
+                this.moveLeft();
                 this.playAnimation(this.PUFFERFISH_WALKING);
             }
         }, 150);
     }
     
-
     removeEnemy() {
         setTimeout(() => {
             const index = this.world.level.enemies.indexOf(this);
             if (index !== -1) {
                 this.world.level.enemies.splice(index, 1);
             }
-        }, this.PUFFERFISH_DIE.length * 150); // Zeit basierend auf Frames
+        }, this.PUFFERFISH_DIE.length * 150);
     }
     
 }

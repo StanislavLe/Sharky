@@ -10,7 +10,7 @@ class EndscreenManager {
         setTimeout(() => {
             this.activeScreen = this.winScreen;
             this.activeScreen.show();
-        }, 4000); // Add a 4-second delay before showing the win screen
+        }, 4000);
     }
 
     showLose() {
@@ -18,7 +18,7 @@ class EndscreenManager {
         setTimeout(() => {
             this.activeScreen = this.loseScreen;
             this.activeScreen.show();
-        }, 4000); // Add a 4-second delay before showing the lose screen
+        }, 4000); 
     }
 
     hideActiveScreen() {

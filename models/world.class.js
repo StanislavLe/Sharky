@@ -14,9 +14,9 @@ class World {
     throwableObjects = [];
     CollectableObject = new CollectableObject();
     soundManager = new SoundManager();
-    endscreen = new Endscreen(); // Endscreen-Objekt hinzufügen
-    endscreenManager = new EndscreenManager(); // Ensure proper initialization
-    fadeOpacity = 1; // Initial opacity for the game
+    endscreen = new Endscreen(); 
+    endscreenManager = new EndscreenManager(); 
+    fadeOpacity = 1; 
 
 
     constructor(canvas, keyboard) {
@@ -24,8 +24,8 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.soundManager.playBackgroundMusik();
-        this.endscreen = new Endscreen(); // Initialisierung sicherstellen
-        this.endscreenManager = new EndscreenManager(); // Ensure proper initialization
+        this.endscreen = new Endscreen(); 
+        this.endscreenManager = new EndscreenManager(); 
         this.draw();
         this.setWorld();
         this.checkCollisions();
@@ -34,16 +34,12 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         if (!this.endscreenManager.isVisible()) {
             this.ctx.save();
             this.ctx.translate(this.camera_x, 0);
-
-            // Hintergrund zeichnen
             this.level.backgroundObjects.forEach(bg => {
                 this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
             });
-            // 🔥 Füge `LightRight` hinzu
             this.addToMap(this.lightRight);
             this.addToMap(this.lightLeft);
             this.level.coins.forEach(coin => {
@@ -59,40 +55,33 @@ class World {
             this.level.enemies.forEach(enemy => {
                 this.addToMap(enemy);
             });
-            // Position für feste Objekte
             this.ctx.translate(-this.camera_x, 0);
             this.addToMap(this.statusBar);
-
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
-            if (boss && boss.isActive) { // 🔥 Show bossStatusBar only when the boss is active
+            if (boss && boss.isActive) { 
                 this.addToMap(this.bossStatusBar);
             }
-
             this.addToMap(this.scoreBar);
             this.addToMap(this.ammoBar);
             this.ctx.translate(this.camera_x, 0);
             this.ctx.translate(-this.camera_x, 0);
             this.ctx.restore();
         }
-
-        // Draw the end screen
         this.endscreenManager.draw(this.ctx);
-
-        // Continue the animation loop
         requestAnimationFrame(() => this.draw());
     }
 
 
     run() {
         setInterval(() => {
-            if (!this.endscreenManager.isVisible()) { // Check if no endscreen is visible
+            if (!this.endscreenManager.isVisible()) { 
                 this.checkCollisions();
                 this.checkThrowObject();
                 this.collectCoin();
                 this.collectAmmo();
                 this.checkBossIntro();
-                this.checkGameOver();   // 🔥 Verlust
-                this.checkVictory();    // 🏁 Sieg
+                this.checkGameOver();   
+                this.checkVictory();    
             }
         }, 200);
     }
@@ -101,20 +90,19 @@ class World {
     checkVictory() {
         const boss = this.level.enemies.find(e => e instanceof FinalBoss);
         if (boss && boss.isDead() && !this.endscreenManager.isVisible()) {
-            this.endscreenManager.showWin(); // Show win screen
+            this.endscreenManager.showWin();
             this.freezeGame();
         }
     }
 
     checkGameOver() {
         if (this.character.isDead() && !this.endscreenManager.isVisible()) {
-            this.endscreenManager.showLose(); // Show lose screen
+            this.endscreenManager.showLose(); 
             this.freezeGame();
         }
     }
     
     freezeGame() {
-        // ⏸️ Optional: Bewegung und Input stoppen
         this.character.speed = 0;
         this.character.isPunching = false;
         this.keyboard.RIGHT = false;
@@ -126,15 +114,15 @@ class World {
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
             if (!(enemy instanceof FinalBoss)) {
-                this.character.speedY = 25; // Nur bei normalen Gegnern hochspringen
-                enemy.die(); // 💀 Andere Gegner sofort töten
+                this.character.speedY = 25; 
+                enemy.die(); 
                 this.soundManager.stompEnemy();
             } else {
-                this.character.hit(); // 🔥 Treffer auf FinalBoss → Energie verringern + Statusbar aktualisieren
+                this.character.hit(); 
                 this.soundManager.punch();
             }
         } else {
-            this.character.hit(); // 🔴 Sharkie wird getroffen
+            this.character.hit();
         }
     }
 
@@ -142,15 +130,13 @@ class World {
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
             let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            bubble.world = this; // ✅ Referenz zur Welt setzen
+            bubble.world = this;
             this.throwableObjects.push(bubble);
             this.character.ammo -= 1;
             this.ammoBar.setPercentage(this.character.ammo * 10);
-
-            // Reset idleTimer und hasSnored
             this.character.idleTimer = 0;
             this.character.hasSnored = false;
-            this.soundManager.stopSnoreSound(); // Stoppe Schnarch-Sound
+            this.soundManager.stopSnoreSound(); 
         }
     }
 
@@ -163,7 +149,6 @@ class World {
         });
     }
 
-
     checkBossIntro() {
         if (this.character.x > 1530) {
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
@@ -172,9 +157,6 @@ class World {
             }
         }
     }
-
-
-
 
     collectCoin() {
         this.level.coins.forEach((coin, index) => {
@@ -203,7 +185,6 @@ class World {
     addToMap(mo) {
         this.ctx.save();
         if (mo === this.character && mo.visualOffsetX) {
-            // Wende das visuelle Offset nur für den Charakter an
             this.ctx.translate(mo.visualOffsetX, 0);
         }
         mo.drawFrame(this.ctx);

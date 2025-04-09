@@ -20,7 +20,7 @@ class JellyFish extends MovableObject{
     constructor() {
         super().loadImage(this.JELLYFISH_WALKING[0]);
         this.x = 200 + Math.random() * 1500;
-        this.y = 100 + Math.random() * 300;  // 🎯 vertikale Streuung verbessert        
+        this.y = 100 + Math.random() * 300;    
         this.speed = 5 + Math.random() * 0.25;
         this.loadImages(this.JELLYFISH_WALKING);
         this.loadImages(this.JELLYFISH_DIE);
@@ -48,7 +48,6 @@ class JellyFish extends MovableObject{
             }
         }, 150);
     }
-    
 
     removeEnemy() {
         setTimeout(() => {
@@ -56,7 +55,7 @@ class JellyFish extends MovableObject{
             if (index !== -1) {
                 this.world.level.enemies.splice(index, 1);
             }
-        }, this.JELLYFISH_DIE.length * 150); // Zeit basierend auf Frames
+        }, this.JELLYFISH_DIE.length * 150);
     }
 
 }

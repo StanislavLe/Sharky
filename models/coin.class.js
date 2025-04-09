@@ -11,7 +11,7 @@ class Coin extends CollectableObject {
 
 
     constructor() {
-        super().loadImage(this.WARPING_COINS[0]); // Starte mit erstem Bild
+        super().loadImage(this.WARPING_COINS[0]); 
         this.loadImages(this.WARPING_COINS);
         this.animateCoins();
     }
@@ -19,7 +19,7 @@ class Coin extends CollectableObject {
     animateCoins() {
         setInterval(() => {
             this.playAnimation(this.WARPING_COINS);
-        }, 150);  // 🔥 Animation mit 150ms pro Frame
+        }, 150); 
     }
  
 }

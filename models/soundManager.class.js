@@ -1,37 +1,34 @@
 class SoundManager {
     backgroundAudio;
     bossAudio;
-    snoreAudio; // Schnarch-Sound als Eigenschaft definieren
+    snoreAudio; 
     isGameOver = false;
 
     constructor() {
         this.initBackgroundMusik();
-        this.initSnoreSound(); // Schnarch-Sound initialisieren
+        this.initSnoreSound(); 
     }
 
-    // === Schnarch-Sound ===
     initSnoreSound(path = '../audio/snoring.mp3') {
         this.snoreAudio = new Audio(path);
         this.snoreAudio.volume = 0.25;
-        this.snoreAudio.loop = true; // Schnarch-Sound in einer Schleife abspielen
+        this.snoreAudio.loop = true; 
     }
 
     snoring() {
-        if (!this.snoreAudio.paused) return; // Verhindere mehrfaches Starten
+        if (!this.snoreAudio.paused) return; 
         this.snoreAudio.play().catch(e => {
             console.warn("Schnarch-Sound konnte nicht abgespielt werden:", e);
         });
     }
 
     stopSnoreSound() {
-        console.log('stopSnoreSound aufgerufen'); // Debugging
         if (this.snoreAudio) {
             this.snoreAudio.pause();
-            this.snoreAudio.currentTime = 0; // Zurücksetzen auf den Anfang
+            this.snoreAudio.currentTime = 0; 
         }
     }
 
-    // === Hintergrund-Musik ===
     initBackgroundMusik(path = '../audio/backgroundMusik.mp3') {
         this.backgroundAudio = new Audio(path);
         this.backgroundAudio.loop = true;
@@ -60,7 +57,6 @@ class SoundManager {
         }
     }
 
-    // === Boss-Musik ===
     initBossMusik(path = '../audio/bossMusik.mp3') {
         this.bossAudio = new Audio(path);
         this.bossAudio.loop = true;
@@ -83,7 +79,6 @@ class SoundManager {
         }
     }
 
-    // === Soundeffekte ===
     playSound(path, volume = 1.0) {
         const audio = new Audio(path);
         audio.volume = volume;
