@@ -15,6 +15,8 @@ class SoundManager {
         const musicStatus = localStorage.getItem('musicStatus');
         if (musicStatus === 'mute') {
             this.stopAllSounds(); 
+        } else if (musicStatus === 'volume') {
+            this.playBackgroundMusik(); 
         }
     }
 

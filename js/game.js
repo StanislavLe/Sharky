@@ -5,31 +5,52 @@ let soundManager = new SoundManager();
 
 function init() {
     canvas = document.getElementById('canvas');
-    soundManager.initializeMusicState();
+    soundManager.initializeMusicState(); // Initialisiere Musikstatus und spiele ggf. Musik ab
+    updateMusicButton(); // Synchronisiere Musik-Button mit localStorage
     world = new World(canvas, keyboard);
     console.log('My character is', world.character);
 }
 
 function toggleMusic() {  
+    const musicStatus = localStorage.getItem('musicStatus');
+    if (musicStatus === 'volume') {
+        localStorage.setItem('musicStatus', 'mute');
+        soundManager.stopBackgroundMusik();
+    } else {
+        localStorage.setItem('musicStatus', 'volume');
+        soundManager.playBackgroundMusik();
+    }
+    updateMusicButton(); // Aktualisiere den Button-Status
+}
+
+function updateMusicButton() {
+    const musicStatus = localStorage.getItem('musicStatus');
     const musicButtonText = document.getElementById('musicButtonText');
     const musicButtonImg = document.getElementById('musicButtonImg');
-    if (soundManager.isPlaying()) {
-        soundManager.stopBackgroundMusik();
+
+    if (musicStatus === 'mute') {
         musicButtonText.textContent = 'Music OFF';
         musicButtonImg.src = 'icon/mute.png';
-        localStorage.setItem('musicStatus', 'mute'); 
-    } else {
-        soundManager.playBackgroundMusik(); 
+    } else if (musicStatus === 'volume') {
         musicButtonText.textContent = 'Music ON';
         musicButtonImg.src = 'icon/volume.png';
-        localStorage.setItem('musicStatus', 'volume'); 
+    } else {
+        // Standardwert aus index.html beibehalten
+        musicButtonText.textContent = 'Music OFF';
+        musicButtonImg.src = 'icon/mute.png';
     }
 }
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-    const musicStatus = localStorage.getItem('musicStatus');
+
+    let musicStatus = localStorage.getItem('musicStatus');
+    if (!musicStatus) {
+        localStorage.setItem('musicStatus', 'mute'); 
+        musicStatus = 'mute';
+    }
+
     const musicButtonText = document.getElementById('musicButtonText');
     const musicButtonImg = document.getElementById('musicButtonImg');
     if (musicStatus === 'mute') {
