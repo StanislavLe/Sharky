@@ -57,6 +57,10 @@ class SoundManager {
         }
     }
 
+    isPlaying() {
+        return this.backgroundAudio && !this.backgroundAudio.paused;
+    }
+
     initBossMusik(path = '../audio/bossMusik.mp3') {
         this.bossAudio = new Audio(path);
         this.bossAudio.loop = true;
