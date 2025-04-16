@@ -77,8 +77,9 @@ class FinalBoss extends MovableObject {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
         this.currentImage = 0;
-        this.world.soundManager.stopBackgroundMusik();  
-        this.world.soundManager.playBossMusik();        
+        this.world.soundManager.stopBackgroundMusik();
+        this.world.soundManager.playBossMusik();
+        this.world.soundManager.isBossMusicPlaying = true; // Set flag for boss music
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
             if (this.currentImage >= this.BOSS_INTRO.length) {
@@ -118,6 +119,7 @@ class FinalBoss extends MovableObject {
         this.behaviorActive = false;  
         this.world.soundManager.ouch();
         this.world.soundManager.stopBossMusik();
+        this.world.soundManager.isBossMusicPlaying = false; // Reset flag for boss music
         setTimeout(() => {
             this.world.soundManager.playBackgroundMusik();
         }, 1000);

@@ -23,7 +23,6 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.soundManager.playBackgroundMusik();
         this.endscreen = new Endscreen(); 
         this.endscreenManager = new EndscreenManager(); 
         this.draw();

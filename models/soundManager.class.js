@@ -3,10 +3,25 @@ class SoundManager {
     bossAudio;
     snoreAudio; 
     isGameOver = false;
+    isBossMusicPlaying = false; 
+
 
     constructor() {
         this.initBackgroundMusik();
         this.initSnoreSound(); 
+    }
+
+    initializeMusicState() {
+        const musicStatus = localStorage.getItem('musicStatus');
+        if (musicStatus === 'mute') {
+            this.stopAllSounds(); 
+        }
+    }
+
+    stopAllSounds() {
+        this.stopBackgroundMusik();
+        this.stopBossMusik();
+        this.stopSnoreSound();
     }
 
     initSnoreSound(path = '../audio/snoring.mp3') {
@@ -58,7 +73,7 @@ class SoundManager {
     }
 
     isPlaying() {
-        return this.backgroundAudio && !this.backgroundAudio.paused;
+        return this.backgroundAudio && !this.backgroundAudio.paused && this.backgroundAudio.currentTime > 0;
     }
 
     initBossMusik(path = '../audio/bossMusik.mp3') {
@@ -84,6 +99,9 @@ class SoundManager {
     }
 
     playSound(path, volume = 1.0) {
+        const musicStatus = localStorage.getItem('musicStatus');
+        if (musicStatus === 'mute') return; 
+
         const audio = new Audio(path);
         audio.volume = volume;
         audio.play().catch(e => {

@@ -5,30 +5,42 @@ let soundManager = new SoundManager();
 
 function init() {
     canvas = document.getElementById('canvas');
+    soundManager.initializeMusicState();
     world = new World(canvas, keyboard);
-    console.log('My character is', world.character)
+    console.log('My character is', world.character);
 }
-
 
 function toggleMusic() {  
     const musicButtonText = document.getElementById('musicButtonText');
     const musicButtonImg = document.getElementById('musicButtonImg');
     if (soundManager.isPlaying()) {
-        soundManager.pauseBackgroundMusik();
+        soundManager.stopBackgroundMusik();
         musicButtonText.textContent = 'Music OFF';
         musicButtonImg.src = 'icon/mute.png';
+        localStorage.setItem('musicStatus', 'mute'); 
     } else {
-        soundManager.initBackgroundMusik();
-        soundManager.playBackgroundMusik();
+        soundManager.playBackgroundMusik(); 
         musicButtonText.textContent = 'Music ON';
-        musicButtonImg.src = 'icon/play.png';
+        musicButtonImg.src = 'icon/volume.png';
+        localStorage.setItem('musicStatus', 'volume'); 
     }
 }
-
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+    const musicStatus = localStorage.getItem('musicStatus');
+    const musicButtonText = document.getElementById('musicButtonText');
+    const musicButtonImg = document.getElementById('musicButtonImg');
+    if (musicStatus === 'mute') {
+        soundManager.stopBackgroundMusik();
+        musicButtonText.textContent = 'Music OFF';
+        musicButtonImg.src = 'icon/mute.png';
+    } else {
+        soundManager.playBackgroundMusik();
+        musicButtonText.textContent = 'Music ON';
+        musicButtonImg.src = 'icon/volume.png';
+    }
     init();
 }
 
