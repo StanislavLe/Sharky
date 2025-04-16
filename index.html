@@ -35,15 +35,20 @@
 </head>
 
 <body>
+    <h1 class="headline">Welcome to Sharky</h1>
     <div>
         <div class="startScreen" id="startScreen">
-            <h2>Welcome to Sharky!</h2>
-            <p>Help Sharky collect coins and avoid enemies!</p>
-            <button id="startButton" onclick="startGame()">Start Game</button>
-            <div>
-                <button id="musicButton" onclick="playMusic()">Musik ON/OFF</button>
-                <button id="instructionButton" onclick="openInstruction()">How to play</button>
-                <button id="impressumButton">Impressum</button>
+            <button class="button-53" role="button" id="startButton" onclick="startGame()">
+                Start Game
+                <img class="icon" src="icon/playButton.png">
+            </button>
+            <div class="startButtonContainer">
+                <button class="button-53" role="button" id="musicButton" onclick="playMusic()">Musik OFF<img
+                        class="icon" src="icon/mute.png"></button>
+                <button class="button-53" role="button" id="instructionButton" onclick="openInstruction()">How to
+                    play<img class="icon" src="icon/howToPlay.png"></button>
+                <button class="button-53" role="button" id="impressumButton" onclick="openLegalNotice()">Legal
+                    Notice<img class="icon" src="icon/insurance.png"></button>
             </div>
         </div>
 

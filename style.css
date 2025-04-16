@@ -1,7 +1,7 @@
 body {
-    color: white;
+    color: #177886;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
     align-items: center;
     font-family: swimmingPool;
@@ -34,8 +34,10 @@ canvas {
     src: url('fonts/swimmingPool.ttf');
 }
 
-h1 {
+.headline {
     font-size: 68px;
+    margin-bottom: 80px;
+    margin-top: 80px;
 }
 
 .startScreen {
@@ -46,8 +48,82 @@ h1 {
     display: flex;
     flex-direction: column;
     color: white;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     width: 720px;
     height: 480px;
 }
+
+.startButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+/* CSS */
+.button-53 {
+  background-color: #3DD1E7;
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-family: swimmingPool;
+  font-size: 20px;
+  font-weight: 200;
+  justify-content: center;
+  line-height: 32px;
+  padding: 16px 32px;
+  position: relative;
+  text-align: center;
+  text-decoration: none #000000 solid;
+  text-decoration-thickness: auto;
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-2deg);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  align-items: center;
+}
+
+.button-53:focus {
+  outline: 0;
+}
+
+.button-53:after {
+  content: '';
+  position: absolute;
+  border: 1px solid #000000;
+  bottom: 4px;
+  left: 4px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+}
+
+.button-53:hover:after {
+  bottom: 2px;
+  left: 2px;
+}
+
+
+.icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 16px;
+    margin-right: 16px;
+    filter: brightness(0) invert(1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-53:hover {
+  transform: scale(1.1) rotate(-2deg);
+  transition: transform 0.3s ease-in-out;
+}
+
