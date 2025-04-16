@@ -35,16 +35,21 @@
 </head>
 
 <body onload="updateMusicButton()">
+
     <h1 class="headline">Welcome to Sharky</h1>
+
     <div>
+
         <div class="startScreen" id="startScreen">
             <button class="button-53" role="button" id="startButton" onclick="startGame()">
                 Start Game
                 <img class="icon" src="icon/playButton.png">
             </button>
             <div class="startButtonContainer">
-                <button class="button-53" role="button" id="musicButton" onclick="toggleMusic()"><p id="musicButtonText">Music OFF</p>
-                    <img id="musicButtonImg" class="icon" src="icon/mute.png"></button>
+                <button class="button-53" role="button" id="musicButton" onclick="toggleMusic()">
+                    <p id="musicButtonText">Music OFF</p>
+                    <img id="musicButtonImg" class="icon" src="icon/mute.png">
+                </button>
                 <button class="button-53" role="button" id="instructionButton" onclick="openInstruction()">How to
                     play<img class="icon" src="icon/howToPlay.png"></button>
                 <button class="button-53" role="button" id="impressumButton" onclick="openLegalNotice()">Legal
@@ -52,10 +57,25 @@
             </div>
         </div>
 
-        <div class="pauseScreen" id="pauseScreen" style="display: none;">
-            <h2>Game Paused</h2>
-            <button id="resumeButton" onclick="resumeGame()">Resume Game</button>
-            <button id="restartButtonPause" onclick="restartPauseGame()">Restart Game</button>
+        <div class="howToPlay" id="howToPlay" style="display: none;">
+            <div class="howToPlayContainer">
+            <div class="storyTelling">
+                <h2>How to play SHARKY</h2>
+                <p>In this game, you play as Sharky, a shark who is on a mission to collect coins and defeat enemies in
+                    the ocean.</p>
+                <p>You can also throw bubbles at enemies to
+                    defeat them and collect coins for a better score.</p>
+                <p>Be careful of the jellyfish and pufferfish, as they can hurt you. You can also collect power-ups to
+                    help you on your journey.</p>
+            </div>
+            <div class="keyAssignment">
+                <h2>key assignment</h2>
+                <p>Use the arrow keys to move Sharky around and collect coins.</p>
+                <p>Press the spacebar to throw bubbles at enemies.</p>
+                <p>Press the "d" key to slap with SHARKY.</p>
+            </div>
+        </div>
+            <button class="button-53" role="button" id="backButton" onclick="closeInstruction()">Back</button>
         </div>
 
         <canvas id="canvas" width="720" height="480" style="display: none;">

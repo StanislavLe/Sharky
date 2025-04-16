@@ -5,8 +5,8 @@ let soundManager = new SoundManager();
 
 function init() {
     canvas = document.getElementById('canvas');
-    soundManager.initializeMusicState(); // Initialisiere Musikstatus und spiele ggf. Musik ab
-    updateMusicButton(); // Synchronisiere Musik-Button mit localStorage
+    soundManager.initializeMusicState(); 
+    updateMusicButton(); 
     world = new World(canvas, keyboard);
     console.log('My character is', world.character);
 }
@@ -20,7 +20,7 @@ function toggleMusic() {
         localStorage.setItem('musicStatus', 'volume');
         soundManager.playBackgroundMusik();
     }
-    updateMusicButton(); // Aktualisiere den Button-Status
+    updateMusicButton(); 
 }
 
 function updateMusicButton() {
@@ -34,23 +34,17 @@ function updateMusicButton() {
     } else if (musicStatus === 'volume') {
         musicButtonText.textContent = 'Music ON';
         musicButtonImg.src = 'icon/volume.png';
-    } else {
-        // Standardwert aus index.html beibehalten
-        musicButtonText.textContent = 'Music OFF';
-        musicButtonImg.src = 'icon/mute.png';
-    }
+    } 
 }
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-
     let musicStatus = localStorage.getItem('musicStatus');
     if (!musicStatus) {
         localStorage.setItem('musicStatus', 'mute'); 
         musicStatus = 'mute';
     }
-
     const musicButtonText = document.getElementById('musicButtonText');
     const musicButtonImg = document.getElementById('musicButtonImg');
     if (musicStatus === 'mute') {
@@ -63,6 +57,24 @@ function startGame() {
         musicButtonImg.src = 'icon/volume.png';
     }
     init();
+}
+
+function openInstruction() {
+    const instruction = document.getElementById('howToPlay');
+    instruction.style.display = 'flex';
+    document.getElementById('startButton').style.display = 'none';
+    document.getElementById('musicButton').style.display = 'none';
+    document.getElementById('instructionButton').style.display = 'none';
+    document.getElementById('impressumButton').style.display = 'none';
+}
+
+function closeInstruction() {
+    const instruction = document.getElementById('howToPlay');
+    instruction.style.display = 'none';
+    document.getElementById('startButton').style.display = 'flex';
+    document.getElementById('musicButton').style.display = 'flex';
+    document.getElementById('instructionButton').style.display = 'flex';
+    document.getElementById('impressumButton').style.display = 'flex';
 }
 
 addEventListener("keydown", (event) => {

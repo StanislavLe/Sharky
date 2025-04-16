@@ -75,7 +75,7 @@ canvas {
   font-weight: 200;
   justify-content: center;
   line-height: 32px;
-  padding: 16px 32px;
+  padding: 8px 12px;
   position: relative;
   text-align: center;
   text-decoration: none #000000 solid;
@@ -129,4 +129,27 @@ canvas {
 
 #musicButtonText {
     margin: 0px;
+}
+
+.howToPlay {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    max-width: 708px;
+    position: relative;
+    bottom: 475px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.howToPlayContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.storyTelling {
+    width: 187%;
 }
