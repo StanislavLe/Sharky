@@ -1,14 +1,18 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let soundManager = new SoundManager();
 
 function init() {
 canvas = document.getElementById('canvas');
 world = new World(canvas, keyboard);
-
-
 console.log('My character is', world.character)
 }
+
+function playMusic() {
+    soundManager.initBackgroundMusik();
+    soundManager.playBackgroundMusik();
+    }
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
@@ -71,8 +75,3 @@ addEventListener("keyup", (event) => {
     
     console.log(event);
 });
-
-
-
-
-

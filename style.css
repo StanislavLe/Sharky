@@ -6,6 +6,9 @@ body {
     align-items: center;
     font-family: swimmingPool;
     background-image: url('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
+height: 100vh;
+padding: 0px;
+margin: 0px;
 }
 
 canvas {
@@ -36,15 +39,15 @@ h1 {
 }
 
 .startScreen {
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/gameCover.webp');
-    background-size: contain;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/gameCover.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
     flex-direction: column;
-    height: 720px;
-    width: 720px;
     color: white;
     justify-content: start;
     align-items: center;
+    width: 720px;
+    height: 480px;
 }
