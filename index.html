@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href='img/icon.png'>
     <link rel="stylesheet" href="../style.css">
     <script src="models/drawable-object.class.js"></script>
+    <script src="js/websiteLogic.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/collectable-object.class.js"></script>
     <script src="models/statusbar.class.js"></script>
@@ -38,7 +39,7 @@
 
     <h1 class="headline">Welcome to Sharky</h1>
 
-    <div>
+    <div class="contentContainer">
 
         <div class="startScreen" id="startScreen">
             <button class="button-53" role="button" id="startButton" onclick="startGame()">
@@ -59,24 +60,36 @@
 
         <div class="howToPlay" id="howToPlay" style="display: none;">
             <div class="howToPlayContainer">
-            <div class="storyTelling">
-                <h2>How to play SHARKY</h2>
-                <p>In this game, you play as Sharky, a shark who is on a mission to collect coins and defeat enemies in
-                    the ocean.</p>
-                <p>You can also throw bubbles at enemies to
-                    defeat them and collect coins for a better score.</p>
-                <p>Be careful of the jellyfish and pufferfish, as they can hurt you. You can also collect power-ups to
-                    help you on your journey.</p>
+                <div class="storyTelling">
+                    <h2>How to play SHARKY</h2>
+                    <p>In this game, you play as Sharky, a shark who is on a mission to collect coins and defeat enemies
+                        in
+                        the ocean.</p>
+                    <p>You can also throw bubbles at enemies to
+                        defeat them and collect coins for a better score.</p>
+                    <p>Be careful of the jellyfish and pufferfish, as they can hurt you. You can also collect power-ups
+                        to
+                        help you on your journey.</p>
+                </div>
+                <div class="keyAssignment">
+                    <h2>key assignment</h2>
+                    <p>Use the arrow keys to move Sharky around and collect coins.</p>
+                    <p>Press the spacebar to throw bubbles at enemies.</p>
+                    <p>Press the "d" key to slap with SHARKY.</p>
+                </div>
             </div>
-            <div class="keyAssignment">
-                <h2>key assignment</h2>
-                <p>Use the arrow keys to move Sharky around and collect coins.</p>
-                <p>Press the spacebar to throw bubbles at enemies.</p>
-                <p>Press the "d" key to slap with SHARKY.</p>
-            </div>
-        </div>
             <button class="button-53" role="button" id="backButton" onclick="closeInstruction()">Back</button>
         </div>
+
+        <div class="legalNotice" id="legalNotice" style="display: none;">
+            <div class="legalNoticeContainer">
+                <a class="link" href="html/impressum.html"><h2 class="legalNoticeButton">Legal Notice<img class="icon" src="icon/contact.png"></h2></a>
+                <a class="link" href="html/datenschutz.html"><h2 class="legalNoticeButton">Privacy Policy<img class="icon" src="icon/insurance.png"></h2></a>
+            </div>
+            <button class="button-53" role="button" id="backButton" onclick="closeLegalNotice()">Back</button>
+        </div>
+
+
 
         <canvas id="canvas" width="720" height="480" style="display: none;">
         </canvas>
