@@ -149,10 +149,14 @@ class World {
     }
 
     checkBossIntro() {
+        console.log("Character X position:", this.character.x); // Debug-Ausgabe
         if (this.character.x > 1530) {
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
-            if (boss) {
-                boss.startIntro(); // 🔥 Intro starten (einmalig)
+            console.log("Boss found:", boss); // Debug-Ausgabe
+            if (boss && !boss.isIntroPlayed) { // Überprüfen, ob das Intro bereits gespielt wurde
+                soundManager.stopBackgroundMusik(); // Hintergrundmusik stoppen
+                console.log("Background music stopped."); // Debug-Ausgabe
+                boss.startIntro(); // Intro starten
             }
         }
     }
@@ -207,8 +211,6 @@ class World {
         this.level.enemies.forEach(enemy => {
             enemy.world = this;
         });
-
     }
-
 
 }

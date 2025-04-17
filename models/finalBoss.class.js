@@ -74,12 +74,19 @@ class FinalBoss extends MovableObject {
     }
 
     startIntro() {
+        console.log("startIntro called."); 
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
         this.currentImage = 0;
-        this.world.soundManager.stopBackgroundMusik();
-        this.world.soundManager.playBossMusik();
-        this.world.soundManager.isBossMusicPlaying = true; // Set flag for boss music
+
+        const isMuted = localStorage.getItem('musicStatus') === 'mute'; // Überprüfe den Stumm-Status
+        if (!isMuted) {
+            soundManager.stopBackgroundMusik(); 
+            console.log("Background music stopped in startIntro."); // Debug-Ausgabe
+            this.world.soundManager.playBossMusik(); // Bossmusik abspielen
+            this.world.soundManager.isBossMusicPlaying = true; // Flag setzen
+        }
+
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
             if (this.currentImage >= this.BOSS_INTRO.length) {
@@ -120,9 +127,13 @@ class FinalBoss extends MovableObject {
         this.world.soundManager.ouch();
         this.world.soundManager.stopBossMusik();
         this.world.soundManager.isBossMusicPlaying = false; // Reset flag for boss music
-        setTimeout(() => {
-            this.world.soundManager.playBackgroundMusik();
-        }, 1000);
+
+        const isMuted = localStorage.getItem('musicStatus') === 'mute'; // Check mute status
+        if (!isMuted) {
+            setTimeout(() => {
+                this.world.soundManager.playBackgroundMusik();
+            }, 1000);
+        }
     }
     
 
