@@ -11,7 +11,34 @@ function init() {
     console.log('My character is', world.character);
 }
 
+function resetWorld() {
+    world = null; // Entferne die aktuelle Welt
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); // Canvas leeren
+    level1 = createNewLevel(); // Level zurücksetzen
+    world = new World(canvas, keyboard); // Neue Welt erstellen
+    console.log('Welt wurde zurückgesetzt.');
+}
 
+function createNewLevel() {
+    // Hier wird das Level neu erstellt, um Coins, Gegner und andere Objekte zurückzusetzen
+    return new Level(
+        [
+            new BackgroundObject('img/background1.png', 0, 0),
+            new BackgroundObject('img/background2.png', 720, 0),
+            // ...weitere Hintergrundobjekte...
+        ],
+        [
+            new Coin(200, 300),
+            new Coin(400, 500),
+            // ...weitere Coins...
+        ],
+        [
+            new PufferFish(600, 350),
+            new JellyFish(800, 400),
+            // ...weitere Gegner...
+        ]
+    );
+}
 
 addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {

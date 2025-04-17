@@ -6,17 +6,18 @@ body {
     align-items: center;
     font-family: swimmingPool;
     background-image: url('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
-height: 100vh;
-padding: 0px;
-margin: 0px;
-margin-left: 80px;
-width: 1250px;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 80px;
+    width: 1250px;
 }
 
 .adsimple-312964252 {
     text-decoration: none;
     color: #07363d;
 }
+
 .adsimple-312964252:visited {
     text-decoration: none;
     color: #07363d;
@@ -77,7 +78,7 @@ canvas {
 }
 
 .startScreen {
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/gameCover.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/gameCover.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -101,51 +102,98 @@ canvas {
 
 /* CSS */
 .button-53 {
-  background-color: #3DD1E7;
-  border: 0 solid #E5E7EB;
-  box-sizing: border-box;
-  color: #ffffff;
-  display: flex;
-  font-family: swimmingPool;
-  font-size: 20px;
-  font-weight: 200;
-  justify-content: center;
-  line-height: 32px;
-  padding: 8px 12px;
-  position: relative;
-  text-align: center;
-  text-decoration: none #000000 solid;
-  text-decoration-thickness: auto;
-  width: 100%;
-  max-width: 460px;
-  position: relative;
-  cursor: pointer;
-  transform: rotate(-2deg);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  align-items: center;
+    background-color: #3DD1E7;
+    border: 0 solid #E5E7EB;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-family: swimmingPool;
+    font-size: 20px;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 32px;
+    padding: 8px 12px;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    align-items: center;
 }
 
 .button-53:focus {
-  outline: 0;
+    outline: 0;
 }
 
 .button-53:after {
-  content: '';
-  position: absolute;
-  border: 1px solid #000000;
-  bottom: 4px;
-  left: 4px;
-  width: calc(100% - 1px);
-  height: calc(100% - 1px);
+    content: '';
+    position: absolute;
+    border: 1px solid #000000;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
 }
 
 .button-53:hover:after {
-  bottom: 2px;
-  left: 2px;
+    bottom: 2px;
+    left: 2px;
 }
 
+
+/* CSS */
+.button-54 {
+    background-color: #3DD1E7;
+    border: 0 solid #E5E7EB;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-family: swimmingPool;
+    font-size: 20px;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 32px;
+    padding: 8px 12px;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    align-items: center;
+}
+
+.button-54:focus {
+    outline: 0;
+}
+
+.button-54:after {
+    content: '';
+    position: absolute;
+    border: 1px solid #ffffff;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+}
+
+.button-54:hover:after {
+    bottom: 2px;
+    left: 2px;
+}
 
 .icon {
     width: 40px;
@@ -159,8 +207,8 @@ canvas {
 }
 
 .button-53:hover {
-  transform: scale(1.1) rotate(-2deg);
-  transition: transform 0.3s ease-in-out;
+    transform: scale(1.1) rotate(-2deg);
+    transition: transform 0.3s ease-in-out;
 }
 
 #musicButtonText {
@@ -234,4 +282,12 @@ canvas {
 
 .link:active {
     text-decoration: none;
+}
+
+.endScreenButtons {
+    position: absolute;
+    bottom: 280px;
+    width: 600px;
+    left: 405px;
+    gap: 62px;
 }

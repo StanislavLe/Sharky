@@ -7,10 +7,12 @@ class Endscreen {
 
     show() {
         this.visible = true;
+        document.getElementById('endScreenButtons').style.display = 'flex';
     }
 
     hide() {
         this.visible = false; 
+        document.getElementById('endScreenButtons').style.display = 'none';
     }
 
     draw(ctx) {

@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1;
+    level = level1; // Level wird von außen übergeben
     lightRight = new LightRight();
     lightLeft = new LightLeft();
     canvas;
@@ -23,6 +23,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.level = level1; // Stelle sicher, dass das Level korrekt initialisiert wird
         this.endscreen = new Endscreen(); 
         this.endscreenManager = new EndscreenManager(); 
         this.draw();
