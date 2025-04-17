@@ -188,6 +188,11 @@ class Character extends MovableObject {
     }
 
     checkIdleTimer() {
+        if (this.world.endscreenManager?.isVisible()) {
+            this.resetIdleState(); // Idle-Zustand zurücksetzen, wenn der Endscreen sichtbar ist
+            return;
+        }
+
         if (this.idleTimer > 100) {
             this.playAnimation(this.IMAGES_LONG_IDLE, 350);
 
