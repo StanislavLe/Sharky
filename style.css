@@ -9,7 +9,43 @@ body {
 height: 100vh;
 padding: 0px;
 margin: 0px;
+margin-left: 80px;
+width: 1250px;
 }
+
+.adsimple-312964252 {
+    text-decoration: none;
+    color: #07363d;
+}
+.adsimple-312964252:visited {
+    text-decoration: none;
+    color: #07363d;
+}
+
+.adsimple-322964240 {
+    margin: 4px;
+}
+
+.privacyPolicy {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #07363d;
+}
+
+.impressum {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #07363d;
+}
+
+a {
+    text-decoration: none;
+    color: #d15217;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #d15217;
+}
+
 
 canvas {
     background-color: black;
