@@ -6,7 +6,6 @@ class LightRight extends MovableObject {
 
     constructor() {
         super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Legacy/Layers/1. Light/1.png');
-        console.log("LightRight geladen:", this.img);
         this.moveLeftOverTime();
     }
     

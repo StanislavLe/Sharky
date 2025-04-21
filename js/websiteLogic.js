@@ -10,11 +10,11 @@ function toggleMusic() {
     updateMusicButton();
 }
 
+
 function updateMusicButton() {
     const musicStatus = localStorage.getItem('musicStatus');
     const musicButtonText = document.getElementById('musicButtonText');
     const musicButtonImg = document.getElementById('musicButtonImg');
-
     if (musicStatus === 'mute') {
         musicButtonText.textContent = 'Music OFF';
         musicButtonImg.src = 'icon/mute.png';
@@ -23,6 +23,7 @@ function updateMusicButton() {
         musicButtonImg.src = 'icon/volume.png';
     }
 }
+
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
@@ -46,6 +47,42 @@ function startGame() {
     init();
 }
 
+
+function resetGame() {
+    if (world) {
+        world.clearAllIntervals();
+    }
+    canvas = document.getElementById('canvas');
+    keyboard = new Keyboard();
+    level1 = new Level( 
+        [ new PufferFish(), new PufferFish(), new JellyFish(), new PufferFish(), new FinalBoss() ],
+        [ ],
+        [ new Coin(), new Coin(), new Coin() ],
+        [ new Bubble(), new Bubble(), new Bubble() ]
+    );
+    world = new World(canvas, keyboard);  
+}
+
+
+function restartGame() {
+    document.getElementById('endScreenButtons').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
+    resetGame();
+}
+
+
+function goHome() {
+    document.getElementById('endScreenButtons').style.display = 'none'; 
+    document.getElementById('canvas').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    
+    if (world) {
+        world.clearAllIntervals();
+        world = null;
+    }
+}
+
+
 function openInstruction() {
     const instruction = document.getElementById('howToPlay');
     instruction.style.display = 'flex';
@@ -54,6 +91,7 @@ function openInstruction() {
     document.getElementById('instructionButton').style.display = 'none';
     document.getElementById('impressumButton').style.display = 'none';
 }
+
 
 function closeInstruction() {
     const instruction = document.getElementById('howToPlay');
@@ -64,6 +102,7 @@ function closeInstruction() {
     document.getElementById('impressumButton').style.display = 'flex';
 }
 
+
 function openLegalNotice() {
     const legalNotice = document.getElementById('legalNotice');
     legalNotice.style.display = 'flex';
@@ -72,6 +111,7 @@ function openLegalNotice() {
     document.getElementById('instructionButton').style.display = 'none';
     document.getElementById('impressumButton').style.display = 'none';
 }
+
 
 function closeLegalNotice() {
     const legalNotice = document.getElementById('legalNotice');

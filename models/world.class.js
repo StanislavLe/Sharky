@@ -31,6 +31,7 @@ class World {
         this.checkCollisions();
         this.run();
     }
+    
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -95,6 +96,7 @@ class World {
         }
     }
 
+
     checkGameOver() {
         if (this.character.isDead() && !this.endscreenManager.isVisible()) {
             this.endscreenManager.showLose(); 
@@ -102,6 +104,7 @@ class World {
         }
     }
     
+
     freezeGame() {
         this.character.speed = 0;
         this.character.isPunching = false;
@@ -110,6 +113,7 @@ class World {
         this.keyboard.UP = false;
         this.keyboard.SPACE = false;
     }
+
 
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
@@ -149,18 +153,17 @@ class World {
         });
     }
 
+
     checkBossIntro() {
-        console.log("Character X position:", this.character.x); // Debug-Ausgabe
         if (this.character.x > 1530) {
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
-            console.log("Boss found:", boss); // Debug-Ausgabe
-            if (boss && !boss.isIntroPlayed) { // Überprüfen, ob das Intro bereits gespielt wurde
-                soundManager.stopBackgroundMusik(); // Hintergrundmusik stoppen
-                console.log("Background music stopped."); // Debug-Ausgabe
-                boss.startIntro(); // Intro starten
+            if (boss && !boss.isIntroPlayed) { 
+                soundManager.stopBackgroundMusik();
+                boss.startIntro();
             }
         }
     }
+
 
     collectCoin() {
         this.level.coins.forEach((coin, index) => {
@@ -200,6 +203,7 @@ class World {
         this.ctx.restore();
     }
 
+
     flipImage(mo) {
         this.ctx.translate(mo.x + mo.width, mo.y);
         this.ctx.scale(-1, 1);
@@ -213,5 +217,25 @@ class World {
             enemy.world = this;
         });
     }
+
+
+    clearAllIntervals() {
+        if (this.logicInterval) clearInterval(this.logicInterval);
+        if (this.drawLoopFrameId) cancelAnimationFrame(this.drawLoopFrameId);
+    
+        if (this.character?.moveInterval) clearInterval(this.character.moveInterval);
+        if (this.character?.animationInterval) clearInterval(this.character.animationInterval);
+        if (this.character?.gravityInterval) clearInterval(this.character.gravityInterval);
+    
+        const boss = this.level.enemies.find(e => e instanceof FinalBoss);
+        if (boss) {
+            if (boss.bossAnimateInterval) clearInterval(boss.bossAnimateInterval);
+            if (boss.introInterval) clearInterval(boss.introInterval);
+            if (boss.bossAttackTimeout) clearTimeout(boss.bossAttackTimeout);
+            if (boss.bossMoveInterval) clearInterval(boss.bossMoveInterval);
+        }
+    }
+    
+    
 
 }

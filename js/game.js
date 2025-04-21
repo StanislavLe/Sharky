@@ -8,7 +8,6 @@ function init() {
     soundManager.initializeMusicState(); 
     updateMusicButton(); 
     world = new World(canvas, keyboard);
-    console.log('My character is', world.character);
 }
 
 function createNewLevel() {
@@ -32,17 +31,11 @@ function createNewLevel() {
 }
 
 function goHome() {
-    // Hide game elements
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('endScreenButtons').style.display = 'none';
-
-    // Show start screen
     document.getElementById('startScreen').style.display = 'flex';
-
-    // Reset game state
     world = null;
     keyboard = new Keyboard();
-    console.log('Returned to start screen.');
 }
 
 addEventListener("keydown", (event) => {
@@ -69,8 +62,6 @@ addEventListener("keydown", (event) => {
     if (event.keyCode == 68) {
         keyboard.D = true;
     }
-
-    console.log(event);
 });
 
 addEventListener("keyup", (event) => {
@@ -97,6 +88,4 @@ addEventListener("keyup", (event) => {
     if (event.keyCode == 68) {
         keyboard.D = false;
     }
-
-    console.log(event);
 });

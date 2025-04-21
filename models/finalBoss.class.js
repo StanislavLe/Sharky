@@ -73,20 +73,17 @@ class FinalBoss extends MovableObject {
 
     }
 
+
     startIntro() {
-        console.log("startIntro called."); 
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
         this.currentImage = 0;
-
         const isMuted = localStorage.getItem('musicStatus') === 'mute'; // Überprüfe den Stumm-Status
         if (!isMuted) {
             soundManager.stopBackgroundMusik(); 
-            console.log("Background music stopped in startIntro."); // Debug-Ausgabe
             this.world.soundManager.playBossMusik(); // Bossmusik abspielen
             this.world.soundManager.isBossMusicPlaying = true; // Flag setzen
         }
-
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
             if (this.currentImage >= this.BOSS_INTRO.length) {
@@ -98,12 +95,14 @@ class FinalBoss extends MovableObject {
         }, 150);
     }
 
+
     isCollidable() {
         return this.isActive && !this.isDying && !this.isDead(); 
     }
+    
 
     animate() {
-        setInterval(() => {
+        this.bossAnimateInterval = setInterval(() => {
             if (this.isDead()) {
                 if (!this.isDying) {
                     this.isDying = true; 
@@ -126,9 +125,9 @@ class FinalBoss extends MovableObject {
         this.behaviorActive = false;  
         this.world.soundManager.ouch();
         this.world.soundManager.stopBossMusik();
-        this.world.soundManager.isBossMusicPlaying = false; // Reset flag for boss music
+        this.world.soundManager.isBossMusicPlaying = false; 
 
-        const isMuted = localStorage.getItem('musicStatus') === 'mute'; // Check mute status
+        const isMuted = localStorage.getItem('musicStatus') === 'mute';
         if (!isMuted) {
             setTimeout(() => {
                 this.world.soundManager.playBackgroundMusik();
@@ -142,7 +141,7 @@ class FinalBoss extends MovableObject {
         const loop = () => {
             if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
             this.state = 'idle';
-            setTimeout(() => {
+            this.bossMoveInterval = setTimeout(() => {
                 if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
                 this.state = 'moveLeft';
                 const moveInterval = setInterval(() => {
@@ -152,7 +151,7 @@ class FinalBoss extends MovableObject {
                     }
                     this.moveLeft();
                 }, 60);
-                setTimeout(() => {
+                this.bossAttackTimeout = setTimeout(() => {
                     clearInterval(moveInterval);
                     if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
                     this.state = 'attack';
@@ -166,6 +165,7 @@ class FinalBoss extends MovableObject {
         loop();
     }
     
+
     checkAttackHit() {
         if (this.isDying || this.isDead()) return; 
         const character = this.world.character;
@@ -178,6 +178,7 @@ class FinalBoss extends MovableObject {
         }
     }
     
+
     playAnimationOnce(images, frameDuration = 100, callback = () => {}) {
         this.currentImage = 0;
         let frame = 0;

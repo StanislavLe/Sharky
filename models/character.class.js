@@ -119,7 +119,7 @@ class Character extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        this.moveInterval = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.moveRight();
@@ -141,7 +141,7 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x;
         }, 1000 / 60);
 
-        setInterval(() => {
+        this.animationInterval = setInterval(() => {
             if (this.isDead()) {
                 if (!this.hasPlayedDeathSound) {
                     this.world.soundManager.gameLose();

@@ -13,7 +13,7 @@ class MovableObject extends DrawableObject {
 
 
     applyGravity() {
-        setInterval(() => {
+        this.gravityInterval = setInterval(() => {
             if (this.isAscending) return; 
     
             if (this.isAboveGround() || this.speedY > 0) {
@@ -51,8 +51,8 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(mo) {
-        if (this.isAscending || this.isDead()) return false; // Keine Kollision, wenn der Endboss aufsteigt oder tot ist
-        if (mo instanceof FinalBoss && !mo.isCollidable()) return false; // 🔥 No collision if boss is not collidable
+        if (this.isAscending || this.isDead()) return false; 
+        if (mo instanceof FinalBoss && !mo.isCollidable()) return false; 
         return this.x + this.width > mo.x &&
                this.y + this.height > mo.y &&
                this.x < mo.x &&

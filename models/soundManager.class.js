@@ -34,8 +34,8 @@ class SoundManager {
 
     snoring() {
         const musicStatus = localStorage.getItem('musicStatus');
-        if (musicStatus === 'mute') return; // Schnarchen nicht abspielen, wenn auf mute
-        if (this.world?.endscreenManager?.isVisible()) return; // Schnarchen nicht abspielen, wenn der Endscreen aktiv ist
+        if (musicStatus === 'mute') return; 
+        if (this.world?.endscreenManager?.isVisible()) return; 
         if (!this.snoreAudio.paused) return; 
         this.snoreAudio.play().catch(e => {
             console.warn("Schnarch-Sound konnte nicht abgespielt werden:", e);
@@ -63,7 +63,6 @@ class SoundManager {
     }
 
     stopBackgroundMusik() {
-        console.log("stopBackgroundMusik called."); // Debug-Ausgabe
         if (this.backgroundAudio) {
             this.backgroundAudio.pause();
             this.backgroundAudio.currentTime = 0;
