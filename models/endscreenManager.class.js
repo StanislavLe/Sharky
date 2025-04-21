@@ -24,6 +24,7 @@ class EndscreenManager {
     hideActiveScreen() {
         if (this.activeScreen) {
             this.activeScreen.hide();
+            this.activeScreen = null; // Ensure the reference is cleared
         }
     }
 

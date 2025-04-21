@@ -7,36 +7,16 @@ function init() {
     canvas = document.getElementById('canvas');
     soundManager.initializeMusicState(); 
     updateMusicButton(); 
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, createNewLevel());
 }
+
+
 
 function createNewLevel() {
-    return new Level(
-        [
-            new BackgroundObject('img/background1.png', 0, 0),
-            new BackgroundObject('img/background2.png', 720, 0),
-            // ...weitere Hintergrundobjekte...
-        ],
-        [
-            new Coin(200, 300),
-            new Coin(400, 500),
-            // ...weitere Coins...
-        ],
-        [
-            new PufferFish(600, 350),
-            new JellyFish(800, 400),
-            // ...weitere Gegner...
-        ]
-    );
+    return level1;
 }
 
-function goHome() {
-    document.getElementById('canvas').style.display = 'none';
-    document.getElementById('endScreenButtons').style.display = 'none';
-    document.getElementById('startScreen').style.display = 'flex';
-    world = null;
-    keyboard = new Keyboard();
-}
+
 
 addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {

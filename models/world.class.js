@@ -19,11 +19,11 @@ class World {
     fadeOpacity = 1; 
 
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.level = level1; 
+        this.level = level; 
         this.endscreen = new Endscreen(); 
         this.endscreenManager = new EndscreenManager(); 
         this.draw();
@@ -112,6 +112,7 @@ class World {
         this.keyboard.LEFT = false;
         this.keyboard.UP = false;
         this.keyboard.SPACE = false;
+        this.keyboard.D = false; // Ensure all inputs are disabled
     }
 
 
@@ -236,6 +237,22 @@ class World {
         }
     }
     
-    
+    cleanup() {
+    this.clearAllIntervals();
+
+    // Zusätzliche Aufräumarbeiten
+    this.character = null;
+    this.level = null;
+    this.keyboard = null;
+
+    // Endscreen verstecken, falls noch sichtbar
+    const buttons = document.getElementById('endScreenButtons');
+    if (buttons) {
+        buttons.style.display = 'none';
+    }
+
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+}
+
 
 }

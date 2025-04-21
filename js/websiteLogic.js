@@ -62,25 +62,44 @@ function resetGame() {
 
 
 function restartGame() {
-    resetGame();
+    if (world) {
+        world.cleanup(); // beendet alle Loops, versteckt Endscreen
+    }
+
+    // Neues Level erstellen
+    const newLevel = createNewLevel();
+
+    // Canvas & Keyboard resetten
+    canvas = document.getElementById('canvas');
+    keyboard = new Keyboard();
+
+    // Neue Welt mit frischem Level starten
+    world = new World(canvas, keyboard, newLevel);
+
+    // DOM-Elemente anpassen
     document.getElementById('endScreenButtons').style.display = 'none';
     document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('canvas').style.display = 'flex';
-    level = level1; 
+    document.getElementById('canvas').style.display = 'block';
 }
+
 
 
 function goHome() {
-    resetGame();
-    document.getElementById('endScreenButtons').style.display = 'none'; 
-    document.getElementById('canvas').style.display = 'none';
-    document.getElementById('startScreen').style.display = 'flex';
-    
     if (world) {
-        world.clearAllIntervals();
+        world.cleanup();
         world = null;
     }
+
+    document.getElementById('endScreenButtons').style.display = 'none';
+    document.getElementById('canvas').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+
+    // Musik zurücksetzen, falls nötig
+    if (localStorage.getItem('musicStatus') === 'volume') {
+        soundManager.playBackgroundMusik();
+    }
 }
+
 
 
 function openInstruction() {

@@ -7,12 +7,18 @@ class Endscreen {
 
     show() {
         this.visible = true;
-        document.getElementById('endScreenButtons').style.display = 'flex';
+        const buttons = document.getElementById('endScreenButtons');
+        if (buttons) {
+            buttons.style.display = 'flex';
+        }
     }
 
     hide() {
-        this.visible = false; 
-        document.getElementById('endScreenButtons').style.display = 'none';
+        this.visible = false;
+        const buttons = document.getElementById('endScreenButtons');
+        if (buttons) {
+            buttons.style.display = 'none';
+        }
     }
 
     draw(ctx) {
