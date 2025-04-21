@@ -1,4 +1,4 @@
-let level1 = new Level(
+var level1 = new Level(
     [
         new PufferFish(),
         new PufferFish(),
