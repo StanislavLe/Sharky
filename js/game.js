@@ -11,16 +11,7 @@ function init() {
     console.log('My character is', world.character);
 }
 
-function resetWorld() {
-    world = null; // Entferne die aktuelle Welt
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); // Canvas leeren
-    level1 = createNewLevel(); // Level zurücksetzen
-    world = new World(canvas, keyboard); // Neue Welt erstellen
-    console.log('Welt wurde zurückgesetzt.');
-}
-
 function createNewLevel() {
-    // Hier wird das Level neu erstellt, um Coins, Gegner und andere Objekte zurückzusetzen
     return new Level(
         [
             new BackgroundObject('img/background1.png', 0, 0),
@@ -38,6 +29,20 @@ function createNewLevel() {
             // ...weitere Gegner...
         ]
     );
+}
+
+function goHome() {
+    // Hide game elements
+    document.getElementById('canvas').style.display = 'none';
+    document.getElementById('endScreenButtons').style.display = 'none';
+
+    // Show start screen
+    document.getElementById('startScreen').style.display = 'flex';
+
+    // Reset game state
+    world = null;
+    keyboard = new Keyboard();
+    console.log('Returned to start screen.');
 }
 
 addEventListener("keydown", (event) => {

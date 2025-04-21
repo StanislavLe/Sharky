@@ -46,15 +46,6 @@ function startGame() {
     init();
 }
 
-function restartGame() {
-    const endScreenButtons = document.getElementById('endScreenButtons');
-    if (endScreenButtons) {
-        endScreenButtons.style.display = 'none'; 
-    }
-    resetWorld(); // Welt komplett zurücksetzen
-    startGame(); // Spiel neu starten
-}
-
 function openInstruction() {
     const instruction = document.getElementById('howToPlay');
     instruction.style.display = 'flex';
