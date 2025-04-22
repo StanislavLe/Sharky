@@ -69,18 +69,12 @@ function resetGame() {
     world = new World(canvas, keyboard, createNewLevel());
 
     // 5. Endscreen & Startscreen ausblenden
-    document.getElementById('endScreenButtons').style.display = 'none';
+   
     document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('canvas').style.display = 'block';
+    document.getElementById('canvas').style.display = 'flex';
+    document.getElementById('restartButton').style.display = 'none';
+    document.getElementById('backHomeButton').style.display = 'none';
 }
-
-
-
-function restartGame() {
-    resetGame();
-}
-
-
 
 
 function goHome() {
@@ -89,11 +83,10 @@ function goHome() {
         world = null;
     }
     document.getElementById('canvas').style.display = 'none';
-    document.getElementById('endScreenButtons').style.display = 'none';
     document.getElementById('startScreen').style.display = 'flex';
+    document.getElementById('restartButton').style.display = 'none';
+    document.getElementById('backHomeButton').style.display = 'none';
 }
-
-
 
 
 function openInstruction() {
