@@ -47,36 +47,28 @@ function startGame() {
     init();
 }
 
-level = level1; 
+level = level1;
 
 
 function resetGame() {
+    // 1. Aktuelle Welt vollständig stoppen
     if (world) {
         world.clearAllIntervals();
-    }
-    canvas = document.getElementById('canvas');
-    keyboard = new Keyboard();
-    level1 = this.level1;
-    world = new World(canvas, keyboard);  
-}
-
-
-function restartGame() {
-    if (world) {
-        world.cleanup(); // beendet alle Loops, versteckt Endscreen
+        world = null;
     }
 
-    // Neues Level erstellen
-    const newLevel = createNewLevel();
-
-    // Canvas & Keyboard resetten
+    // 2. Canvas & Tastatur neu initialisieren
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
 
-    // Neue Welt mit frischem Level starten
-    world = new World(canvas, keyboard, newLevel);
+    // 3. Neues Level erzeugen
+    level = createNewLevel(); // Verwende immer frisches Level!
 
-    // DOM-Elemente anpassen
+    // 4. Welt neu erzeugen mit frischem Level
+    // NEU
+    world = new World(canvas, keyboard, createNewLevel());
+
+    // 5. Endscreen & Startscreen ausblenden
     document.getElementById('endScreenButtons').style.display = 'none';
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
@@ -84,21 +76,23 @@ function restartGame() {
 
 
 
+function restartGame() {
+    resetGame();
+}
+
+
+
+
 function goHome() {
     if (world) {
-        world.cleanup();
+        world.clearAllIntervals();
         world = null;
     }
-
-    document.getElementById('endScreenButtons').style.display = 'none';
     document.getElementById('canvas').style.display = 'none';
+    document.getElementById('endScreenButtons').style.display = 'none';
     document.getElementById('startScreen').style.display = 'flex';
-
-    // Musik zurücksetzen, falls nötig
-    if (localStorage.getItem('musicStatus') === 'volume') {
-        soundManager.playBackgroundMusik();
-    }
 }
+
 
 
 
