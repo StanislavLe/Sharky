@@ -49,35 +49,27 @@ function startGame() {
 
 level = level1;
 
-
 function resetGame() {
-    // 1. Aktuelle Welt vollständig stoppen
+
     if (world) {
         world.clearAllIntervals();
         world = null;
     }
 
-    // 2. Canvas & Tastatur neu initialisieren
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
+    level = createNewLevel();
+    world = new World(canvas, keyboard, level);
 
-    // 3. Neues Level erzeugen
-    level = createNewLevel(); // Verwende immer frisches Level!
-
-    // 4. Welt neu erzeugen mit frischem Level
-    // NEU
-    world = new World(canvas, keyboard, createNewLevel());
-
-    // 5. Endscreen & Startscreen ausblenden
-   
+    document.getElementById('endScreenButtons').style.display = 'none';
     document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('canvas').style.display = 'flex';
-    document.getElementById('restartButton').style.display = 'none';
-    document.getElementById('backHomeButton').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
 }
 
 
+
 function goHome() {
+    
     if (world) {
         world.clearAllIntervals();
         world = null;

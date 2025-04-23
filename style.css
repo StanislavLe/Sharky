@@ -290,4 +290,5 @@ canvas {
     width: 600px;
     left: 405px;
     gap: 62px;
+    display: flex;
 }

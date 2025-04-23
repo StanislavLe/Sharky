@@ -98,11 +98,16 @@ class World {
 
 
     checkGameOver() {
-        if (this.character.isDead() && !this.endscreenManager.isVisible()) {
+        if (
+            this.character.isDead() &&
+            !this.endscreenManager.isVisible() &&
+            !this.endscreenManager.isPending
+        ) {
             this.endscreenManager.showLose(); 
             this.freezeGame();
         }
     }
+    
     
 
     freezeGame() {
