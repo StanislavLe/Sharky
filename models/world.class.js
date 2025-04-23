@@ -17,6 +17,7 @@ class World {
     endscreen = new Endscreen(); 
     endscreenManager = new EndscreenManager(); 
     fadeOpacity = 1; 
+    victoryProcessed = false; // Neue Eigenschaft
 
 
     constructor(canvas, keyboard, level) {
@@ -90,7 +91,8 @@ class World {
      
     checkVictory() {
         const boss = this.level.enemies.find(e => e instanceof FinalBoss);
-        if (boss && boss.isDead() && !this.endscreenManager.isVisible()) {
+        if (boss && boss.isDead() && !this.endscreenManager.isVisible() && !this.victoryProcessed) {
+            this.victoryProcessed = true; // Sieg markieren
             this.endscreenManager.showWin();
             this.freezeGame();
         }

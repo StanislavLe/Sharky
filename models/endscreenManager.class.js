@@ -8,13 +8,16 @@ class EndscreenManager {
     }
 
     showWin() {
+        if (this.isPending) return; // Verhindere mehrfaches Ausführen
         console.log('[EndscreenManager] WIN detected ✅');
         this._cancelPending(); // Abbrechen, falls loseTimeout noch aktiv
         this.hideActiveScreen();
-    
+
+        this.isPending = true; // Markiere als in Bearbeitung
         this._pendingTimeout = setTimeout(() => {
             this.activeScreen = this.winScreen;
             this.activeScreen.show();
+            this.isPending = false; // Bearbeitung abgeschlossen
             console.log('[EndscreenManager] WIN-Screen shown');
         }, 2000); // Optional Delay
     }

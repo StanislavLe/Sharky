@@ -50,7 +50,6 @@ function startGame() {
 level = level1;
 
 function resetGame() {
-
     if (world) {
         world.clearAllIntervals();
         world = null;
@@ -61,7 +60,21 @@ function resetGame() {
     level = createNewLevel();
     world = new World(canvas, keyboard, level);
 
-    document.getElementById('endScreenButtons').style.display = 'none';
+    const restartButton = document.getElementById('restartButton');
+    const backHomeButton = document.getElementById('backHomeButton');
+    const endScreenButtons = document.getElementById('endScreenButtons');
+
+    // Buttons vollständig zurücksetzen
+    if (restartButton && backHomeButton && endScreenButtons) {
+        restartButton.style.display = 'none';
+        backHomeButton.style.display = 'none';
+        restartButton.style.visibility = 'hidden';
+        backHomeButton.style.visibility = 'hidden';
+
+        endScreenButtons.style.display = 'none';
+        endScreenButtons.style.opacity = '0'; // Sicherstellen, dass die Buttons unsichtbar sind
+    }
+
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
 }

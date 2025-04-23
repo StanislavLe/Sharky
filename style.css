@@ -285,10 +285,24 @@ canvas {
 }
 
 .endScreenButtons {
-    position: absolute;
-    bottom: 280px;
-    width: 600px;
-    left: 405px;
     gap: 62px;
     display: flex;
+    position: absolute;
+    width: 600px;
+    left: 405px;
+    z-index: 1000; /* Sicherstellen, dass die Buttons über anderen Elementen liegen */
+}
+
+.endScreenButtons button {
+    opacity: 1; /* Sicherstellen, dass die Buttons vollständig sichtbar sind */
+}
+
+/* Für Lose */
+.loseButtons {
+    bottom: 280px;
+}
+
+/* Für Win (höher, zentrierter oder größer?) */
+.winButtons {
+    bottom: 548px;
 }
