@@ -132,3 +132,47 @@ function closeLegalNotice() {
     document.getElementById('instructionButton').style.display = 'flex';
     document.getElementById('impressumButton').style.display = 'flex';
 }
+
+function fullScreenActive(canvas) {
+    if (canvas.requestFullscreen) {
+        canvas.requestFullscreen();
+    } else if (canvas.webkitRequestFullscreen) {
+        canvas.webkitRequestFullscreen(); // Safari
+    } else if (canvas.msRequestFullscreen) {
+        canvas.msRequestFullscreen(); // IE
+    }
+    console.log('[Fullscreen] 🔛 Aktiviert');
+}
+
+function fullScreenInactive() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen(); // Safari
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen(); // IE
+    }
+    console.log('[Fullscreen] 🔚 Deaktiviert');
+}
+
+function setupFullScreenToggle() {
+    const toggleBtn = document.getElementById('fullscreenToggle');
+    const canvas = document.querySelector('canvas');
+
+    if (!toggleBtn || !canvas) {
+        console.warn('[Fullscreen] ❌ canvas oder Icon fehlt');
+        return;
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            fullScreenActive(canvas);
+        } else {
+            fullScreenInactive();
+        }
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    setupFullScreenToggle();
+});

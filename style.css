@@ -306,3 +306,17 @@ canvas {
 .winButtons {
     bottom: 548px;
 }
+
+
+#fullscreenToggle {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 2000; /* über dem Endscreen */
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+#fullscreenToggle:hover {
+    opacity: 1;
+}
