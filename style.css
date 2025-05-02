@@ -315,7 +315,10 @@ canvas {
     z-index: 2000; /* über dem Endscreen */
     opacity: 0.8;
     transition: opacity 0.3s ease;
-}
+    position: relative;
+    bottom: 50px;
+    left: 660px;
+    filter: brightness(0) invert(1);}
 
 #fullscreenToggle:hover {
     opacity: 1;
