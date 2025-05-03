@@ -119,73 +119,89 @@ class Character extends MovableObject {
     }
 
     animate() {
+        // Bewegung 60 FPS
         this.moveInterval = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.moveRight();
-                this.resetIdleState(); 
+                this.resetIdleState();
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
                 this.moveLeft();
-                this.resetIdleState(); 
+                this.resetIdleState();
             }
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
-                this.resetIdleState(); 
+                this.resetIdleState();
             }
             if (this.world.keyboard.D && !this.isPunching) {
                 this.punch();
-                this.resetIdleState(); 
+                this.resetIdleState();
             }
+    
             this.world.camera_x = -this.x;
         }, 1000 / 60);
-
+    
+        // Animationslogik 150ms Takt
         this.animationInterval = setInterval(() => {
             if (this.isDead()) {
-                if (!this.hasPlayedDeathSound) {
-                    this.world.soundManager.gameLose();
-                    this.hasPlayedDeathSound = true;
-                }
-                if (!this.hasPlayedDeathAnimation) {
-                    this.playAnimation(this.IMAGES_DEAD);
-
-                    if (this.currentImage >= this.IMAGES_DEAD.length) {
-                        this.currentImage = this.IMAGES_DEAD.length - 1;
-                        this.hasPlayedDeathAnimation = true;
+                // Start Animation nur einmal
+                if (!this.deathStarted) {
+                    this.deathStarted = true;
+                    this.currentImage = 0;
+                
+                    // Todesanimation & Aufsteigen gleichzeitig starten
+                    if (!this.hasStartedAscend) {
+                        this.hasStartedAscend = true;
                         this.isAscending = true;
                         this.startAscend();
                     }
                 }
-
+                
+    
+                // Animation läuft weiter bis zum Ende
+                if (this.currentImage < this.IMAGES_DEAD.length) {
+                    this.playAnimation(this.IMAGES_DEAD);
+                } else {
+                    // Bleib beim letzten Frame stehen
+                    let lastFrame = this.IMAGES_DEAD[this.IMAGES_DEAD.length - 1];
+                    this.img = this.imageCache[lastFrame];
+    
+                    // Nur einmal Sound abspielen
+                    if (!this.hasPlayedDeathSound) {
+                        this.hasPlayedDeathSound = true;
+                        this.character_dead_sound.play();
+                    }
+                }
+    
                 this.idleTimer = 0;
                 return;
             }
-
+    
+            // Wenn er aufsteigt, keine Animation ändern
             if (this.isAscending) return;
-
-            else if (this.isPunching) {
-                return;
-            }
-
-            else if (this.isHurt() && !this.enemy?.isDying) {
+    
+            // Kampfanimation blockiert andere
+            if (this.isPunching) return;
+    
+            // Sonstige Animationen
+            if (this.isHurt() && !this.enemy?.isDying) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.idleTimer = 0;
-            }
-            else if (this.isAboveGround()) {
+            } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
                 this.idleTimer = 0;
-            }
-            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.idleTimer = 0;
-            }
-            else {
+            } else {
                 this.idleTimer += 1;
                 this.checkIdleTimer();
             }
         }, 150);
     }
+    
 
     checkIdleTimer() {
         if (this.world.endscreenManager?.isVisible()) {
