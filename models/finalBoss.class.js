@@ -105,12 +105,22 @@ class FinalBoss extends MovableObject {
         this.bossAnimateInterval = setInterval(() => {
             if (this.isDead()) {
                 if (!this.isDying) {
-                    this.isDying = true; 
-                    this.playAnimationOnce(this.BOSS_DEAD, 100, () => {
-                        this.img = this.imageCache[this.BOSS_DEAD[this.BOSS_DEAD.length - 1]]; // Ensure the last frame stays visible
-                        this.dieBoss();
-                        this.startAscend();
-                    });
+                    this.isDying = true;
+                    this.currentImage = 0;
+                    this.deathFrame = 0;
+    
+                    this.bossDeathInterval = setInterval(() => {
+                        if (this.deathFrame < this.BOSS_DEAD.length) {
+                            const path = this.BOSS_DEAD[this.deathFrame];
+                            this.img = this.imageCache[path];
+                            this.deathFrame++;
+                        } else {
+                            clearInterval(this.bossDeathInterval);
+                            this.img = this.imageCache[this.BOSS_DEAD[this.BOSS_DEAD.length - 1]];
+                            this.dieBoss();
+                            this.startAscend();
+                        }
+                    }, 150);
                 }
             } else if (this.isHurt()) {
                 this.playAnimation(this.BOSS_HURT);
@@ -119,6 +129,7 @@ class FinalBoss extends MovableObject {
             }
         }, 150);
     }
+    
 
 
     dieBoss() {
@@ -130,7 +141,12 @@ class FinalBoss extends MovableObject {
         const isMuted = localStorage.getItem('musicStatus') === 'mute';
         if (!isMuted) {
             setTimeout(() => {
-                this.world.soundManager.playBackgroundMusik();
+                const musicStatus = localStorage.getItem('musicStatus');
+                if (musicStatus === 'volume') {
+                    this.world.soundManager.playBackgroundMusik();
+                } else {
+                    console.log('[Musikstatus] ❌ Kein Musik-Start wegen MUTE');
+                }
             }, 1000);
         }
     }
