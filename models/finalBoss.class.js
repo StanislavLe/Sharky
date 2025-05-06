@@ -8,6 +8,8 @@ class FinalBoss extends MovableObject {
     introFrame = 0;
     behaviorActive = false;
     isDying = false;
+    isAttacking = false;
+
 
     BOSS_INTRO = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/1.png',
@@ -81,8 +83,8 @@ class FinalBoss extends MovableObject {
     
         const isMuted = localStorage.getItem('musicStatus') === 'mute';
         if (!isMuted) {
-            window.soundManager.stopBackgroundMusik();         // 🟡 DAS MUSS ZUERST KOMMEN
-            window.soundManager.isBossMusicPlaying = true;     // 🟢 FLAG UNBEDINGT SOFORT SETZEN
+            window.soundManager.stopBackgroundMusik();         
+            window.soundManager.isBossMusicPlaying = true; 
             window.soundManager.playBossMusik();
         }    
         this.introInterval = setInterval(() => {
@@ -110,7 +112,6 @@ class FinalBoss extends MovableObject {
                     this.currentImage = 0;
                     this.deathFrame = 0;
     
-                    // ✅ Direkt bei Animationsstart Sound abspielen
                     this.world.soundManager.ouch();
     
                     this.bossDeathInterval = setInterval(() => {
@@ -128,16 +129,17 @@ class FinalBoss extends MovableObject {
                 }
             } else if (this.isHurt()) {
                 this.playAnimation(this.BOSS_HURT);
-            } else if (!this.isDying) {
+            } else if (!this.isDying && !this.isAttacking) { 
                 this.playAnimation(this.BOSS_WALKING);
             }
         }, 150);
     }
     
+    
 
     dieBoss() {
         this.behaviorActive = false;              
-        this.world.soundManager.stopBossMusik();  // ✅ sollte Flag setzen!
+        this.world.soundManager.stopBossMusik();  
     }
     
     
@@ -146,9 +148,11 @@ class FinalBoss extends MovableObject {
         const loop = () => {
             if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
             this.state = 'idle';
+    
             this.bossMoveInterval = setTimeout(() => {
                 if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
                 this.state = 'moveLeft';
+    
                 const moveInterval = setInterval(() => {
                     if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) {
                         clearInterval(moveInterval);
@@ -156,11 +160,14 @@ class FinalBoss extends MovableObject {
                     }
                     this.moveLeft();
                 }, 60);
+    
                 this.bossAttackTimeout = setTimeout(() => {
                     clearInterval(moveInterval);
                     if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
                     this.state = 'attack';
-                    this.playAnimationOnce(this.BOSS_ATTACK, 200, () => {
+                    this.isAttacking = true; 
+                    this.playAnimationOnce(this.BOSS_ATTACK, 100, () => {
+                        this.isAttacking = false; 
                         this.checkAttackHit(); 
                         loop();
                     });
@@ -169,6 +176,7 @@ class FinalBoss extends MovableObject {
         };
         loop();
     }
+    
     
 
     checkAttackHit() {
@@ -202,7 +210,6 @@ class FinalBoss extends MovableObject {
                 frame++;
             }
         }, frameDuration);
-    }
-    
+    }   
 
 }
