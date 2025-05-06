@@ -1,20 +1,16 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-window.soundManager = new SoundManager(); // ✅ Einzige Instanz
+window.soundManager = new SoundManager(); 
+
 
 function init() {
-    console.log('[Game] 🚀 init() gestartet');
     canvas = document.getElementById('canvas');
     updateMusicButton();
-
     world = new World(canvas, keyboard, createNewLevel());
-
-    // ✅ Musikstatus beim Start prüfen
     window.soundManager.initializeMusicState();
     window.soundManager.startMusicWatcher();
 }
-
 
 
 function createNewLevel() {
@@ -76,8 +72,6 @@ function createNewLevel() {
 }
 
 
-
-
 addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -103,6 +97,7 @@ addEventListener("keydown", (event) => {
         keyboard.D = true;
     }
 });
+
 
 addEventListener("keyup", (event) => {
     if (event.keyCode == 39) {

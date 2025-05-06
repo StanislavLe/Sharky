@@ -13,11 +13,11 @@ class World {
     ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
-    soundManager = window.soundManager; // ✅ Statt neuer Instanz
+    soundManager = window.soundManager; 
     endscreen = new Endscreen(); 
     endscreenManager = new EndscreenManager(); 
     fadeOpacity = 1; 
-    victoryProcessed = false; // Neue Eigenschaft
+    victoryProcessed = false;
 
 
     constructor(canvas, keyboard, level) {
@@ -92,7 +92,7 @@ class World {
     checkVictory() {
         const boss = this.level.enemies.find(e => e instanceof FinalBoss);
         if (boss && boss.isDead() && !this.endscreenManager.isVisible() && !this.victoryProcessed) {
-            this.victoryProcessed = true; // Sieg markieren
+            this.victoryProcessed = true; 
             this.endscreenManager.showWin();
             this.freezeGame();
         }
@@ -105,7 +105,7 @@ class World {
             !this.endscreenManager.isVisible() &&
             !this.endscreenManager.isPending
         ) {
-            this.soundManager.gameLose(); // ✅ Jetzt wird der Sound gespielt
+            this.soundManager.gameLose(); 
             this.endscreenManager.showLose(); 
             this.freezeGame();
         }
@@ -121,7 +121,7 @@ class World {
         this.keyboard.LEFT = false;
         this.keyboard.UP = false;
         this.keyboard.SPACE = false;
-        this.keyboard.D = false; // Ensure all inputs are disabled
+        this.keyboard.D = false; 
     }
 
 
@@ -246,20 +246,16 @@ class World {
         }
     }
     
+
     cleanup() {
     this.clearAllIntervals();
-
-    // Zusätzliche Aufräumarbeiten
     this.character = null;
     this.level = null;
     this.keyboard = null;
-
-    // Endscreen verstecken, falls noch sichtbar
     const buttons = document.getElementById('endScreenButtons');
     if (buttons) {
         buttons.style.display = 'none';
     }
-
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
 

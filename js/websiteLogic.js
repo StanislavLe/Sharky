@@ -1,5 +1,6 @@
 level = level1;
 
+
 function toggleMusic() {
     const musicStatus = localStorage.getItem('musicStatus');
     if (musicStatus === 'volume') {
@@ -44,22 +45,15 @@ function resetGame() {
         world.clearAllIntervals();
         world = null;
     }
-
-    console.log('[Game] ♻️ Spiel wird zurückgesetzt');
-
-    // Musikverwaltung säubern
     window.soundManager.stopBackgroundMusik();
     window.soundManager.stopMusicWatcher();
-
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
     level = createNewLevel();
     world = new World(canvas, keyboard, level);
-
     const restartButton = document.getElementById('restartButton');
     const backHomeButton = document.getElementById('backHomeButton');
     const endScreenButtons = document.getElementById('endScreenButtons');
-
     if (restartButton && backHomeButton && endScreenButtons) {
         restartButton.style.display = 'none';
         backHomeButton.style.display = 'none';
@@ -68,15 +62,11 @@ function resetGame() {
         endScreenButtons.style.display = 'none';
         endScreenButtons.style.opacity = '0';
     }
-
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-
-    // ✅ Musikverwaltung neu starten
     window.soundManager.initializeMusicState();
     window.soundManager.startMusicWatcher();
 }
-
 
 
 function goHome() {
@@ -84,22 +74,16 @@ function goHome() {
         world.clearAllIntervals();
         world = null;
     }
-
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('startScreen').style.display = 'flex';
     document.getElementById('restartButton').style.display = 'none';
     document.getElementById('backHomeButton').style.display = 'none';
-
     updateMusicButton();
-
-    // 🧠 Musikstatus erneut auswerten
     if (localStorage.getItem('musicStatus') === 'volume') {
         window.soundManager.initializeMusicState();
         window.soundManager.startMusicWatcher();
     }
 }
-
-
 
 
 function openInstruction() {
@@ -141,6 +125,7 @@ function closeLegalNotice() {
     document.getElementById('impressumButton').style.display = 'flex';
 }
 
+
 function fullScreenActive(canvas) {
     if (canvas.requestFullscreen) {
         canvas.requestFullscreen();
@@ -149,19 +134,19 @@ function fullScreenActive(canvas) {
     } else if (canvas.msRequestFullscreen) {
         canvas.msRequestFullscreen(); // IE
     }
-    console.log('[Fullscreen] 🔛 Aktiviert');
 }
+
 
 function fullScreenInactive() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen(); // Safari
+        document.webkitExitFullscreen(); 
     } else if (document.msExitFullscreen) {
-        document.msExitFullscreen(); // IE
+        document.msExitFullscreen(); 
     }
-    console.log('[Fullscreen] 🔚 Deaktiviert');
 }
+
 
 function setupFullScreenToggle() {
     const toggleBtn = document.getElementById('fullscreenToggle');
