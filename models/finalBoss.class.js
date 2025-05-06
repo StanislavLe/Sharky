@@ -78,22 +78,33 @@ class FinalBoss extends MovableObject {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
         this.currentImage = 0;
-        const isMuted = localStorage.getItem('musicStatus') === 'mute'; // Überprüfe den Stumm-Status
+    
+        const isMuted = localStorage.getItem('musicStatus') === 'mute';
         if (!isMuted) {
-            soundManager.stopBackgroundMusik(); 
-            this.world.soundManager.playBossMusik(); // Bossmusik abspielen
-            this.world.soundManager.isBossMusicPlaying = true; // Flag setzen
+            console.log('[Boss] ⛔️ Hintergrundmusik wird gestoppt...');
+            window.soundManager.stopBackgroundMusik();         // 🟡 DAS MUSS ZUERST KOMMEN
+            window.soundManager.isBossMusicPlaying = true;     // 🟢 FLAG UNBEDINGT SOFORT SETZEN
+            window.soundManager.playBossMusik();
         }
+    
+        console.log('[Boss] ▶️ Intro beginnt...');
+    
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
+            console.log('[Boss] Intro Frame:', this.currentImage);
+    
             if (this.currentImage >= this.BOSS_INTRO.length) {
                 clearInterval(this.introInterval);
-                this.isActive = true; 
+                this.isActive = true;
+                console.log('[Boss] ✅ Intro beendet → Boss aktiv');
+    
                 this.startBossBehavior();
                 this.animate();
             }
         }, 150);
     }
+    
+    
 
 
     isCollidable() {
@@ -108,6 +119,9 @@ class FinalBoss extends MovableObject {
                     this.isDying = true;
                     this.currentImage = 0;
                     this.deathFrame = 0;
+    
+                    // ✅ Direkt bei Animationsstart Sound abspielen
+                    this.world.soundManager.ouch();
     
                     this.bossDeathInterval = setInterval(() => {
                         if (this.deathFrame < this.BOSS_DEAD.length) {
@@ -130,26 +144,20 @@ class FinalBoss extends MovableObject {
         }, 150);
     }
     
+    
 
 
     dieBoss() {
-        this.behaviorActive = false;  
-        this.world.soundManager.ouch();
-        this.world.soundManager.stopBossMusik();
-        this.world.soundManager.isBossMusicPlaying = false; 
-
-        const isMuted = localStorage.getItem('musicStatus') === 'mute';
-        if (!isMuted) {
-            setTimeout(() => {
-                const musicStatus = localStorage.getItem('musicStatus');
-                if (musicStatus === 'volume') {
-                    this.world.soundManager.playBackgroundMusik();
-                } else {
-                    console.log('[Musikstatus] ❌ Kein Musik-Start wegen MUTE');
-                }
-            }, 1000);
-        }
+        this.behaviorActive = false;          
+        console.log('[Boss] ☠️ Boss stirbt – Musik wird gestoppt');
+    
+        this.world.soundManager.stopBossMusik();  // ✅ sollte Flag setzen!
+        
+        // ✨ Sicherheitslog zur Prüfung
+        console.log('[Boss] nach stopBossMusik: isBossMusicPlaying =', this.world.soundManager.isBossMusicPlaying);
     }
+    
+    
     
 
     startBossBehavior() {

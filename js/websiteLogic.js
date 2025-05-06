@@ -1,11 +1,11 @@
+level = level1;
+
 function toggleMusic() {
     const musicStatus = localStorage.getItem('musicStatus');
     if (musicStatus === 'volume') {
         localStorage.setItem('musicStatus', 'mute');
-        soundManager.stopBackgroundMusik();
     } else {
         localStorage.setItem('musicStatus', 'volume');
-        soundManager.playBackgroundMusik();
     }
     updateMusicButton();
 }
@@ -25,35 +25,31 @@ function updateMusicButton() {
 }
 
 
+function setMusicStatus() {
+    if (!localStorage.getItem('musicStatus')) {
+        localStorage.setItem('musicStatus', 'mute'); // Standard: Musik AN
+    }
+}
+
+
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-    let musicStatus = localStorage.getItem('musicStatus');
-    if (!musicStatus) {
-        localStorage.setItem('musicStatus', 'mute');
-        musicStatus = 'mute';
-    }
-    const musicButtonText = document.getElementById('musicButtonText');
-    const musicButtonImg = document.getElementById('musicButtonImg');
-    if (musicStatus === 'mute') {
-        soundManager.stopBackgroundMusik();
-        musicButtonText.textContent = 'Music OFF';
-        musicButtonImg.src = 'icon/mute.png';
-    } else {
-        soundManager.playBackgroundMusik();
-        musicButtonText.textContent = 'Music ON';
-        musicButtonImg.src = 'icon/volume.png';
-    }
     init();
 }
 
-level = level1;
 
 function resetGame() {
     if (world) {
         world.clearAllIntervals();
         world = null;
     }
+
+    console.log('[Game] ♻️ Spiel wird zurückgesetzt');
+
+    // Musikverwaltung säubern
+    window.soundManager.stopBackgroundMusik();
+    window.soundManager.stopMusicWatcher();
 
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
@@ -64,34 +60,46 @@ function resetGame() {
     const backHomeButton = document.getElementById('backHomeButton');
     const endScreenButtons = document.getElementById('endScreenButtons');
 
-    // Buttons vollständig zurücksetzen
     if (restartButton && backHomeButton && endScreenButtons) {
         restartButton.style.display = 'none';
         backHomeButton.style.display = 'none';
         restartButton.style.visibility = 'hidden';
         backHomeButton.style.visibility = 'hidden';
-
         endScreenButtons.style.display = 'none';
-        endScreenButtons.style.opacity = '0'; // Sicherstellen, dass die Buttons unsichtbar sind
+        endScreenButtons.style.opacity = '0';
     }
 
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+
+    // ✅ Musikverwaltung neu starten
+    window.soundManager.initializeMusicState();
+    window.soundManager.startMusicWatcher();
 }
 
 
 
 function goHome() {
-    
     if (world) {
         world.clearAllIntervals();
         world = null;
     }
+
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('startScreen').style.display = 'flex';
     document.getElementById('restartButton').style.display = 'none';
     document.getElementById('backHomeButton').style.display = 'none';
+
+    updateMusicButton();
+
+    // 🧠 Musikstatus erneut auswerten
+    if (localStorage.getItem('musicStatus') === 'volume') {
+        window.soundManager.initializeMusicState();
+        window.soundManager.startMusicWatcher();
+    }
 }
+
+
 
 
 function openInstruction() {

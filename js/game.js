@@ -1,13 +1,18 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let soundManager = new SoundManager();
+window.soundManager = new SoundManager(); // ✅ Einzige Instanz
 
 function init() {
+    console.log('[Game] 🚀 init() gestartet');
     canvas = document.getElementById('canvas');
-    soundManager.initializeMusicState(); 
-    updateMusicButton(); 
+    updateMusicButton();
+
     world = new World(canvas, keyboard, createNewLevel());
+
+    // ✅ Musikstatus beim Start prüfen
+    window.soundManager.initializeMusicState();
+    window.soundManager.startMusicWatcher();
 }
 
 

@@ -119,7 +119,6 @@ class Character extends MovableObject {
     }
 
     animate() {
-        // Bewegung 60 FPS
         this.moveInterval = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
@@ -143,32 +142,24 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x;
         }, 1000 / 60);
     
-        // Animationslogik 150ms Takt
         this.animationInterval = setInterval(() => {
             if (this.isDead()) {
-                // Start Animation nur einmal
+                this.resetIdleState(); // 🛑 Sofort Schnarchen beenden
                 if (!this.deathStarted) {
                     this.deathStarted = true;
                     this.currentImage = 0;
-                
-                    // Todesanimation & Aufsteigen gleichzeitig starten
                     if (!this.hasStartedAscend) {
                         this.hasStartedAscend = true;
                         this.isAscending = true;
                         this.startAscend();
                     }
                 }
-                
     
-                // Animation läuft weiter bis zum Ende
                 if (this.currentImage < this.IMAGES_DEAD.length) {
                     this.playAnimation(this.IMAGES_DEAD);
                 } else {
-                    // Bleib beim letzten Frame stehen
                     let lastFrame = this.IMAGES_DEAD[this.IMAGES_DEAD.length - 1];
                     this.img = this.imageCache[lastFrame];
-    
-                    // Nur einmal Sound abspielen
                     if (!this.hasPlayedDeathSound) {
                         this.hasPlayedDeathSound = true;
                         this.character_dead_sound.play();
@@ -179,14 +170,11 @@ class Character extends MovableObject {
                 return;
             }
     
-            // Wenn er aufsteigt, keine Animation ändern
             if (this.isAscending) return;
-    
-            // Kampfanimation blockiert andere
             if (this.isPunching) return;
     
-            // Sonstige Animationen
-            if (this.isHurt() && !this.enemy?.isDying) {
+            if (this.isHurt()) {
+                this.resetIdleState(); // ✅ Schnarchen abbrechen bei Schaden
                 this.playAnimation(this.IMAGES_HURT);
                 this.idleTimer = 0;
             } else if (this.isAboveGround()) {
@@ -202,16 +190,16 @@ class Character extends MovableObject {
         }, 150);
     }
     
+    
 
     checkIdleTimer() {
-        if (this.world.endscreenManager?.isVisible()) {
-            this.resetIdleState(); // Idle-Zustand zurücksetzen, wenn der Endscreen sichtbar ist
+        if (this.world.endscreenManager?.isVisible() || this.isDead() || this.isHurt()) {
+            this.resetIdleState(); // 🧹 Sofort alles stoppen
             return;
         }
-
+    
         if (this.idleTimer > 100) {
             this.playAnimation(this.IMAGES_LONG_IDLE, 350);
-
             if (!this.hasSnored) {
                 this.world.soundManager.snoring();
                 this.hasSnored = true;
@@ -219,9 +207,10 @@ class Character extends MovableObject {
         } else if (this.idleTimer > 0) {
             this.playAnimation(this.IMAGES_IDLE);
             this.idleTimer++;
-            this.hasSnored = false; 
+            this.hasSnored = false;
         }
     }
+    
 
     punch() {
         if (this.isPunching || this.isDead()) return;

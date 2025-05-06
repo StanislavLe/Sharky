@@ -13,7 +13,7 @@ class World {
     ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
-    soundManager = new SoundManager();
+    soundManager = window.soundManager; // ✅ Statt neuer Instanz
     endscreen = new Endscreen(); 
     endscreenManager = new EndscreenManager(); 
     fadeOpacity = 1; 
@@ -105,10 +105,12 @@ class World {
             !this.endscreenManager.isVisible() &&
             !this.endscreenManager.isPending
         ) {
+            this.soundManager.gameLose(); // ✅ Jetzt wird der Sound gespielt
             this.endscreenManager.showLose(); 
             this.freezeGame();
         }
     }
+    
     
     
 
@@ -166,7 +168,7 @@ class World {
         if (this.character.x > 1530) {
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
             if (boss && !boss.isIntroPlayed) { 
-                soundManager.stopBackgroundMusik();
+                
                 boss.startIntro();
             }
         }
