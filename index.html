@@ -83,23 +83,32 @@
 
         <div class="legalNotice" id="legalNotice" style="display: none;">
             <div class="legalNoticeContainer">
-                <a class="link" href="html/impressum.html" target="_blank"><h2 class="legalNoticeButton">Legal Notice<img class="icon" src="icon/contact.png"></h2></a>
-                <a class="link" href="html/datenschutz.html" target="_blank"><h2 class="legalNoticeButton">Privacy Policy<img class="icon" src="icon/insurance.png"></h2></a>
+                <a class="link" href="html/impressum.html" target="_blank">
+                    <h2 class="legalNoticeButton">Legal Notice<img class="icon" src="icon/contact.png"></h2>
+                </a>
+                <a class="link" href="html/datenschutz.html" target="_blank">
+                    <h2 class="legalNoticeButton">Privacy Policy<img class="icon" src="icon/insurance.png"></h2>
+                </a>
             </div>
             <button class="button-53" role="button" id="backButton" onclick="closeLegalNotice()">Back</button>
         </div>
 
-        <canvas id="canvas" width="720" height="480" style="display: none;">
-        </canvas>
 
-        <img id="fullscreenToggle" src="icon/fullScreen.png" alt="Fullscreen" />
+        <div id="gameContainer">
+            <canvas id="canvas" width="720" height="480" style="display: none;">
+            </canvas>
 
+            <div id="gameSettings">
+                <img id="fullscreenToggle" src="icon/fullScreen.png" alt="Fullscreen">
+            </div>
 
-        <div id="endScreenButtons" class="endScreenButtons">	
-            <button class="button-54" role="button" id="restartButton" style="display: none;" onclick="resetGame()">Restart</button>
-            <button class="button-54" role="button" id="backHomeButton" style="display: none;" onclick="goHome()">Back Home</button>
+            <div id="endScreenButtons" class="endScreenButtons">
+                <button class="button-54" role="button" id="restartButton" style="display: none;"
+                    onclick="resetGame()">Restart</button>
+                <button class="button-54" role="button" id="backHomeButton" style="display: none;"
+                    onclick="goHome()">Back Home</button>
+            </div>
         </div>
-
     </div>
 
 </body>

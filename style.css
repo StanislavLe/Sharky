@@ -6,11 +6,8 @@ body {
     align-items: center;
     font-family: swimmingPool;
     background-image: url('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
-    height: 100vh;
     padding: 0px;
     margin: 0px;
-    margin-left: 80px;
-    width: 1250px;
 }
 
 .adsimple-312964252 {
@@ -48,11 +45,6 @@ a:visited {
 }
 
 
-canvas {
-    background-color: black;
-    display: block;
-
-}
 
 @media only screen and (max-width: 720px) {
     canvas {
@@ -89,6 +81,7 @@ canvas {
     align-items: center;
     width: 720px;
     height: 480px;
+    z-index: 500;
 }
 
 .startButtonContainer {
@@ -240,6 +233,10 @@ canvas {
 
 .contentContainer {
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .legalNotice {
@@ -290,11 +287,13 @@ canvas {
     position: absolute;
     width: 600px;
     left: 405px;
-    z-index: 1000; /* Sicherstellen, dass die Buttons über anderen Elementen liegen */
+    z-index: 1000;
+    /* Sicherstellen, dass die Buttons über anderen Elementen liegen */
 }
 
 .endScreenButtons button {
-    opacity: 1; /* Sicherstellen, dass die Buttons vollständig sichtbar sind */
+    opacity: 1;
+    /* Sicherstellen, dass die Buttons vollständig sichtbar sind */
 }
 
 /* Für Lose */
@@ -309,17 +308,46 @@ canvas {
 
 
 #fullscreenToggle {
+    position: relative;
+    top: 430px;
     width: 40px;
     height: 40px;
     cursor: pointer;
-    z-index: 2000; /* über dem Endscreen */
+    z-index: 2000;
     opacity: 0.8;
     transition: opacity 0.3s ease;
-    position: relative;
-    bottom: 50px;
-    left: 660px;
-    filter: brightness(0) invert(1);}
+    filter: brightness(0) invert(1);
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    right: 50px;
+}
 
 #fullscreenToggle:hover {
     opacity: 1;
+}
+
+#restartButton,
+#backHomeButton,
+#endScreenButtons {
+    z-index: 2000;
+    position: fixed;
+}
+
+#gameContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+canvas {
+    background-color: black;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
