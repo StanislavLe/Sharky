@@ -33,13 +33,22 @@
     <script src="levels/level1.js"></script>
     <script src="js/websiteLogic.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/fullScreen.js"></script>
 </head>
 
 <body onload="updateMusicButton();setMusicStatus()">
 
     <h1 class="headline">Welcome to Sharky</h1>
 
-    <div class="contentContainer">
+
+    <div id="contentContainer" class="contentContainer">
+
+
+        <div class="fullscreenButtonContainer" id="fullscreenButtonContainer">
+            <img id="fullscreenToggleOpen" src="icon/fullScreen.png" alt="Fullscreen">
+            <img id="fullscreenToggleClose" src="icon/fullScreen.png" alt="Fullscreen">
+        </div>
+
 
         <div class="startScreen" id="startScreen">
             <button class="button-53" role="button" id="startButton" onclick="startGame()">
@@ -94,13 +103,9 @@
         </div>
 
 
-        <div id="gameContainer">
+        <div class="gameContainer" id="gameContainer">
             <canvas id="canvas" width="720" height="480" style="display: none;">
             </canvas>
-
-            <div id="gameSettings">
-                <img id="fullscreenToggle" src="icon/fullScreen.png" alt="Fullscreen">
-            </div>
 
             <div id="endScreenButtons" class="endScreenButtons">
                 <button class="button-54" role="button" id="restartButton" style="display: none;"
