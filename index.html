@@ -34,9 +34,10 @@
     <script src="js/websiteLogic.js"></script>
     <script src="js/game.js"></script>
     <script src="js/fullScreen.js"></script>
+    <script src="js/mobileLogic.js"></script>
 </head>
 
-<body onload="updateMusicButton();setMusicStatus()">
+<body onload="updateMusicButton();setMusicStatus();onLoadHandler()">
 
     <h1 class="headline">Welcome to Sharky</h1>
 
@@ -117,13 +118,13 @@
 
     </div>
 
-        <div id="touchControls" style="display: flex;">
-            <button id="btnLeft">←</button>
-            <button id="btnRight">→</button>
-            <button id="btnJump">↑</button>
-            <button id="btnAttack">Attack</button>
-            <button id="btnSlap">Slap</button>
-        </div>
+    <div id="touchControls" style="display: flex;">
+        <button id="btnLeft">←</button>
+        <button id="btnRight">→</button>
+        <button id="btnJump">↑</button>
+        <button id="btnAttack">Attack</button>
+        <button id="btnSlap">Slap</button>
+    </div>
 
 
 </body>

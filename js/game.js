@@ -3,7 +3,6 @@ let world;
 let keyboard = new Keyboard();
 window.soundManager = new SoundManager(); 
 
-
 function init() {
     canvas = document.getElementById('canvas');
     updateMusicButton();
@@ -11,7 +10,6 @@ function init() {
     window.soundManager.initializeMusicState();
     window.soundManager.startMusicWatcher();
 }
-
 
 function createNewLevel() {
     return new Level(
@@ -71,7 +69,6 @@ function createNewLevel() {
     );
 }
 
-
 addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -98,7 +95,6 @@ addEventListener("keydown", (event) => {
     }
 });
 
-
 addEventListener("keyup", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = false;
@@ -124,61 +120,3 @@ addEventListener("keyup", (event) => {
         keyboard.D = false;
     }
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-
-document.getElementById('btnLeft').addEventListener('touchstart', () => keyboard.LEFT = true);
-document.getElementById('btnLeft').addEventListener('touchend', () => keyboard.LEFT = false);
-
-document.getElementById('btnRight').addEventListener('touchstart', () => keyboard.RIGHT = true);
-document.getElementById('btnRight').addEventListener('touchend', () => keyboard.RIGHT = false);
-
-document.getElementById('btnJump').addEventListener('touchstart', () => keyboard.UP = true);
-document.getElementById('btnJump').addEventListener('touchend', () => keyboard.UP = false);
-
-document.getElementById('btnAttack').addEventListener('touchstart', () => keyboard.SPACE = true);
-document.getElementById('btnAttack').addEventListener('touchend', () => keyboard.SPACE = false);
-
-document.getElementById('btnSlap').addEventListener('touchstart', () => keyboard.D = true);
-document.getElementById('btnSlap').addEventListener('touchend', () => keyboard.D = false);
-});
-
-
-function isMobileDevice() {
-    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (isMobileDevice()) {
-        document.getElementById('touchControls').style.display = 'flex';
-    }
-});
-
-
-function bindTouchControls() {
-    const keys = [
-        { id: 'btnLeft', prop: 'LEFT' },
-        { id: 'btnRight', prop: 'RIGHT' },
-        { id: 'btnJump', prop: 'UP' },
-        { id: 'btnAttack', prop: 'SPACE' },
-        { id: 'btnSlap', prop: 'D' }
-    ];
-
-    keys.forEach(key => {
-        const button = document.getElementById(key.id);
-        if (button) {
-            button.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keyboard[key.prop] = true;
-            }, { passive: false });
-
-            button.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keyboard[key.prop] = false;
-            }, { passive: false });
-        } else {
-            console.warn(`Touch Button with id '${key.id}' not found.`);
-        }
-    });
-}
-
