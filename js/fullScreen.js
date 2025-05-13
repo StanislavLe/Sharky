@@ -29,14 +29,10 @@ function updateCanvasSize() {
 
         canvas.style.width = `${newWidth}px`;
         canvas.style.height = `${newHeight}px`;
-
-        // WICHTIG: KEIN neues canvas.width/canvas.height setzen, um den Kontext nicht zu killen!
     } else {
         canvas.style.width = '720px';
         canvas.style.height = '480px';
     }
-
-    // Hier neu:
     refreshGameContext();
 }
 

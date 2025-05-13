@@ -35,10 +35,18 @@ function setMusicStatus() {
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('canvas').style.display = 'block';
     document.getElementById('gameContainer').style.display = 'flex';
+    canvas = document.getElementById('canvas'); // canvas erst JETZT holen
+    canvas.style.display = 'block';
     init();
+
+    if (isMobileDevice()) {
+        bindTouchControls();
+    }
 }
+
+
+
 
 
 function resetGame() {
