@@ -7,7 +7,8 @@ body {
     font-family: swimmingPool;
     background-image: url('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
     padding: 0px;
-    margin: 0px;
+    margin: 0;
+    height: 100%;
 }
 
 .adsimple-312964252 {
@@ -69,20 +70,8 @@ a:visited {
     margin-top: 80px;
 }
 
-.startScreen {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/gameCover.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    width: 720px;
-    height: 480px;
-    z-index: 1;
-}
+
+
 
 .startButtonContainer {
     display: flex;
@@ -287,24 +276,20 @@ a:visited {
     display: flex;
     position: absolute;
     width: 600px;
-    left: 405px;
+    left: 55px;
     z-index: 1000;
-    /* Sicherstellen, dass die Buttons über anderen Elementen liegen */
 }
 
 .endScreenButtons button {
     opacity: 1;
-    /* Sicherstellen, dass die Buttons vollständig sichtbar sind */
 }
 
-/* Für Lose */
 .loseButtons {
-    bottom: 280px;
+    bottom: 55px;
 }
 
-/* Für Win (höher, zentrierter oder größer?) */
 .winButtons {
-    bottom: 548px;
+    bottom: 55px;
 }
 
 
@@ -312,7 +297,7 @@ a:visited {
 #backHomeButton,
 #endScreenButtons {
     z-index: 2000;
-    position: fixed;
+
 }
 
 .gameContainer {
@@ -334,7 +319,7 @@ canvas {
 }
 
 :fullscreen::backdrop {
-    background: transparent;
+    background: black;
 }
 
 .fullscreenButtonContainer {
@@ -355,13 +340,13 @@ canvas {
     opacity: 0.8;
     transition: opacity 0.3s ease;
     filter: brightness(0) invert(1);
-    pointer-events: auto; /* Klicks erlauben */
+    pointer-events: auto; 
 }
 
 #fullscreenToggleOpen:hover,
 #fullscreenToggleClose:hover {
     opacity: 1;
-    transform: scale(1.1); /* KEIN translateX mehr! */
+    transform: scale(1.1); 
 }
 
 #fullscreenToggleOpen {
@@ -370,8 +355,80 @@ canvas {
 
 #fullscreenToggleClose {
     pointer-events: auto;
-    display: none; /* Start unsichtbar */
+    display: none; 
     z-index: 9999;
-    position: fixed;
+}
 
+.startScreen {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/gameCover.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    width: 720px;
+    height: 480px;
+    z-index: 1;
+}
+
+:fullscreen .startScreen {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:fullscreen .button-53 {
+    transform: scale(1.5);
+    font-size: 32px;
+    padding: 16px 24px;
+    transition: transform 0.5s ease, font-size 0.5s ease, padding 0.5s ease;
+}
+
+:fullscreen .startButtonContainer {
+gap: 80px;
+margin-top: 80px;
+}
+
+
+:fullscreen canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+}
+
+:fullscreen #contentContainer,
+:fullscreen #gameContainer {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+:fullscreen #restartButton,
+:fullscreen #backHomeButton {
+    font-size: 28px;
+    padding: 16px 24px;
+    transition: transform 0.5s ease, font-size 0.5s ease, padding 0.5s ease;
+}
+
+:fullscreen #endScreenButtons {
+    width: 100%;
+    left: 0;
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    bottom: 100px; /* oder was schöner aussieht */
 }

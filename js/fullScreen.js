@@ -6,59 +6,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function toggleFullscreen() {
         if (!document.fullscreenElement) {
-            if (fullscreenElement.requestFullscreen) {
-                fullscreenElement.requestFullscreen();
-            } else if (fullscreenElement.webkitRequestFullscreen) {
-                fullscreenElement.webkitRequestFullscreen();
-            } else if (fullscreenElement.msRequestFullscreen) {
-                fullscreenElement.msRequestFullscreen();
-            }
+            fullscreenElement.requestFullscreen?.();
         } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
+            document.exitFullscreen?.();
         }
     }
 
-    function resizeCanvasFullscreen() {
-        if (canvas) {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+function updateCanvasSize() {
+    const canvas = document.getElementById('canvas');
+    if (!canvas) return;
+
+    if (document.fullscreenElement) {
+        const aspectRatio = 720 / 480;
+        let newWidth = window.innerWidth;
+        let newHeight = window.innerHeight;
+
+        if (newWidth / newHeight > aspectRatio) {
+            newWidth = newHeight * aspectRatio;
+        } else {
+            newHeight = newWidth / aspectRatio;
         }
+
+        canvas.style.width = `${newWidth}px`;
+        canvas.style.height = `${newHeight}px`;
+
+        // WICHTIG: KEIN neues canvas.width/canvas.height setzen, um den Kontext nicht zu killen!
+    } else {
+        canvas.style.width = '720px';
+        canvas.style.height = '480px';
     }
 
-    function resetCanvasSize() {
-        if (canvas) {
-            canvas.width = 720;
-            canvas.height = 480;
-        }
-    }
+    // Hier neu:
+    refreshGameContext();
+}
 
-    enterFullscreenBtn.addEventListener('click', toggleFullscreen);
-    exitFullscreenBtn.addEventListener('click', toggleFullscreen);
+function refreshGameContext() {
+    if (window.world) {
+        world.ctx = document.getElementById('canvas').getContext('2d');
+    }
+}
+
 
     document.addEventListener('fullscreenchange', () => {
+        updateCanvasSize();
         if (document.fullscreenElement) {
             enterFullscreenBtn.style.display = 'none';
             exitFullscreenBtn.style.display = 'block';
-            resizeCanvasFullscreen();
         } else {
             enterFullscreenBtn.style.display = 'block';
             exitFullscreenBtn.style.display = 'none';
-            resetCanvasSize();
         }
     });
 
-    document.getElementById('fullscreenToggleClose').addEventListener('click', () => {
-        console.log('Schließen-Button geklickt');
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        }
-    });
-    
-
+    enterFullscreenBtn.addEventListener('click', toggleFullscreen);
+    exitFullscreenBtn.addEventListener('click', toggleFullscreen);
 });

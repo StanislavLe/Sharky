@@ -28,7 +28,7 @@ function updateMusicButton() {
 
 function setMusicStatus() {
     if (!localStorage.getItem('musicStatus')) {
-        localStorage.setItem('musicStatus', 'mute'); 
+        localStorage.setItem('musicStatus', 'mute');
     }
 }
 
@@ -46,10 +46,10 @@ function resetGame() {
         world.clearAllIntervals();
         world = null;
     }
-    window.soundManager.stopBossMusik(); 
+    window.soundManager.stopBossMusik();
     window.soundManager.stopBackgroundMusik();
     window.soundManager.stopMusicWatcher();
-    window.soundManager.isGameOver = false; 
+    window.soundManager.isGameOver = false;
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
     level = createNewLevel();
@@ -77,12 +77,13 @@ function goHome() {
         world.clearAllIntervals();
         world = null;
     }
-    window.soundManager.stopBossMusik(); 
+    window.soundManager.stopBossMusik();
     window.soundManager.isGameOver = false;
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('startScreen').style.display = 'flex';
     document.getElementById('restartButton').style.display = 'none';
     document.getElementById('backHomeButton').style.display = 'none';
+    document.getElementById('gameContainer').style.display = 'none';
     updateMusicButton();
     if (localStorage.getItem('musicStatus') === 'volume') {
         window.soundManager.initializeMusicState();
