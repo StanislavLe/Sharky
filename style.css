@@ -436,13 +436,17 @@ margin-top: 80px;
 
 
 #touchControls {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+ position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    gap: 10px;
-    z-index: 9999;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 999;
+    pointer-events: none; /* optional, falls nichts überlagert werden soll */
 }
 
 #touchControls button {
@@ -455,4 +459,68 @@ margin-top: 80px;
     backdrop-filter: blur(5px);
     cursor: pointer;
 }
+
+
+#orientationPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#orientationPopup.hidden {
+    display: none;
+}
+
+#orientationPopup.visible {
+    display: flex;
+}
+
+.popup-content {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+
+.touch-left,
+.touch-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    pointer-events: all; 
+}
+
+.touch-left {
+    position: absolute;
+    left: 20px;
+    bottom: 300px;
+}
+
+.touch-right {
+    position: absolute;
+    right: 20px;
+    bottom: 300px;
+}
+
+.touch-left button,
+.touch-right button {
+    font-size: 1.2rem;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    backdrop-filter: blur(4px);
+}
+
 
