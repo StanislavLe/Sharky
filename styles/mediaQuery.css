@@ -1,0 +1,111 @@
+@media only screen and (max-width: 950px) {
+    .headline {
+        font-size: 48px;
+    }
+}
+
+
+@media only screen and (max-width: 540px) {
+    .button-53 {
+        font-size: 14px;
+        max-width: 320px;
+    }
+}
+
+
+@media only screen and (max-width: 720px) {
+    .startScreen {
+        width: 100vw;
+    }
+
+    canvas {
+        width: 100%;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    #fullscreenToggleOpen {
+        display: none;
+    }
+
+    #fullscreenToggleClose {
+        display: none;
+    }
+
+    .touch-right {
+        bottom: 84px;
+    }
+
+    .touch-left {
+        bottom: 155px;
+    }
+}
+
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}
+
+
+@media only screen and (max-height: 750px) {
+    .headline {
+        font-size: 48px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+}
+
+
+@media only screen and (max-height: 580px) {
+    .headline {
+        display: none;
+    }
+
+    .startScreen {
+        width: 100vW;
+        height: 100vh;
+    }
+
+    body {
+        justify-content: center;
+    }
+
+    #fullscreenToggleOpen {
+        display: none;
+    }
+
+    #fullscreenToggleClose {
+        display: none;
+    }
+
+    .touch-right {
+        bottom: 156px;
+    }
+
+    .touch-left {
+        bottom: 186px;
+    }
+
+    .endScreenButtons {
+        width: 560px;
+    }
+}
+
+
+@media only screen and (max-height: 430px) {
+    .touch-right {
+        bottom: 60px;
+    }
+
+    .touch-left {
+        bottom: 100px;
+    }
+
+    .endScreenButtons {
+        width: 448px;
+    }
+}

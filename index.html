@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharky</title>
     <link rel="icon" type="image/x-icon" href='img/icon.png'>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/buttons.css">
+    <link rel="stylesheet" href="styles/mediaQuery.css">
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/collectable-object.class.js"></script>
@@ -38,19 +40,12 @@
 </head>
 
 <body onload="updateMusicButton();setMusicStatus();onLoadHandler()">
-
     <h1 class="headline">Welcome to Sharky</h1>
-
-
     <div id="contentContainer" class="contentContainer">
-
-
         <div class="fullscreenButtonContainer" id="fullscreenButtonContainer">
             <img id="fullscreenToggleOpen" src="icon/fullScreen.png" alt="Fullscreen">
             <img id="fullscreenToggleClose" src="icon/fullScreen.png" alt="Fullscreen">
         </div>
-
-
         <div class="startScreen" id="startScreen">
             <button class="button-53" role="button" id="startButton" onclick="startGame()">
                 Start Game
@@ -67,7 +62,6 @@
                     Notice<img class="icon" src="icon/insurance.png"></button>
             </div>
         </div>
-
         <div class="howToPlay" id="howToPlay" style="display: none;">
             <div class="howToPlayContainer">
                 <div class="storyTelling">
@@ -90,7 +84,6 @@
             </div>
             <button class="button-53" role="button" id="backButton" onclick="closeInstruction()">Back</button>
         </div>
-
         <div class="legalNotice" id="legalNotice" style="display: none;">
             <div class="legalNoticeContainer">
                 <a class="link" href="html/impressum.html" target="_blank">
@@ -102,12 +95,9 @@
             </div>
             <button class="button-53" role="button" id="backButton" onclick="closeLegalNotice()">Back</button>
         </div>
-
-
         <div class="gameContainer" id="gameContainer" style="display: none;">
             <canvas id="canvas" width="720" height="480" style="display: none;">
             </canvas>
-
             <div id="endScreenButtons" class="endScreenButtons">
                 <button class="button-54" role="button" id="restartButton" style="display: none;"
                     onclick="resetGame()">Restart</button>
@@ -115,23 +105,18 @@
                     onclick="goHome()">Back Home</button>
             </div>
         </div>
-
     </div>
-
-<div id="touchControls" class="touchControls">
-    <div class="touch-left">
-        <button id="btnLeft">←</button>
-        <button id="btnRight">→</button>
+    <div id="touchControls" class="touchControls">
+        <div class="touch-left">
+            <button id="btnLeft">←</button>
+            <button id="btnRight">→</button>
+        </div>
+        <div class="touch-right">
+            <button id="btnJump">↑</button>
+            <button id="btnAttack">Attack</button>
+            <button id="btnSlap">Slap</button>
+        </div>
     </div>
-    <div class="touch-right">
-        <button id="btnJump">↑</button>
-        <button id="btnAttack">Attack</button>
-        <button id="btnSlap">Slap</button>
-    </div>
-</div>
-
-
-
 </body>
 
 </html>

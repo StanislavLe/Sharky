@@ -1,0 +1,183 @@
+.button-53 {
+    background-color: #3DD1E7;
+    border: 0 solid #E5E7EB;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-family: swimmingPool;
+    font-size: 20px;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 32px;
+    padding: 8px 12px;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    align-items: center;
+}
+
+
+.button-53:focus {
+    outline: 0;
+}
+
+
+.button-53:after {
+    content: '';
+    position: absolute;
+    border: 1px solid #000000;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+}
+
+
+.button-53:hover:after {
+    bottom: 2px;
+    left: 2px;
+}
+
+
+.button-53:hover {
+    transform: scale(1.1) rotate(-2deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.button-54 {
+    background-color: #3DD1E7;
+    border: 0 solid #E5E7EB;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-family: swimmingPool;
+    font-size: 20px;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 32px;
+    padding: 8px 12px;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    align-items: center;
+}
+
+
+.button-54:focus {
+    outline: 0;
+}
+
+
+.button-54:after {
+    content: '';
+    position: absolute;
+    border: 1px solid #ffffff;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+}
+
+
+.button-54:hover:after {
+    bottom: 2px;
+    left: 2px;
+}
+
+
+.endScreenButtons {
+    gap: 62px;
+    display: flex;
+    position: absolute;
+    width: 600px;
+    left: 55px;
+    z-index: 1000;
+}
+
+
+.endScreenButtons button {
+    opacity: 1;
+}
+
+
+.loseButtons {
+    bottom: 55px;
+}
+
+
+.winButtons {
+    bottom: 55px;
+}
+
+
+#restartButton,
+#backHomeButton,
+#endScreenButtons {
+    z-index: 2000;
+
+}
+
+
+:fullscreen::backdrop {
+    background: black;
+}
+
+
+.fullscreenButtonContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    gap: 10px;
+    pointer-events: auto;
+}
+
+
+#fullscreenToggleOpen,
+#fullscreenToggleClose {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    filter: brightness(0) invert(1);
+    pointer-events: auto;
+}
+
+
+#fullscreenToggleOpen:hover,
+#fullscreenToggleClose:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+
+#fullscreenToggleOpen {
+    display: block;
+}
+
+
+#fullscreenToggleClose {
+    pointer-events: auto;
+    display: none;
+    z-index: 9999;
+}

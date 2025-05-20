@@ -1,3 +1,9 @@
+@font-face {
+    font-family: swimmingPool;
+    src: url('../fonts/swimmingPool.ttf');
+}
+
+
 body {
     color: #177886;
     display: flex;
@@ -5,25 +11,29 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: swimmingPool;
-    background-image: url('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
+    background-image: url('../img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
     padding: 0px;
     margin: 0;
     height: 100%;
 }
+
 
 .adsimple-312964252 {
     text-decoration: none;
     color: #07363d;
 }
 
+
 .adsimple-312964252:visited {
     text-decoration: none;
     color: #07363d;
 }
 
+
 .adsimple-322964240 {
     margin: 4px;
 }
+
 
 .privacyPolicy {
     font-family: Arial, Helvetica, sans-serif;
@@ -35,10 +45,12 @@ body {
     color: #07363d;
 }
 
+
 a {
     text-decoration: none;
     color: #d15217;
 }
+
 
 a:visited {
     text-decoration: none;
@@ -46,19 +58,11 @@ a:visited {
 }
 
 
-
-@font-face {
-    font-family: swimmingPool;
-    src: url('fonts/swimmingPool.ttf');
-}
-
 .headline {
     font-size: 68px;
     margin-bottom: 80px;
     margin-top: 80px;
 }
-
-
 
 
 .startButtonContainer {
@@ -70,100 +74,6 @@ a:visited {
     margin-top: 20px;
 }
 
-/* CSS */
-.button-53 {
-    background-color: #3DD1E7;
-    border: 0 solid #E5E7EB;
-    box-sizing: border-box;
-    color: #ffffff;
-    display: flex;
-    font-family: swimmingPool;
-    font-size: 20px;
-    font-weight: 200;
-    justify-content: center;
-    line-height: 32px;
-    padding: 8px 12px;
-    position: relative;
-    text-align: center;
-    text-decoration: none #000000 solid;
-    text-decoration-thickness: auto;
-    width: 100%;
-    max-width: 460px;
-    position: relative;
-    cursor: pointer;
-    transform: rotate(-2deg);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    align-items: center;
-}
-
-.button-53:focus {
-    outline: 0;
-}
-
-.button-53:after {
-    content: '';
-    position: absolute;
-    border: 1px solid #000000;
-    bottom: 4px;
-    left: 4px;
-    width: calc(100% - 1px);
-    height: calc(100% - 1px);
-}
-
-.button-53:hover:after {
-    bottom: 2px;
-    left: 2px;
-}
-
-
-/* CSS */
-.button-54 {
-    background-color: #3DD1E7;
-    border: 0 solid #E5E7EB;
-    box-sizing: border-box;
-    color: #ffffff;
-    display: flex;
-    font-family: swimmingPool;
-    font-size: 20px;
-    font-weight: 200;
-    justify-content: center;
-    line-height: 32px;
-    padding: 8px 12px;
-    position: relative;
-    text-align: center;
-    text-decoration: none #000000 solid;
-    text-decoration-thickness: auto;
-    width: 100%;
-    max-width: 460px;
-    position: relative;
-    cursor: pointer;
-    transform: rotate(-2deg);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    align-items: center;
-}
-
-.button-54:focus {
-    outline: 0;
-}
-
-.button-54:after {
-    content: '';
-    position: absolute;
-    border: 1px solid #ffffff;
-    bottom: 4px;
-    left: 4px;
-    width: calc(100% - 1px);
-    height: calc(100% - 1px);
-}
-
-.button-54:hover:after {
-    bottom: 2px;
-    left: 2px;
-}
 
 .icon {
     width: 40px;
@@ -176,14 +86,11 @@ a:visited {
     align-items: center;
 }
 
-.button-53:hover {
-    transform: scale(1.1) rotate(-2deg);
-    transition: transform 0.3s ease-in-out;
-}
 
 #musicButtonText {
     margin: 0px;
 }
+
 
 .howToPlay {
     font-size: 20px;
@@ -198,15 +105,18 @@ a:visited {
     flex-direction: column;
 }
 
+
 .howToPlayContainer {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+
 .storyTelling {
     width: 187%;
 }
+
 
 .contentContainer {
     overflow: hidden;
@@ -216,6 +126,7 @@ a:visited {
     flex-direction: column;
     z-index: 1;
 }
+
 
 .legalNotice {
     font-size: 20px;
@@ -231,6 +142,7 @@ a:visited {
     height: 440px;
 }
 
+
 .legalNoticeButton {
     display: flex;
     justify-content: center;
@@ -238,55 +150,32 @@ a:visited {
     color: white;
 }
 
+
 .legalNoticeButton:hover {
     transform: scale(1.1) rotate(-2deg);
     transition: transform 0.3s ease-in-out;
 }
 
+
 .link {
     text-decoration: none;
 }
+
 
 .link:visited {
     text-decoration: none;
 }
 
+
 .link:hover {
     text-decoration: none;
 }
+
 
 .link:active {
     text-decoration: none;
 }
 
-.endScreenButtons {
-    gap: 62px;
-    display: flex;
-    position: absolute;
-    width: 600px;
-    left: 55px;
-    z-index: 1000;
-}
-
-.endScreenButtons button {
-    opacity: 1;
-}
-
-.loseButtons {
-    bottom: 55px;
-}
-
-.winButtons {
-    bottom: 55px;
-}
-
-
-#restartButton,
-#backHomeButton,
-#endScreenButtons {
-    z-index: 2000;
-
-}
 
 .gameContainer {
     position: relative;
@@ -297,6 +186,7 @@ a:visited {
     display: flex;
 }
 
+
 canvas {
     background-color: black;
     display: block;
@@ -306,49 +196,9 @@ canvas {
     pointer-events: none;
 }
 
-:fullscreen::backdrop {
-    background: black;
-}
-
-.fullscreenButtonContainer {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    display: flex;
-    gap: 10px;
-    pointer-events: auto;
-}
-
-#fullscreenToggleOpen,
-#fullscreenToggleClose {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-    filter: brightness(0) invert(1);
-    pointer-events: auto;
-}
-
-#fullscreenToggleOpen:hover,
-#fullscreenToggleClose:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-#fullscreenToggleOpen {
-    display: block;
-}
-
-#fullscreenToggleClose {
-    pointer-events: auto;
-    display: none;
-    z-index: 9999;
-}
 
 .startScreen {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/gameCover.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/gameCover.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -361,6 +211,7 @@ canvas {
     height: 480px;
 }
 
+
 :fullscreen .startScreen {
     width: 100vw;
     height: 100vh;
@@ -371,12 +222,14 @@ canvas {
     align-items: center;
 }
 
+
 :fullscreen .button-53 {
     transform: scale(1.5);
     font-size: 32px;
     padding: 16px 24px;
     transition: transform 0.5s ease, font-size 0.5s ease, padding 0.5s ease;
 }
+
 
 :fullscreen .startButtonContainer {
     gap: 80px;
@@ -391,6 +244,7 @@ canvas {
     transform: translate(-50%, -50%);
     background-color: black;
 }
+
 
 :fullscreen #contentContainer,
 :fullscreen #gameContainer {
@@ -411,6 +265,7 @@ canvas {
     transition: transform 0.5s ease, font-size 0.5s ease, padding 0.5s ease;
 }
 
+
 :fullscreen #endScreenButtons {
     width: 100%;
     left: 0;
@@ -418,7 +273,6 @@ canvas {
     display: flex;
     position: fixed;
     bottom: 100px;
-    /* oder was schöner aussieht */
 }
 
 
@@ -434,8 +288,8 @@ canvas {
     box-sizing: border-box;
     z-index: 999;
     pointer-events: none;
-    /* optional, falls nichts überlagert werden soll */
 }
+
 
 #touchControls button {
     background-color: rgba(0, 0, 0, 0.5);
@@ -466,13 +320,16 @@ canvas {
     box-sizing: border-box;
 }
 
+
 #orientationPopup.hidden {
     display: none;
 }
 
+
 #orientationPopup.visible {
     display: flex;
 }
+
 
 .popup-content {
     font-size: 1.5rem;
@@ -488,17 +345,20 @@ canvas {
     pointer-events: all;
 }
 
+
 .touch-left {
     position: absolute;
     left: 20px;
     bottom: 300px;
 }
 
+
 .touch-right {
     position: absolute;
     right: 20px;
     bottom: 300px;
 }
+
 
 .touch-left button,
 .touch-right button {
@@ -509,126 +369,4 @@ canvas {
     border: 2px solid white;
     color: white;
     backdrop-filter: blur(4px);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media only screen and (max-width: 950px) {
-    .headline {
-        font-size: 48px;
-    }
-}
-
-
-@media only screen and (max-width: 540px) {
-    .button-53 {
-        font-size: 14px;
-        max-width: 320px;
-    }
-}
-
-
-@media only screen and (max-width: 720px) {
-    .startScreen {
-        width: 100vw;
-    }
-
-    canvas {
-        width: 100%;
-    }
-
-    h1 {
-        display: none;
-    }
-
-    #fullscreenToggleOpen {
-        display: none;
-    }
-
-    #fullscreenToggleClose {
-        display: none;
-    }
-
-    .touch-right {
-        bottom: 84px;
-    }
-
-    .touch-left {
-        bottom: 155px;
-    }
-
-}
-
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
-}
-
-@media only screen and (max-height: 750px) {
-    .headline {
-        font-size: 48px;
-        margin-top: 16px;
-        margin-bottom: 16px;
-    }
-}
-
-@media only screen and (max-height: 580px) {
-    .headline {
-        display: none;
-    }
-
-    .startScreen {
-        width: 100vW;
-        height: 100vh;
-    }
-
-    body {
-        justify-content: center;    }
-
-    #fullscreenToggleOpen {
-        display: none;
-    }
-
-    #fullscreenToggleClose {
-        display: none;
-    }
-
-    
-    .touch-right {
-        bottom: 156px;
-    }
-
-    .touch-left {
-        bottom: 186px;
-    }
-        .endScreenButtons {
-        width: 560px;
-    }
-}
-
-@media only screen and (max-height: 430px) {
-
-    .touch-right {
-        bottom: 60px;
-    }
-
-    .touch-left {
-        bottom: 100px;
-    }
-
-
-    .endScreenButtons {
-        width: 448px;
-    }
 }
