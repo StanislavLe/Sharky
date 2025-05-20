@@ -594,9 +594,7 @@ canvas {
     }
 
     body {
-        justify-content: center;
-        overflow: hidden;
-    }
+        justify-content: center;    }
 
     #fullscreenToggleOpen {
         display: none;
