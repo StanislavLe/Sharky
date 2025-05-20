@@ -47,18 +47,6 @@ a:visited {
 
 
 
-@media only screen and (max-width: 720px) {
-    canvas {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
-}
-
 @font-face {
     font-family: swimmingPool;
     src: url('fonts/swimmingPool.ttf');
@@ -340,13 +328,13 @@ canvas {
     opacity: 0.8;
     transition: opacity 0.3s ease;
     filter: brightness(0) invert(1);
-    pointer-events: auto; 
+    pointer-events: auto;
 }
 
 #fullscreenToggleOpen:hover,
 #fullscreenToggleClose:hover {
     opacity: 1;
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 #fullscreenToggleOpen {
@@ -355,7 +343,7 @@ canvas {
 
 #fullscreenToggleClose {
     pointer-events: auto;
-    display: none; 
+    display: none;
     z-index: 9999;
 }
 
@@ -371,7 +359,6 @@ canvas {
     align-items: center;
     width: 720px;
     height: 480px;
-    z-index: 1;
 }
 
 :fullscreen .startScreen {
@@ -392,8 +379,8 @@ canvas {
 }
 
 :fullscreen .startButtonContainer {
-gap: 80px;
-margin-top: 80px;
+    gap: 80px;
+    margin-top: 80px;
 }
 
 
@@ -430,13 +417,13 @@ margin-top: 80px;
     justify-content: center;
     display: flex;
     position: fixed;
-    bottom: 100px; /* oder was schöner aussieht */
+    bottom: 100px;
+    /* oder was schöner aussieht */
 }
 
 
-
 #touchControls {
- position: fixed;
+    position: fixed;
     bottom: 0;
     width: 100vw;
     height: 100vh;
@@ -446,11 +433,12 @@ margin-top: 80px;
     padding: 20px;
     box-sizing: border-box;
     z-index: 999;
-    pointer-events: none; /* optional, falls nichts überlagert werden soll */
+    pointer-events: none;
+    /* optional, falls nichts überlagert werden soll */
 }
 
 #touchControls button {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
     padding: 20px;
@@ -497,7 +485,7 @@ margin-top: 80px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    pointer-events: all; 
+    pointer-events: all;
 }
 
 .touch-left {
@@ -524,3 +512,125 @@ margin-top: 80px;
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 950px) {
+    .headline {
+        font-size: 48px;
+    }
+}
+
+
+@media only screen and (max-width: 540px) {
+    .button-53 {
+        font-size: 14px;
+        max-width: 320px;
+    }
+}
+
+
+@media only screen and (max-width: 720px) {
+    .startScreen {
+        width: 100vw;
+    }
+
+    canvas {
+        width: 100%;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    #fullscreenToggleOpen {
+        display: none;
+    }
+
+    #fullscreenToggleClose {
+        display: none;
+    }
+
+    .touch-right {
+        bottom: 84px;
+    }
+
+    .touch-left {
+        bottom: 155px;
+    }
+
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}
+
+@media only screen and (max-height: 750px) {
+    .headline {
+        font-size: 48px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+}
+
+@media only screen and (max-height: 580px) {
+    .headline {
+        display: none;
+    }
+
+    .startScreen {
+        width: 100vW;
+        height: 100vh;
+    }
+
+    body {
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    #fullscreenToggleOpen {
+        display: none;
+    }
+
+    #fullscreenToggleClose {
+        display: none;
+    }
+
+    
+    .touch-right {
+        bottom: 156px;
+    }
+
+    .touch-left {
+        bottom: 186px;
+    }
+        .endScreenButtons {
+        width: 560px;
+    }
+}
+
+@media only screen and (max-height: 430px) {
+
+    .touch-right {
+        bottom: 60px;
+    }
+
+    .touch-left {
+        bottom: 100px;
+    }
+
+
+    .endScreenButtons {
+        width: 448px;
+    }
+}
