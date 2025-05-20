@@ -42,6 +42,4 @@ class BossStatusBar extends DrawableObject {
             return 0;
         }
     }
-
-
 }

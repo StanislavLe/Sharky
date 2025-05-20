@@ -111,8 +111,6 @@ class World {
         }
     }
     
-    
-    
 
     freezeGame() {
         this.character.speed = 0;
@@ -258,6 +256,4 @@ class World {
     }
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
-
-
 }

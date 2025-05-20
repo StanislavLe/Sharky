@@ -144,7 +144,7 @@ class Character extends MovableObject {
     
         this.animationInterval = setInterval(() => {
             if (this.isDead()) {
-                this.resetIdleState(); // 🛑 Sofort Schnarchen beenden
+                this.resetIdleState(); 
                 if (!this.deathStarted) {
                     this.deathStarted = true;
                     this.currentImage = 0;
@@ -174,7 +174,7 @@ class Character extends MovableObject {
             if (this.isPunching) return;
     
             if (this.isHurt()) {
-                this.resetIdleState(); // ✅ Schnarchen abbrechen bei Schaden
+                this.resetIdleState();
                 this.playAnimation(this.IMAGES_HURT);
                 this.idleTimer = 0;
             } else if (this.isAboveGround()) {
@@ -190,14 +190,12 @@ class Character extends MovableObject {
         }, 150);
     }
     
-    
 
     checkIdleTimer() {
         if (this.world.endscreenManager?.isVisible() || this.isDead() || this.isHurt()) {
-            this.resetIdleState(); // 🧹 Sofort alles stoppen
+            this.resetIdleState(); 
             return;
         }
-    
         if (this.idleTimer > 100) {
             this.playAnimation(this.IMAGES_LONG_IDLE, 350);
             if (!this.hasSnored) {
@@ -247,4 +245,3 @@ class Character extends MovableObject {
         }, punchEndTime);
     }
 }
-

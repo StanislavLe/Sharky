@@ -1,10 +1,15 @@
+let lastOrientation = null;
+
+
 document.addEventListener('DOMContentLoaded', () => {
     bindTouchControls();
 });
 
+
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1) || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
+
 
 function bindTouchControls() {
     const keys = [
@@ -14,7 +19,6 @@ function bindTouchControls() {
         { id: 'btnAttack', prop: 'SPACE' },
         { id: 'btnSlap', prop: 'D' }
     ];
-
     keys.forEach(key => {
         const button = document.getElementById(key.id);
         if (button) {
@@ -22,7 +26,6 @@ function bindTouchControls() {
                 e.preventDefault();
                 keyboard[key.prop] = true;
             }, { passive: false });
-
             button.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 keyboard[key.prop] = false;
@@ -33,11 +36,12 @@ function bindTouchControls() {
     });
 }
 
+
 function onLoadHandler() {
     window.addEventListener('resize', () => setTimeout(handleOrientationChange, 100));
     window.addEventListener('orientationchange', () => setTimeout(handleOrientationChange, 100));
-    handleOrientationChange(); // Direkt prüfen
-    startOrientationMonitor(); // NEU: Rotation regelmäßig prüfen
+    handleOrientationChange(); 
+    startOrientationMonitor();
 }
 
 
@@ -57,6 +61,7 @@ function showOrientationPopup() {
     popup.classList.add('visible');
 }
 
+
 function hideOrientationPopup() {
     const popup = document.getElementById('orientationPopup');
     if (popup) {
@@ -65,14 +70,13 @@ function hideOrientationPopup() {
     }
 }
 
+
 function handleOrientationChange() {
     const isLandscape = screen.orientation
         ? screen.orientation.type.startsWith('landscape')
         : window.innerWidth > window.innerHeight;
-
     const isMobile = isMobileDevice();
     const touchControls = document.getElementById('touchControls');
-
     if (isMobile) {
         if (isLandscape) {
             hideOrientationPopup();
@@ -82,14 +86,11 @@ function handleOrientationChange() {
             if (touchControls) touchControls.style.display = 'none';
         }
     } else {
-        // Desktop: Immer Popup und TouchControls verstecken
         hideOrientationPopup();
         if (touchControls) touchControls.style.display = 'none';
     }
 }
 
-
-let lastOrientation = null;
 
 function startOrientationMonitor() {
     setInterval(() => {
@@ -98,6 +99,5 @@ function startOrientationMonitor() {
             lastOrientation = isLandscapeNow;
             handleOrientationChange();
         }
-    }, 500); // alle 500ms prüfen
+    }, 500);
 }
-

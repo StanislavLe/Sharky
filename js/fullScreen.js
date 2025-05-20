@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterFullscreenBtn = document.getElementById('fullscreenToggleOpen');
     const exitFullscreenBtn = document.getElementById('fullscreenToggleClose');
     const canvas = document.getElementById('canvas');
-
     function toggleFullscreen() {
         if (!document.fullscreenElement) {
             fullscreenElement.requestFullscreen?.();
@@ -12,35 +11,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-function updateCanvasSize() {
-    const canvas = document.getElementById('canvas');
-    if (!canvas) return;
 
-    if (document.fullscreenElement) {
-        const aspectRatio = 720 / 480;
-        let newWidth = window.innerWidth;
-        let newHeight = window.innerHeight;
-
-        if (newWidth / newHeight > aspectRatio) {
-            newWidth = newHeight * aspectRatio;
+    function updateCanvasSize() {
+        const canvas = document.getElementById('canvas');
+        if (!canvas) return;
+        if (document.fullscreenElement) {
+            const aspectRatio = 720 / 480;
+            let newWidth = window.innerWidth;
+            let newHeight = window.innerHeight;
+            if (newWidth / newHeight > aspectRatio) {
+                newWidth = newHeight * aspectRatio;
+            } else {
+                newHeight = newWidth / aspectRatio;
+            }
+            canvas.style.width = `${newWidth}px`;
+            canvas.style.height = `${newHeight}px`;
         } else {
-            newHeight = newWidth / aspectRatio;
+            canvas.style.width = '720px';
+            canvas.style.height = '480px';
         }
-
-        canvas.style.width = `${newWidth}px`;
-        canvas.style.height = `${newHeight}px`;
-    } else {
-        canvas.style.width = '720px';
-        canvas.style.height = '480px';
+        refreshGameContext();
     }
-    refreshGameContext();
-}
 
-function refreshGameContext() {
-    if (window.world) {
-        world.ctx = document.getElementById('canvas').getContext('2d');
+
+    function refreshGameContext() {
+        if (window.world) {
+            world.ctx = document.getElementById('canvas').getContext('2d');
+        }
     }
-}
 
 
     document.addEventListener('fullscreenchange', () => {
@@ -53,7 +51,6 @@ function refreshGameContext() {
             exitFullscreenBtn.style.display = 'none';
         }
     });
-
     enterFullscreenBtn.addEventListener('click', toggleFullscreen);
     exitFullscreenBtn.addEventListener('click', toggleFullscreen);
 });

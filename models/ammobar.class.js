@@ -42,6 +42,4 @@ class AmmoBar extends DrawableObject {
             return 0;
         }
     }
-
-
 }

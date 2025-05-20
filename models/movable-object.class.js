@@ -23,6 +23,7 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
     
+
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
@@ -31,10 +32,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
     isAboveEnemy(enemy) {
         return this.y + this.height < enemy.y + enemy.height && this.speedY < 0;
     }
-                
+          
+    
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -42,13 +45,16 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+
     increaseAmmo() {
         this.ammo += 1;
     }
 
+
     increaseScore() {
         this.score += 1;
     }
+
 
     isColliding(mo) {
         if (this.isAscending || this.isDead()) return false; 
@@ -58,6 +64,7 @@ class MovableObject extends DrawableObject {
                this.x < mo.x &&
                this.y < mo.y + mo.height;
     }
+
 
     hit(damage = 5) {
         this.energy -= damage;
@@ -72,32 +79,39 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
     isDead() {
         return this.energy == 0;
     }
 
+
     die() {
         this.energy = 0;
     }
+    
     
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
+    
 
     jump() {
         this.speedY = 30;
     }
+    
 
     moveRight() {
         this.x += this.speed;
     }
 
+    
     moveLeft() {
         this.x -= this.speed;
     }
 
+    
     startAscend() {
         this.isAscending = true;    
         this.ascendInterval = setInterval(() => {

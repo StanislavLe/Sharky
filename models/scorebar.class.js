@@ -9,6 +9,7 @@ class ScoreBar extends DrawableObject {
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/green/Coin/100_ copia 4.png',
     ];
 
+
     percentage = 0;
 
     constructor() {
@@ -21,11 +22,13 @@ class ScoreBar extends DrawableObject {
         this.setPercentage(0);
     }
 
+
     setPercentage(percentage) {
         this.percentage = Math.min(100, percentage);
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
+
 
     resolveImageIndex() {
         if (this.percentage == 100) {
@@ -42,5 +45,4 @@ class ScoreBar extends DrawableObject {
             return 0;
         }
     }
-
 }

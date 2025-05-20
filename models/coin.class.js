@@ -9,7 +9,6 @@ class Coin extends CollectableObject {
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/1. Coins/4.png',
     ]
 
-
     constructor() {
         super().loadImage(this.WARPING_COINS[0]); 
         this.loadImages(this.WARPING_COINS);
@@ -21,5 +20,4 @@ class Coin extends CollectableObject {
             this.playAnimation(this.WARPING_COINS);
         }, 150); 
     }
- 
 }

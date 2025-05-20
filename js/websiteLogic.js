@@ -39,14 +39,10 @@ function startGame() {
     canvas = document.getElementById('canvas'); // canvas erst JETZT holen
     canvas.style.display = 'block';
     init();
-
     if (isMobileDevice()) {
         bindTouchControls();
     }
 }
-
-
-
 
 
 function resetGame() {

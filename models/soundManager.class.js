@@ -81,6 +81,7 @@ class SoundManager {
         this.backgroundAudio.loop = true;
         this.backgroundAudio.volume = 0.5;
     }
+    
 
     playBackgroundMusik() {
         const musicStatus = localStorage.getItem('musicStatus');

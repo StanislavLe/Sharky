@@ -57,5 +57,4 @@ class JellyFish extends MovableObject{
             }
         }, this.JELLYFISH_DIE.length * 150);
     }
-
 }

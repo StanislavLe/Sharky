@@ -6,17 +6,16 @@ class LightLeft extends MovableObject {
 
     constructor() {
         super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/1. Light/2.png');
-        this.moveLeftOverTime(); 
+        this.moveLeftOverTime();
     }
-    
 
- moveLeftOverTime() {
-    setInterval(() => {
-        this.x -= 1;  
-        if (this.x + this.width < 0) {
-            this.x = 2300; 
-        }
-    }, 1000 / 60);
-}
 
+    moveLeftOverTime() {
+        setInterval(() => {
+            this.x -= 1;
+            if (this.x + this.width < 0) {
+                this.x = 2300;
+            }
+        }, 1000 / 60);
+    }
 }

@@ -135,7 +135,6 @@ class FinalBoss extends MovableObject {
         }, 150);
     }
     
-    
 
     dieBoss() {
         this.behaviorActive = false;              
@@ -177,7 +176,6 @@ class FinalBoss extends MovableObject {
         loop();
     }
     
-    
 
     checkAttackHit() {
         if (this.isDying || this.isDead()) return; 
@@ -190,7 +188,7 @@ class FinalBoss extends MovableObject {
             character.hit();
         }
     }
-    
+
 
     playAnimationOnce(images, frameDuration = 100, callback = () => {}) {
         this.currentImage = 0;
@@ -211,5 +209,4 @@ class FinalBoss extends MovableObject {
             }
         }, frameDuration);
     }   
-
 }
