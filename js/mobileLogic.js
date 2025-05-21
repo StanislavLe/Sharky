@@ -1,16 +1,21 @@
 let lastOrientation = null;
 
-
 document.addEventListener('DOMContentLoaded', () => {
     bindTouchControls();
 });
 
-
+/**
+ * Prüft, ob das aktuelle Gerät ein mobiles Gerät ist.
+ * @returns {boolean} true, wenn es sich um ein mobiles Gerät handelt.
+ */
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1) || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
-
+/**
+ * Bindet die Touch-Steuerung an die entsprechenden Buttons.
+ * @function
+ */
 function bindTouchControls() {
     const keys = [
         { id: 'btnLeft', prop: 'LEFT' },
@@ -36,7 +41,10 @@ function bindTouchControls() {
     });
 }
 
-
+/**
+ * Initialisiert die Überwachung der Bildschirmorientierung und setzt Event-Listener.
+ * @function
+ */
 function onLoadHandler() {
     window.addEventListener('resize', () => setTimeout(handleOrientationChange, 100));
     window.addEventListener('orientationchange', () => setTimeout(handleOrientationChange, 100));
@@ -44,7 +52,10 @@ function onLoadHandler() {
     startOrientationMonitor();
 }
 
-
+/**
+ * Zeigt das Popup an, das den Nutzer auffordert, das Gerät ins Querformat zu drehen.
+ * @function
+ */
 function showOrientationPopup() {
     let popup = document.getElementById('orientationPopup');
     if (!popup) {
@@ -61,7 +72,10 @@ function showOrientationPopup() {
     popup.classList.add('visible');
 }
 
-
+/**
+ * Versteckt das Orientierungs-Popup.
+ * @function
+ */
 function hideOrientationPopup() {
     const popup = document.getElementById('orientationPopup');
     if (popup) {
@@ -70,7 +84,10 @@ function hideOrientationPopup() {
     }
 }
 
-
+/**
+ * Behandelt Änderungen der Bildschirmorientierung und zeigt/versteckt die Touch-Steuerung und das Popup.
+ * @function
+ */
 function handleOrientationChange() {
     const isLandscape = screen.orientation
         ? screen.orientation.type.startsWith('landscape')
@@ -91,7 +108,10 @@ function handleOrientationChange() {
     }
 }
 
-
+/**
+ * Startet einen Intervall, der die Bildschirmorientierung überwacht und bei Änderung handleOrientationChange aufruft.
+ * @function
+ */
 function startOrientationMonitor() {
     setInterval(() => {
         const isLandscapeNow = window.innerWidth > window.innerHeight;

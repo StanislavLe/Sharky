@@ -1,6 +1,11 @@
 class ThrowableObject extends MovableObject {
 
-
+    /**
+     * Erstellt ein neues Wurfobjekt (z.B. Blase) und startet den Wurf.
+     * @param {number} x - Start-X-Position.
+     * @param {number} y - Start-Y-Position.
+     * @constructor
+     */
     constructor(x,y) {
         super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.x = x;
@@ -10,6 +15,10 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
+    /**
+     * Startet die Wurfbewegung und prüft auf Kollision mit Gegnern.
+     * @function
+     */
     throw() {
         this.speedY = 30;
         this.applyGravity();
@@ -25,13 +34,17 @@ class ThrowableObject extends MovableObject {
                         enemy.die();
                         this.world.soundManager.stompEnemy();
                     }
-                    this.removeFromWorld(); // 💥 Bubble zerstört
-                    break; // 🛑 Nur ein Gegner wird getroffen
+                    this.removeFromWorld(); 
+                    break;
                 }
             }
         }, 25);
     }
 
+    /**
+     * Entfernt das Wurfobjekt aus der Welt und stoppt die Bewegung.
+     * @function
+     */
     removeFromWorld() {
         clearInterval(this.moveInterval);
         const index = this.world?.throwableObjects.indexOf(this);

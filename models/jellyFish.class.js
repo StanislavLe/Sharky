@@ -17,6 +17,10 @@ class JellyFish extends MovableObject{
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Dead/Lila/L4.png',
     ];
 
+    /**
+     * Erstellt eine neue Instanz einer Qualle, lädt die Bilder und startet die Animation.
+     * @constructor
+     */
     constructor() {
         super().loadImage(this.JELLYFISH_WALKING[0]);
         this.x = 500 + Math.random() * 1500;
@@ -27,6 +31,10 @@ class JellyFish extends MovableObject{
         this.animate();    
     }
 
+    /**
+     * Startet die Bewegungs- und Animationsintervalle für die Qualle.
+     * @function
+     */
     animate() {
         setInterval(() => {
             if (this.isDead()) {
@@ -49,6 +57,10 @@ class JellyFish extends MovableObject{
         }, 150);
     }
 
+    /**
+     * Entfernt die Qualle nach dem Abspielen der Sterbeanimation aus dem Level.
+     * @function
+     */
     removeEnemy() {
         setTimeout(() => {
             const index = this.world.level.enemies.indexOf(this);

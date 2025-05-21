@@ -11,6 +11,10 @@ class BossStatusBar extends DrawableObject {
 
     percentage = 100;
 
+    /**
+     * Erstellt eine neue Instanz der BossStatusBar und lädt die Bilder.
+     * @constructor
+     */
     constructor() {
         super();
         this.loadImages(this.BOSS_STATUS_BAR);
@@ -21,12 +25,20 @@ class BossStatusBar extends DrawableObject {
         this.setPercentage(100);
     }
 
+    /**
+     * Setzt den aktuellen Prozentwert der Boss-Lebensanzeige und aktualisiert das Bild.
+     * @param {number} percentage - Der neue Prozentwert.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.BOSS_STATUS_BAR[this.resolveImageIndex()]
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Ermittelt den Index des Bildes basierend auf dem aktuellen Prozentwert.
+     * @returns {number} Der Index des Bildes im BOSS_STATUS_BAR-Array.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

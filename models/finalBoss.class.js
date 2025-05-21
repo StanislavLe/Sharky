@@ -64,6 +64,10 @@ class FinalBoss extends MovableObject {
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
     ]
 
+    /**
+     * Erstellt eine neue Instanz des FinalBoss, lädt alle Bilder und setzt die Startposition.
+     * @constructor
+     */
     constructor() {
         super().loadImage(this.BOSS_INTRO[0]);
         this.loadImages(this.BOSS_INTRO);
@@ -75,7 +79,10 @@ class FinalBoss extends MovableObject {
 
     }
 
-
+    /**
+     * Startet die Intro-Animation des Bosses und aktiviert ihn danach.
+     * @function
+     */
     startIntro() {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
@@ -98,12 +105,18 @@ class FinalBoss extends MovableObject {
         }, 150);
     }
     
-
+    /**
+     * Gibt zurück, ob der Boss aktuell kollidierbar ist.
+     * @returns {boolean}
+     */
     isCollidable() {
         return this.isActive && !this.isDying && !this.isDead(); 
     }
     
-
+    /**
+     * Startet die Animationsintervalle für den Boss (Bewegung, Tod, etc.).
+     * @function
+     */
     animate() {
         this.bossAnimateInterval = setInterval(() => {
             if (this.isDead()) {
@@ -135,13 +148,19 @@ class FinalBoss extends MovableObject {
         }, 150);
     }
     
-
+    /**
+     * Beendet das Bossverhalten und stoppt die Bossmusik.
+     * @function
+     */
     dieBoss() {
         this.behaviorActive = false;              
         this.world.soundManager.stopBossMusik();  
     }
     
-    
+    /**
+     * Startet das Verhalten des Bosses (Bewegung, Angriff, etc.).
+     * @function
+     */
     startBossBehavior() {
         this.behaviorActive = true;
         const loop = () => {
@@ -176,7 +195,10 @@ class FinalBoss extends MovableObject {
         loop();
     }
     
-
+    /**
+     * Prüft, ob der Angriff des Bosses den Charakter trifft.
+     * @function
+     */
     checkAttackHit() {
         if (this.isDying || this.isDead()) return; 
         const character = this.world.character;
@@ -189,7 +211,12 @@ class FinalBoss extends MovableObject {
         }
     }
 
-
+    /**
+     * Spielt eine Animation einmalig ab und ruft danach einen Callback auf.
+     * @param {string[]} images - Array mit Bildpfaden.
+     * @param {number} [frameDuration=100] - Dauer pro Frame in ms.
+     * @param {Function} [callback] - Funktion, die nach der Animation aufgerufen wird.
+     */
     playAnimationOnce(images, frameDuration = 100, callback = () => {}) {
         this.currentImage = 0;
         let frame = 0;

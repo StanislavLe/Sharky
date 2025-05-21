@@ -34,6 +34,10 @@ class World {
     }
 
 
+    /**
+     * Zeichnet alle Objekte auf das Canvas und behandelt die Kameraposition.
+     * @function
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         if (!this.endscreenManager.isVisible()) {
@@ -74,6 +78,10 @@ class World {
     }
 
 
+    /**
+     * Startet die Hauptspiel-Logikschleife (z.B. Kollisionsprüfung, Sieg/Niederlage).
+     * @function
+     */
     run() {
         setInterval(() => {
             if (!this.endscreenManager.isVisible()) { 
@@ -89,6 +97,10 @@ class World {
     }
 
      
+    /**
+     * Prüft, ob der Spieler gewonnen hat und zeigt ggf. den Endscreen.
+     * @function
+     */
     checkVictory() {
         const boss = this.level.enemies.find(e => e instanceof FinalBoss);
         if (boss && boss.isDead() && !this.endscreenManager.isVisible() && !this.victoryProcessed) {
@@ -99,6 +111,10 @@ class World {
     }
 
 
+    /**
+     * Prüft, ob das Spiel verloren wurde und zeigt ggf. den Endscreen.
+     * @function
+     */
     checkGameOver() {
         if (
             this.character.isDead() &&
@@ -112,6 +128,10 @@ class World {
     }
     
 
+    /**
+     * Friert das Spiel ein (z.B. nach Sieg oder Niederlage).
+     * @function
+     */
     freezeGame() {
         this.character.speed = 0;
         this.character.isPunching = false;
@@ -123,6 +143,10 @@ class World {
     }
 
 
+    /**
+     * Behandelt das Besiegen eines Gegners durch Draufspringen.
+     * @param {MovableObject} enemy - Das gegnerische Objekt.
+     */
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
             if (!(enemy instanceof FinalBoss)) {
@@ -139,6 +163,10 @@ class World {
     }
 
 
+    /**
+     * Prüft, ob ein Wurfobjekt erzeugt werden soll.
+     * @function
+     */
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
             let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -153,6 +181,10 @@ class World {
     }
 
 
+    /**
+     * Prüft Kollisionen zwischen Charakter und Gegnern.
+     * @function
+     */
     checkCollisions() {
         this.level.enemies.forEach((enemy, index) => {
             if (!enemy.isDead() && this.character.isColliding(enemy)) {
@@ -162,6 +194,10 @@ class World {
     }
 
 
+    /**
+     * Prüft, ob der Boss-Intro gestartet werden soll.
+     * @function
+     */
     checkBossIntro() {
         if (this.character.x > 1530) {
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
@@ -173,6 +209,10 @@ class World {
     }
 
 
+    /**
+     * Prüft und behandelt das Einsammeln von Münzen.
+     * @function
+     */
     collectCoin() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
@@ -185,6 +225,10 @@ class World {
     }
 
 
+    /**
+     * Prüft und behandelt das Einsammeln von Munition (Bubbles).
+     * @function
+     */
     collectAmmo() {
         this.level.bubbles.forEach((bubble, index) => {
             if (this.character.isColliding(bubble)) {
@@ -197,6 +241,10 @@ class World {
     }
 
 
+    /**
+     * Fügt ein Objekt zur Zeichenfläche hinzu (inkl. Spiegelung).
+     * @param {DrawableObject} mo - Das darzustellende Objekt.
+     */
     addToMap(mo) {
         this.ctx.save();
         if (mo === this.character && mo.visualOffsetX) {
@@ -212,6 +260,10 @@ class World {
     }
 
 
+    /**
+     * Spiegelt ein Bild horizontal auf dem Canvas.
+     * @param {DrawableObject} mo - Das darzustellende Objekt.
+     */
     flipImage(mo) {
         this.ctx.translate(mo.x + mo.width, mo.y);
         this.ctx.scale(-1, 1);
@@ -219,6 +271,10 @@ class World {
     }
 
 
+    /**
+     * Setzt die Referenz auf die Welt für Charakter und Gegner.
+     * @function
+     */
     setWorld() {
         this.character.world = this;
         this.level.enemies.forEach(enemy => {
@@ -227,6 +283,10 @@ class World {
     }
 
 
+    /**
+     * Stoppt alle laufenden Intervalle und Animationen im Spiel.
+     * @function
+     */
     clearAllIntervals() {
         if (this.logicInterval) clearInterval(this.logicInterval);
         if (this.drawLoopFrameId) cancelAnimationFrame(this.drawLoopFrameId);
@@ -245,6 +305,10 @@ class World {
     }
     
 
+    /**
+     * Bereinigt die Welt und setzt alle Referenzen zurück.
+     * @function
+     */
     cleanup() {
     this.clearAllIntervals();
     this.character = null;

@@ -11,6 +11,10 @@ class AmmoBar extends DrawableObject {
 
     percentage = 0;
 
+    /**
+     * Erstellt eine neue Instanz der AmmoBar und lädt die Bilder.
+     * @constructor
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -21,12 +25,20 @@ class AmmoBar extends DrawableObject {
         this.setPercentage(0);
     }
 
+    /**
+     * Setzt den aktuellen Munitions-Prozentsatz und aktualisiert das Bild.
+     * @param {number} percentage - Der neue Prozentwert (maximal 100).
+     */
     setPercentage(percentage) {
         this.percentage = Math.min(100, percentage);
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Ermittelt den Index des Bildes basierend auf dem aktuellen Prozentwert.
+     * @returns {number} Der Index des Bildes im IMAGES-Array.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

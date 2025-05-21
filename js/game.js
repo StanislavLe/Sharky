@@ -3,6 +3,10 @@ let world;
 let keyboard = new Keyboard();
 window.soundManager = new SoundManager(); 
 
+/**
+ * Initialisiert das Spiel, setzt das Canvas, die Welt und die Musiksteuerung.
+ * @function
+ */
 function init() {
     canvas = document.getElementById('canvas');
     updateMusicButton();
@@ -11,6 +15,11 @@ function init() {
     window.soundManager.startMusicWatcher();
 }
 
+/**
+ * Erstellt ein neues Level mit Gegnern, Hintergrund, Münzen und Blasen.
+ * @returns {Level} Das neu erstellte Level-Objekt.
+ * @function
+ */
 function createNewLevel() {
     return new Level(
         [
@@ -69,6 +78,11 @@ function createNewLevel() {
     );
 }
 
+/**
+ * Event-Listener für Tastendruck.
+ * Setzt die entsprechenden Eigenschaften im Keyboard-Objekt auf true.
+ * @param {KeyboardEvent} event - Das Tastaturereignis.
+ */
 addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -95,6 +109,11 @@ addEventListener("keydown", (event) => {
     }
 });
 
+/**
+ * Event-Listener für das Loslassen einer Taste.
+ * Setzt die entsprechenden Eigenschaften im Keyboard-Objekt auf false.
+ * @param {KeyboardEvent} event - Das Tastaturereignis.
+ */
 addEventListener("keyup", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = false;

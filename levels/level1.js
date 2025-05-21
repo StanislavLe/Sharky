@@ -1,3 +1,7 @@
+/**
+ * Erstellt das Level 1 mit Gegnern, Hintergrundobjekten, Münzen und Blasen.
+ * @type {Level}
+ */
 var level1 = new Level(
     [
         new PufferFish(),

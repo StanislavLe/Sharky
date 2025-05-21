@@ -1,6 +1,9 @@
 level = level1;
 
-
+/**
+ * Schaltet den Musikstatus zwischen "volume" und "mute" um und aktualisiert den Button.
+ * @function
+ */
 function toggleMusic() {
     const musicStatus = localStorage.getItem('musicStatus');
     if (musicStatus === 'volume') {
@@ -11,7 +14,10 @@ function toggleMusic() {
     updateMusicButton();
 }
 
-
+/**
+ * Aktualisiert den Musik-Button je nach aktuellem Musikstatus.
+ * @function
+ */
 function updateMusicButton() {
     const musicStatus = localStorage.getItem('musicStatus');
     const musicButtonText = document.getElementById('musicButtonText');
@@ -25,14 +31,20 @@ function updateMusicButton() {
     }
 }
 
-
+/**
+ * Setzt den Musikstatus in localStorage auf "mute", falls noch nicht vorhanden.
+ * @function
+ */
 function setMusicStatus() {
     if (!localStorage.getItem('musicStatus')) {
         localStorage.setItem('musicStatus', 'mute');
     }
 }
 
-
+/**
+ * Startet das Spiel, blendet den Startbildschirm aus und initialisiert die Welt.
+ * @function
+ */
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('gameContainer').style.display = 'flex';
@@ -44,7 +56,10 @@ function startGame() {
     }
 }
 
-
+/**
+ * Setzt das Spiel zurück und initialisiert die Welt neu.
+ * @function
+ */
 function resetGame() {
     if (world) {
         world.clearAllIntervals();
@@ -75,7 +90,10 @@ function resetGame() {
     window.soundManager.startMusicWatcher();
 }
 
-
+/**
+ * Kehrt zum Startbildschirm zurück und setzt die Anzeige zurück.
+ * @function
+ */
 function goHome() {
     if (world) {
         world.clearAllIntervals();
@@ -95,7 +113,10 @@ function goHome() {
     }
 }
 
-
+/**
+ * Öffnet die Spielanleitung und blendet andere Buttons aus.
+ * @function
+ */
 function openInstruction() {
     const instruction = document.getElementById('howToPlay');
     instruction.style.display = 'flex';
@@ -105,7 +126,10 @@ function openInstruction() {
     document.getElementById('impressumButton').style.display = 'none';
 }
 
-
+/**
+ * Schließt die Spielanleitung und zeigt die Buttons wieder an.
+ * @function
+ */
 function closeInstruction() {
     const instruction = document.getElementById('howToPlay');
     instruction.style.display = 'none';
@@ -115,7 +139,10 @@ function closeInstruction() {
     document.getElementById('impressumButton').style.display = 'flex';
 }
 
-
+/**
+ * Öffnet das Impressum und blendet andere Buttons aus.
+ * @function
+ */
 function openLegalNotice() {
     const legalNotice = document.getElementById('legalNotice');
     legalNotice.style.display = 'flex';
@@ -125,7 +152,10 @@ function openLegalNotice() {
     document.getElementById('impressumButton').style.display = 'none';
 }
 
-
+/**
+ * Schließt das Impressum und zeigt die Buttons wieder an.
+ * @function
+ */
 function closeLegalNotice() {
     const legalNotice = document.getElementById('legalNotice');
     legalNotice.style.display = 'none';

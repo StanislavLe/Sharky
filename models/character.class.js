@@ -99,6 +99,10 @@ class Character extends MovableObject {
 
     world;
 
+    /**
+     * Erstellt eine neue Instanz des Charakters, lädt alle Bilder und startet die Animation.
+     * @constructor
+     */
     constructor() {
         super().loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -112,12 +116,20 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Setzt den Idle-Zustand zurück und stoppt das Schnarchgeräusch.
+     * @function
+     */
     resetIdleState() {
         this.idleTimer = 0;
         this.hasSnored = false;
         this.world.soundManager.stopSnoreSound(); 
     }
 
+    /**
+     * Startet die Bewegungs- und Animationsintervalle für den Charakter.
+     * @function
+     */
     animate() {
         this.moveInterval = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -191,6 +203,10 @@ class Character extends MovableObject {
     }
     
 
+    /**
+     * Überprüft den Idle-Timer und spielt ggf. Idle- oder Long-Idle-Animationen ab.
+     * @function
+     */
     checkIdleTimer() {
         if (this.world.endscreenManager?.isVisible() || this.isDead() || this.isHurt()) {
             this.resetIdleState(); 
@@ -210,6 +226,10 @@ class Character extends MovableObject {
     }
     
 
+    /**
+     * Führt die Schlag-Animation aus und prüft auf Kollision mit Gegnern.
+     * @function
+     */
     punch() {
         if (this.isPunching || this.isDead()) return;
         this.isPunching = true;

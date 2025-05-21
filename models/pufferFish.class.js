@@ -14,7 +14,10 @@ class PufferFish extends MovableObject {
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.png',
     ];
     
-
+    /**
+     * Erstellt eine neue Instanz eines Kugelfisches, lädt die Bilder und startet die Animation.
+     * @constructor
+     */
     constructor() {
         super().loadImage(this.PUFFERFISH_WALKING[0]);
         this.x = 800 + Math.random() * 1500;
@@ -24,7 +27,10 @@ class PufferFish extends MovableObject {
         this.animate();
     }
 
-
+    /**
+     * Startet die Bewegungs- und Animationsintervalle für den Kugelfisch.
+     * @function
+     */
     animate() {
         setInterval(() => {
             if (this.isDead()) {
@@ -39,7 +45,10 @@ class PufferFish extends MovableObject {
         }, 150);
     }
     
-
+    /**
+     * Entfernt den Kugelfisch nach dem Abspielen der Sterbeanimation aus dem Level.
+     * @function
+     */
     removeEnemy() {
         setTimeout(() => {
             const index = this.world.level.enemies.indexOf(this);

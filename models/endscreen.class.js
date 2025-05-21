@@ -1,4 +1,9 @@
 class Endscreen {
+    /**
+     * Erstellt eine neue Endscreen-Instanz und lädt das entsprechende Bild.
+     * @param {string} imageSrc - Pfad zum Endscreen-Bild.
+     * @constructor
+     */
     constructor(imageSrc) {
         this.image = new Image();
         this.image.onload = () => {
@@ -13,6 +18,11 @@ class Endscreen {
     }
     
 
+    /**
+     * Gibt den Bildpfad für den Endscreen je nach Typ zurück.
+     * @param {string} type - 'win' oder 'lose'.
+     * @returns {string} Bildpfad.
+     */
     getImagePath(type) {
         const images = {
             win: 'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/6.Botones/Try again/Mesa de trabajo 1.png',
@@ -22,6 +32,10 @@ class Endscreen {
     }
 
 
+    /**
+     * Zeigt den Endscreen und die passenden Buttons an.
+     * @function
+     */
     show() {
         this.visible = true;
         const restartButton = document.getElementById('restartButton');
@@ -46,12 +60,20 @@ class Endscreen {
     }
     
 
+    /**
+     * Versteckt den Endscreen und die Buttons.
+     * @function
+     */
     hide() {
         this.visible = false;
         this.toggleButtons(false);
     }
 
 
+    /**
+     * Zeigt oder versteckt die Restart- und Home-Buttons.
+     * @param {boolean} show - true, um anzuzeigen; false, um zu verstecken.
+     */
     toggleButtons(show) {
         const restartBtn = document.getElementById('restartButton');
         const backBtn = document.getElementById('backHomeButton');
@@ -64,6 +86,10 @@ class Endscreen {
     }
 
 
+    /**
+     * Zeichnet den Endscreen auf das Canvas, wenn sichtbar.
+     * @param {CanvasRenderingContext2D} ctx - Der Zeichenkontext.
+     */
     draw(ctx) {
         if (!this.visible) return;
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
