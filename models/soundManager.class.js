@@ -50,7 +50,7 @@ class SoundManager {
     }
 
 
-    initSnoreSound(path = '../audio/snoring.mp3') {
+    initSnoreSound(path = 'audio/snoring.mp3') {
         this.snoreAudio = new Audio(path);
         this.snoreAudio.volume = 0.25;
         this.snoreAudio.loop = true;
@@ -76,7 +76,7 @@ class SoundManager {
     }
 
 
-    initBackgroundMusik(path = '../audio/backgroundMusik.mp3') {
+    initBackgroundMusik(path = 'audio/backgroundMusik.mp3') {
         this.backgroundAudio = new Audio(path);
         this.backgroundAudio.loop = true;
         this.backgroundAudio.volume = 0.5;
@@ -112,7 +112,7 @@ class SoundManager {
      * Initialisiert die Bossmusik.
      * @param {string} [path='../audio/bossMusik.mp3'] - Pfad zur Bossmusik.
      */
-    initBossMusik(path = '../audio/bossMusik.mp3') {
+    initBossMusik(path = 'audio/bossMusik.mp3') {
         this.bossAudio = new Audio(path);
         this.bossAudio.loop = true;
         this.bossAudio.volume = 0.5;
@@ -172,41 +172,41 @@ class SoundManager {
      * Spielt den Sound für das Einsammeln einer Blase ab.
      * @function
      */
-    collectBubble() { this.playSound('../audio/collectBubble.mp3', 0.5); }
+    collectBubble() { this.playSound('audio/collectBubble.mp3', 0.5); }
 
     /**
      * Spielt den Sound für das Einsammeln einer Münze ab.
      * @function
      */
-    collectCoin() { this.playSound('../audio/collectCoin.mp3', 0.8); }
+    collectCoin() { this.playSound('audio/collectCoin.mp3', 0.8); }
 
     /**
      * Spielt den Sound für einen Schlag ab (wenn das Spiel nicht vorbei ist).
      * @function
      */
-    punch() { if (!this.isGameOver) this.playSound('../audio/punch.mp3', 0.8); }
+    punch() { if (!this.isGameOver) this.playSound('audio/punch.mp3', 0.8); }
 
     /**
      * Spielt den Sound für das Besiegen eines Gegners ab.
      * @function
      */
-    stompEnemy() { this.playSound('../audio/stompEnemy.mp3', 1.0); }
+    stompEnemy() { this.playSound('audio/stompEnemy.mp3', 1.0); }
 
     /**
      * Spielt den "Bruh Retry"-Sound ab.
      * @function
      */
-    bruhRetry() { this.playSound('../audio/bruhRetry.mp3', 1.0); }
+    bruhRetry() { this.playSound('audio/bruhRetry.mp3', 1.0); }
 
     /**
      * Spielt den Game-Over-Sound ab und setzt isGameOver auf true.
      * @function
      */
-    gameLose() { this.isGameOver = true; this.playSound('../audio/gameLose.mp3', 1.0); }
+    gameLose() { this.isGameOver = true; this.playSound('audio/gameLose.mp3', 1.0); }
 
     /**
      * Spielt den "Ouch"-Sound ab.
      * @function
      */
-    ouch() { this.playSound('../audio/ouch.mp3', 1.0); }
+    ouch() { this.playSound('audio/ouch.mp3', 1.0); }
 }
