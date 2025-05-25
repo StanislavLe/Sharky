@@ -32,8 +32,8 @@ class DrawableObject {
         if (this instanceof Character || this instanceof PufferFish || this instanceof Coin || this instanceof Bubble || this instanceof JellyFish) {
             // Blue rectangle
             ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = '2';
+ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }

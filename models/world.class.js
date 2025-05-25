@@ -251,9 +251,11 @@ class World {
             this.ctx.translate(mo.visualOffsetX, 0);
         }
         if (mo instanceof Character) {
-            mo.drawFrameCharacter(this.ctx); // Spezielle Frame-Methode für Character
+            mo.drawFrameCharacter(this.ctx);
+        } else if (mo instanceof FinalBoss) {
+            mo.drawFrameBoss(this.ctx);
         } else {
-            mo.drawFrame(this.ctx); // Normale Methode für alle anderen
+            mo.drawFrame(this.ctx);
         }
         if (mo.otherDirection) {
             this.flipImage(mo);

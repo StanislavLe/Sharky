@@ -235,5 +235,46 @@ class FinalBoss extends MovableObject {
                 frame++;
             }
         }, frameDuration);
-    }   
+    }  
+    
+        // Hitbox-Padding für Boss
+    hitboxPadding = {
+        top: 200,
+        bottom: 30,
+        left: 80,
+        right: 80
+    };
+
+    /**
+     * Zeichnet den Debug-Rahmen für den FinalBoss.
+     * @param {CanvasRenderingContext2D} ctx
+     */
+    drawFrameBoss(ctx) {
+        const p = this.hitboxPadding;
+        const x = this.x + p.left;
+        const y = this.y + p.top;
+        const width = this.width - (p.left + p.right);
+        const height = this.height - (p.top + p.bottom);
+
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
+        ctx.rect(x, y, width, height);
+        ctx.stroke();
+    }
+
+    /**
+     * Gibt die Hitbox des FinalBoss zurück, angepasst mit Padding.
+     * @returns {{x: number, y: number, width: number, height: number}}
+     */
+    getHitbox() {
+        const p = this.hitboxPadding;
+        return {
+            x: this.x + p.left,
+            y: this.y + p.top,
+            width: this.width - (p.left + p.right),
+            height: this.height - (p.top + p.bottom)
+        };
+    }
+
 }

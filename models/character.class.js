@@ -282,7 +282,7 @@ class Character extends MovableObject {
 
         ctx.beginPath();
         ctx.lineWidth = 2;
-        ctx.strokeStyle = 'blue';
+ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
         ctx.rect(x, y, width, height);
         ctx.stroke();
     }
