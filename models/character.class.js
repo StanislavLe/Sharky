@@ -7,6 +7,14 @@ class Character extends MovableObject {
     idleTimer = 0;
     hasSnored = false;
 
+    // Gemeinsames Padding für Frame & Kollision
+    hitboxPadding = {
+        top: 110,
+        bottom: 50,
+        left: 50,
+        right: 50
+    };
+
     IMAGES_WALKING = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/1.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/2.png',
@@ -123,7 +131,7 @@ class Character extends MovableObject {
     resetIdleState() {
         this.idleTimer = 0;
         this.hasSnored = false;
-        this.world.soundManager.stopSnoreSound(); 
+        this.world.soundManager.stopSnoreSound();
     }
 
     /**
@@ -150,13 +158,13 @@ class Character extends MovableObject {
                 this.punch();
                 this.resetIdleState();
             }
-    
+
             this.world.camera_x = -this.x;
         }, 1000 / 60);
-    
+
         this.animationInterval = setInterval(() => {
             if (this.isDead()) {
-                this.resetIdleState(); 
+                this.resetIdleState();
                 if (!this.deathStarted) {
                     this.deathStarted = true;
                     this.currentImage = 0;
@@ -166,7 +174,7 @@ class Character extends MovableObject {
                         this.startAscend();
                     }
                 }
-    
+
                 if (this.currentImage < this.IMAGES_DEAD.length) {
                     this.playAnimation(this.IMAGES_DEAD);
                 } else {
@@ -177,14 +185,14 @@ class Character extends MovableObject {
                         this.character_dead_sound.play();
                     }
                 }
-    
+
                 this.idleTimer = 0;
                 return;
             }
-    
+
             if (this.isAscending) return;
             if (this.isPunching) return;
-    
+
             if (this.isHurt()) {
                 this.resetIdleState();
                 this.playAnimation(this.IMAGES_HURT);
@@ -201,7 +209,7 @@ class Character extends MovableObject {
             }
         }, 150);
     }
-    
+
 
     /**
      * Überprüft den Idle-Timer und spielt ggf. Idle- oder Long-Idle-Animationen ab.
@@ -209,7 +217,7 @@ class Character extends MovableObject {
      */
     checkIdleTimer() {
         if (this.world.endscreenManager?.isVisible() || this.isDead() || this.isHurt()) {
-            this.resetIdleState(); 
+            this.resetIdleState();
             return;
         }
         if (this.idleTimer > 100) {
@@ -224,7 +232,7 @@ class Character extends MovableObject {
             this.hasSnored = false;
         }
     }
-    
+
 
     /**
      * Führt die Schlag-Animation aus und prüft auf Kollision mit Gegnern.
@@ -235,7 +243,7 @@ class Character extends MovableObject {
         this.isPunching = true;
         this.currentImage = 0;
         this.world.soundManager.punch?.();
-        const punchOffset = 15; 
+        const punchOffset = 15;
         const punchEndTime = 100 * this.IMAGES_PUNCH.length;
         this.resetIdleState();
         this.visualOffsetX = punchOffset;
@@ -264,4 +272,29 @@ class Character extends MovableObject {
             this.isPunching = false;
         }, punchEndTime);
     }
+
+    drawFrameCharacter(ctx) {
+        const p = this.hitboxPadding;
+        const x = this.x + p.left;
+        const y = this.y + p.top;
+        const width = this.width - (p.left + p.right);
+        const height = this.height - (p.top + p.bottom);
+
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'blue';
+        ctx.rect(x, y, width, height);
+        ctx.stroke();
+    }
+
+    getHitbox() {
+        const p = this.hitboxPadding;
+        return {
+            x: this.x + p.left,
+            y: this.y + p.top,
+            width: this.width - (p.left + p.right),
+            height: this.height - (p.top + p.bottom)
+        };
+    }
+
 }

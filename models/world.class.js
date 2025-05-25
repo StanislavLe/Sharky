@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1; 
+    level = level1;
     lightRight = new LightRight();
     lightLeft = new LightLeft();
     canvas;
@@ -13,10 +13,10 @@ class World {
     ammoBar = new AmmoBar();
     throwableObjects = [];
     CollectableObject = new CollectableObject();
-    soundManager = window.soundManager; 
-    endscreen = new Endscreen(); 
-    endscreenManager = new EndscreenManager(); 
-    fadeOpacity = 1; 
+    soundManager = window.soundManager;
+    endscreen = new Endscreen();
+    endscreenManager = new EndscreenManager();
+    fadeOpacity = 1;
     victoryProcessed = false;
 
 
@@ -24,9 +24,9 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.level = level; 
-        this.endscreen = new Endscreen(); 
-        this.endscreenManager = new EndscreenManager(); 
+        this.level = level;
+        this.endscreen = new Endscreen();
+        this.endscreenManager = new EndscreenManager();
         this.draw();
         this.setWorld();
         this.checkCollisions();
@@ -64,7 +64,7 @@ class World {
             this.ctx.translate(-this.camera_x, 0);
             this.addToMap(this.statusBar);
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
-            if (boss && boss.isActive) { 
+            if (boss && boss.isActive) {
                 this.addToMap(this.bossStatusBar);
             }
             this.addToMap(this.scoreBar);
@@ -84,19 +84,19 @@ class World {
      */
     run() {
         setInterval(() => {
-            if (!this.endscreenManager.isVisible()) { 
+            if (!this.endscreenManager.isVisible()) {
                 this.checkCollisions();
                 this.checkThrowObject();
                 this.collectCoin();
                 this.collectAmmo();
                 this.checkBossIntro();
-                this.checkGameOver();   
-                this.checkVictory();    
+                this.checkGameOver();
+                this.checkVictory();
             }
         }, 200);
     }
 
-     
+
     /**
      * Prüft, ob der Spieler gewonnen hat und zeigt ggf. den Endscreen.
      * @function
@@ -104,7 +104,7 @@ class World {
     checkVictory() {
         const boss = this.level.enemies.find(e => e instanceof FinalBoss);
         if (boss && boss.isDead() && !this.endscreenManager.isVisible() && !this.victoryProcessed) {
-            this.victoryProcessed = true; 
+            this.victoryProcessed = true;
             this.endscreenManager.showWin();
             this.freezeGame();
         }
@@ -121,12 +121,12 @@ class World {
             !this.endscreenManager.isVisible() &&
             !this.endscreenManager.isPending
         ) {
-            this.soundManager.gameLose(); 
-            this.endscreenManager.showLose(); 
+            this.soundManager.gameLose();
+            this.endscreenManager.showLose();
             this.freezeGame();
         }
     }
-    
+
 
     /**
      * Friert das Spiel ein (z.B. nach Sieg oder Niederlage).
@@ -139,7 +139,7 @@ class World {
         this.keyboard.LEFT = false;
         this.keyboard.UP = false;
         this.keyboard.SPACE = false;
-        this.keyboard.D = false; 
+        this.keyboard.D = false;
     }
 
 
@@ -150,11 +150,11 @@ class World {
     stompEnemy(enemy) {
         if (this.character.isAboveEnemy(enemy)) {
             if (!(enemy instanceof FinalBoss)) {
-                this.character.speedY = 25; 
-                enemy.die(); 
+                this.character.speedY = 25;
+                enemy.die();
                 this.soundManager.stompEnemy();
             } else {
-                this.character.hit(); 
+                this.character.hit();
                 this.soundManager.punch();
             }
         } else {
@@ -176,7 +176,7 @@ class World {
             this.ammoBar.setPercentage(this.character.ammo * 10);
             this.character.idleTimer = 0;
             this.character.hasSnored = false;
-            this.soundManager.stopSnoreSound(); 
+            this.soundManager.stopSnoreSound();
         }
     }
 
@@ -201,8 +201,8 @@ class World {
     checkBossIntro() {
         if (this.character.x > 1530) {
             const boss = this.level.enemies.find(e => e instanceof FinalBoss);
-            if (boss && !boss.isIntroPlayed) { 
-                
+            if (boss && !boss.isIntroPlayed) {
+
                 boss.startIntro();
             }
         }
@@ -250,7 +250,11 @@ class World {
         if (mo === this.character && mo.visualOffsetX) {
             this.ctx.translate(mo.visualOffsetX, 0);
         }
-        mo.drawFrame(this.ctx);
+        if (mo instanceof Character) {
+            mo.drawFrameCharacter(this.ctx); // Spezielle Frame-Methode für Character
+        } else {
+            mo.drawFrame(this.ctx); // Normale Methode für alle anderen
+        }
         if (mo.otherDirection) {
             this.flipImage(mo);
         } else {
@@ -290,11 +294,11 @@ class World {
     clearAllIntervals() {
         if (this.logicInterval) clearInterval(this.logicInterval);
         if (this.drawLoopFrameId) cancelAnimationFrame(this.drawLoopFrameId);
-    
+
         if (this.character?.moveInterval) clearInterval(this.character.moveInterval);
         if (this.character?.animationInterval) clearInterval(this.character.animationInterval);
         if (this.character?.gravityInterval) clearInterval(this.character.gravityInterval);
-    
+
         const boss = this.level.enemies.find(e => e instanceof FinalBoss);
         if (boss) {
             if (boss.bossAnimateInterval) clearInterval(boss.bossAnimateInterval);
@@ -303,21 +307,21 @@ class World {
             if (boss.bossMoveInterval) clearInterval(boss.bossMoveInterval);
         }
     }
-    
+
 
     /**
      * Bereinigt die Welt und setzt alle Referenzen zurück.
      * @function
      */
     cleanup() {
-    this.clearAllIntervals();
-    this.character = null;
-    this.level = null;
-    this.keyboard = null;
-    const buttons = document.getElementById('endScreenButtons');
-    if (buttons) {
-        buttons.style.display = 'none';
+        this.clearAllIntervals();
+        this.character = null;
+        this.level = null;
+        this.keyboard = null;
+        const buttons = document.getElementById('endScreenButtons');
+        if (buttons) {
+            buttons.style.display = 'none';
+        }
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-}
 }

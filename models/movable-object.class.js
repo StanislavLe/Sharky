@@ -79,14 +79,34 @@ class MovableObject extends DrawableObject {
      * @param {MovableObject} mo - Das andere Objekt.
      * @returns {boolean}
      */
-    isColliding(mo) {
-        if (this.isAscending || this.isDead()) return false; 
-        if (mo instanceof FinalBoss && !mo.isCollidable()) return false; 
-        return this.x + this.width > mo.x &&
-               this.y + this.height > mo.y &&
-               this.x < mo.x &&
-               this.y < mo.y + mo.height;
-    }
+isColliding(mo) {
+    if (this.isAscending || this.isDead()) return false; 
+    if (mo instanceof FinalBoss && !mo.isCollidable()) return false; 
+
+    const a = this.getHitbox();
+    const b = mo.getHitbox();
+
+    return (
+        a.x + a.width > b.x &&
+        a.y + a.height > b.y &&
+        a.x < b.x + b.width &&
+        a.y < b.y + b.height
+    );
+}
+
+
+
+
+getHitbox() {
+    return {
+        x: this.x,
+        y: this.y,
+        width: this.width,
+        height: this.height
+    };
+}
+
+
 
     /**
      * Verursacht Schaden am Objekt und aktualisiert ggf. die Statusleiste.
