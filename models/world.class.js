@@ -51,8 +51,8 @@ class World {
             this.level.coins.forEach(coin => {
                 this.addToMap(coin);
             });
-            this.level.bubbles.forEach(bubble => {
-                this.addToMap(bubble);
+            this.level.PoisonBottle.forEach(PoisonBottle => {
+                this.addToMap(PoisonBottle);
             });
             this.throwableObjects.forEach(bg => {
                 this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
@@ -169,9 +169,9 @@ class World {
      */
     checkThrowObject() {
         if (this.keyboard.SPACE && this.character.ammo > 0) {
-            let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            bubble.world = this;
-            this.throwableObjects.push(bubble);
+            let PoisonBottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            PoisonBottle.world = this;
+            this.throwableObjects.push(PoisonBottle);
             this.character.ammo -= 1;
             this.ammoBar.setPercentage(this.character.ammo * 10);
             this.character.idleTimer = 0;
@@ -230,10 +230,10 @@ class World {
      * @function
      */
     collectAmmo() {
-        this.level.bubbles.forEach((bubble, index) => {
-            if (this.character.isColliding(bubble)) {
+        this.level.PoisonBottle.forEach((PoisonBottle, index) => {
+            if (this.character.isColliding(PoisonBottle)) {
                 this.character.increaseAmmo();
-                this.level.bubbles.splice(index, 1);
+                this.level.PoisonBottle.splice(index, 1);
                 this.soundManager.collectBubble();
                 this.ammoBar.setPercentage(this.character.ammo * 10);
             }

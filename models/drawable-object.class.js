@@ -29,7 +29,7 @@ class DrawableObject {
      * @param {CanvasRenderingContext2D} ctx - Der Zeichenkontext.
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof PufferFish || this instanceof Coin || this instanceof Bubble || this instanceof JellyFish) {
+        if (this instanceof Character || this instanceof PufferFish || this instanceof Coin || this instanceof PoisonBottle || this instanceof JellyFish) {
             // Blue rectangle
             ctx.beginPath();
             ctx.lineWidth = '2';

@@ -7,7 +7,7 @@ class ThrowableObject extends MovableObject {
      * @constructor
      */
     constructor(x,y) {
-        super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
+        super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png');
         this.x = x;
         this.y = y;
         this.height = 50;

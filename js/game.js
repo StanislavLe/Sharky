@@ -71,9 +71,9 @@ function createNewLevel() {
         ],
 
         [
-            new Bubble(), new Bubble(), new Bubble(), new Bubble(),
-            new Bubble(), new Bubble(), new Bubble(), new Bubble(),
-            new Bubble(), new Bubble(), new Bubble(), new Bubble(),
+            new PoisonBottle(), new PoisonBottle(), new PoisonBottle(), new PoisonBottle(),
+            new PoisonBottle(), new PoisonBottle(), new PoisonBottle(), new PoisonBottle(),
+            new PoisonBottle(), new PoisonBottle(), new PoisonBottle(), new PoisonBottle(),
         ]
     );
 }

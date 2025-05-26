@@ -2,7 +2,7 @@ class Level {
     enemies;
     backgroundObjects;
     coins;
-    bubbles;
+    PoisonBottle;
     level_end_x = 2100;
 
     /**
@@ -10,13 +10,13 @@ class Level {
      * @param {Array} enemies - Array von Gegnerobjekten.
      * @param {Array} backgroundObjects - Array von Hintergrundobjekten.
      * @param {Array} coins - Array von Münzobjekten.
-     * @param {Array} bubbles - Array von Blasenobjekten.
+     * @param {Array} PoisonBottle - Array von Blasenobjekten.
      * @constructor
      */
-    constructor(enemies, backgroundObjects, coins, bubbles) {
+    constructor(enemies, backgroundObjects, coins, PoisonBottle) {
         this.enemies = enemies;
         this.backgroundObjects = backgroundObjects;
         this.coins = coins;
-        this.bubbles = bubbles;
+        this.PoisonBottle = PoisonBottle;
     }
 }
