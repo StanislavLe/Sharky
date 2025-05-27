@@ -33,7 +33,7 @@ class DrawableObject {
             // Blue rectangle
             ctx.beginPath();
             ctx.lineWidth = '2';
-ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
@@ -48,7 +48,7 @@ ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
             statusBar.setPercentage(this.energy);
         }
     }
-    
+
     /**
      * Lädt mehrere Bilder und speichert sie im Cache.
      * @param {string[]} arr - Array mit Bildpfaden.

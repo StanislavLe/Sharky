@@ -16,17 +16,17 @@ class EndscreenManager {
      * @function
      */
     showWin() {
-        if (this.isPending) return; 
-        this._cancelPending(); 
+        if (this.isPending) return;
+        this._cancelPending();
         this.hideActiveScreen();
-        this.isPending = true; 
+        this.isPending = true;
         this._pendingTimeout = setTimeout(() => {
             this.activeScreen = this.winScreen;
             this.activeScreen.show();
-            this.isPending = false; 
-        }, 2000); 
+            this.isPending = false;
+        }, 2000);
     }
-    
+
     /**
      * Zeigt den Verlust-Endscreen nach einer Verzögerung an.
      * @function

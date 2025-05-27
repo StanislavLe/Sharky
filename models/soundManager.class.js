@@ -13,6 +13,9 @@ class SoundManager {
     }
 
 
+    /**
+     * Initialisiert den Musikstatus aus dem lokalen Speicher.
+     */
     initializeMusicState() {
         const musicStatus = localStorage.getItem('musicStatus');
         if (musicStatus === 'mute') {
@@ -26,6 +29,10 @@ class SoundManager {
     }
 
 
+    /**
+     * Startet einen Intervall-Watcher, der regelmäßig den Musikstatus prüft.
+     * @param {number} [interval=500] - Intervall in Millisekunden.
+     */
     startMusicWatcher(interval = 500) {
         if (this._musicWatcher) clearInterval(this._musicWatcher);
         this._musicWatcher = setInterval(() => {
@@ -34,6 +41,9 @@ class SoundManager {
     }
 
 
+    /**
+     * Stoppt den Musikstatus-Watcher.
+     */
     stopMusicWatcher() {
         if (this._musicWatcher) {
             clearInterval(this._musicWatcher);
@@ -42,6 +52,9 @@ class SoundManager {
     }
 
 
+    /**
+     * Stoppt alle laufenden Sounds und setzt Status zurück.
+     */
     stopAllSounds() {
         this.stopBackgroundMusik();
         this.stopBossMusik();
@@ -50,6 +63,10 @@ class SoundManager {
     }
 
 
+    /**
+     * Initialisiert den Schnarch-Sound.
+     * @param {string} [path='audio/snoring.mp3'] - Pfad zum Schnarch-Sound.
+     */
     initSnoreSound(path = 'audio/snoring.mp3') {
         this.snoreAudio = new Audio(path);
         this.snoreAudio.volume = 0.25;
@@ -57,6 +74,9 @@ class SoundManager {
     }
 
 
+    /**
+     * Spielt den Schnarch-Sound ab, sofern erlaubt.
+     */
     snoring() {
         const musicStatus = localStorage.getItem('musicStatus');
         if (musicStatus === 'mute') return;
@@ -68,6 +88,9 @@ class SoundManager {
     }
 
 
+    /**
+     * Stoppt den Schnarch-Sound und setzt die Wiedergabe zurück.
+     */
     stopSnoreSound() {
         if (this.snoreAudio) {
             this.snoreAudio.pause();
@@ -76,13 +99,20 @@ class SoundManager {
     }
 
 
+    /**
+     * Initialisiert den Hintergrundmusik-Audio-Player.
+     * @param {string} [path='audio/backgroundMusik.mp3'] - Pfad zur Hintergrundmusik.
+     */
     initBackgroundMusik(path = 'audio/backgroundMusik.mp3') {
         this.backgroundAudio = new Audio(path);
         this.backgroundAudio.loop = true;
         this.backgroundAudio.volume = 0.5;
     }
-    
 
+
+    /**
+     * Spielt die Hintergrundmusik ab, sofern erlaubt.
+     */
     playBackgroundMusik() {
         const musicStatus = localStorage.getItem('musicStatus');
         if (musicStatus === 'mute' || this.isBossMusicPlaying || this.backgroundStarted) {
@@ -99,6 +129,9 @@ class SoundManager {
     }
 
 
+    /**
+     * Stoppt die Hintergrundmusik und setzt den Status zurück.
+     */
     stopBackgroundMusik() {
         if (this.backgroundAudio) {
             this.backgroundAudio.pause();

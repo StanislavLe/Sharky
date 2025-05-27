@@ -1,8 +1,8 @@
-class JellyFish extends MovableObject{
+class JellyFish extends MovableObject {
 
-    direction = -1; 
+    direction = -1;
     currentDirectionTime = 0;
-    
+
     JELLYFISH_WALKING = [
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
         'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
@@ -24,11 +24,11 @@ class JellyFish extends MovableObject{
     constructor() {
         super().loadImage(this.JELLYFISH_WALKING[0]);
         this.x = 500 + Math.random() * 1500;
-        this.y = 100 + Math.random() * 300;    
+        this.y = 100 + Math.random() * 300;
         this.speed = 5 + Math.random() * 0.25;
         this.loadImages(this.JELLYFISH_WALKING);
         this.loadImages(this.JELLYFISH_DIE);
-        this.animate();    
+        this.animate();
     }
 
     /**
@@ -48,9 +48,9 @@ class JellyFish extends MovableObject{
                 }
                 this.playAnimation(this.JELLYFISH_WALKING);
                 this.currentDirectionTime += 150;
-                if (this.currentDirectionTime >= 6000) { 
-                    this.direction *= -1; 
-                    this.otherDirection = this.direction === 1; 
+                if (this.currentDirectionTime >= 6000) {
+                    this.direction *= -1;
+                    this.otherDirection = this.direction === 1;
                     this.currentDirectionTime = 0;
                 }
             }

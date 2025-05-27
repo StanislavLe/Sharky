@@ -4,7 +4,7 @@ class FinalBoss extends MovableObject {
     x = 200;
     y = 10;
     isIntroPlayed = false;
-    isActive = false; 
+    isActive = false;
     introFrame = 0;
     behaviorActive = false;
     isDying = false;
@@ -87,32 +87,32 @@ class FinalBoss extends MovableObject {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
         this.currentImage = 0;
-    
+
         const isMuted = localStorage.getItem('musicStatus') === 'mute';
         if (!isMuted) {
-            window.soundManager.stopBackgroundMusik();         
-            window.soundManager.isBossMusicPlaying = true; 
+            window.soundManager.stopBackgroundMusik();
+            window.soundManager.isBossMusicPlaying = true;
             window.soundManager.playBossMusik();
-        }    
+        }
         this.introInterval = setInterval(() => {
-            this.playAnimation(this.BOSS_INTRO);    
+            this.playAnimation(this.BOSS_INTRO);
             if (this.currentImage >= this.BOSS_INTRO.length) {
                 clearInterval(this.introInterval);
-                this.isActive = true;    
+                this.isActive = true;
                 this.startBossBehavior();
                 this.animate();
             }
         }, 150);
     }
-    
+
     /**
      * Gibt zurück, ob der Boss aktuell kollidierbar ist.
      * @returns {boolean}
      */
     isCollidable() {
-        return this.isActive && !this.isDying && !this.isDead(); 
+        return this.isActive && !this.isDying && !this.isDead();
     }
-    
+
     /**
      * Startet die Animationsintervalle für den Boss (Bewegung, Tod, etc.).
      * @function
@@ -124,9 +124,9 @@ class FinalBoss extends MovableObject {
                     this.isDying = true;
                     this.currentImage = 0;
                     this.deathFrame = 0;
-    
+
                     this.world.soundManager.ouch();
-    
+
                     this.bossDeathInterval = setInterval(() => {
                         if (this.deathFrame < this.BOSS_DEAD.length) {
                             const path = this.BOSS_DEAD[this.deathFrame];
@@ -142,21 +142,21 @@ class FinalBoss extends MovableObject {
                 }
             } else if (this.isHurt()) {
                 this.playAnimation(this.BOSS_HURT);
-            } else if (!this.isDying && !this.isAttacking) { 
+            } else if (!this.isDying && !this.isAttacking) {
                 this.playAnimation(this.BOSS_WALKING);
             }
         }, 150);
     }
-    
+
     /**
      * Beendet das Bossverhalten und stoppt die Bossmusik.
      * @function
      */
     dieBoss() {
-        this.behaviorActive = false;              
-        this.world.soundManager.stopBossMusik();  
+        this.behaviorActive = false;
+        this.world.soundManager.stopBossMusik();
     }
-    
+
     /**
      * Startet das Verhalten des Bosses (Bewegung, Angriff, etc.).
      * @function
@@ -166,11 +166,11 @@ class FinalBoss extends MovableObject {
         const loop = () => {
             if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
             this.state = 'idle';
-    
+
             this.bossMoveInterval = setTimeout(() => {
                 if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
                 this.state = 'moveLeft';
-    
+
                 const moveInterval = setInterval(() => {
                     if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) {
                         clearInterval(moveInterval);
@@ -178,15 +178,15 @@ class FinalBoss extends MovableObject {
                     }
                     this.moveLeft();
                 }, 60);
-    
+
                 this.bossAttackTimeout = setTimeout(() => {
                     clearInterval(moveInterval);
                     if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
                     this.state = 'attack';
-                    this.isAttacking = true; 
+                    this.isAttacking = true;
                     this.playAnimationOnce(this.BOSS_ATTACK, 100, () => {
-                        this.isAttacking = false; 
-                        this.checkAttackHit(); 
+                        this.isAttacking = false;
+                        this.checkAttackHit();
                         loop();
                     });
                 }, 2000);
@@ -194,18 +194,18 @@ class FinalBoss extends MovableObject {
         };
         loop();
     }
-    
+
     /**
      * Prüft, ob der Angriff des Bosses den Charakter trifft.
      * @function
      */
     checkAttackHit() {
-        if (this.isDying || this.isDead()) return; 
+        if (this.isDying || this.isDead()) return;
         const character = this.world.character;
-        const withinXRange = character.x + character.width > this.x - this.width * 0.15 && 
-                             character.x < this.x;
+        const withinXRange = character.x + character.width > this.x - this.width * 0.15 &&
+            character.x < this.x;
         const sameHeight = character.y < this.y + this.height &&
-                           character.y + character.height > this.y;
+            character.y + character.height > this.y;
         if (withinXRange && sameHeight && !character.isDead()) {
             character.hit();
         }
@@ -217,13 +217,13 @@ class FinalBoss extends MovableObject {
      * @param {number} [frameDuration=100] - Dauer pro Frame in ms.
      * @param {Function} [callback] - Funktion, die nach der Animation aufgerufen wird.
      */
-    playAnimationOnce(images, frameDuration = 100, callback = () => {}) {
+    playAnimationOnce(images, frameDuration = 100, callback = () => { }) {
         this.currentImage = 0;
         let frame = 0;
         const interval = setInterval(() => {
-            if (this.isDead()) { 
+            if (this.isDead()) {
                 clearInterval(interval);
-                callback(); 
+                callback();
                 return;
             }
             if (frame >= images.length) {
@@ -235,9 +235,9 @@ class FinalBoss extends MovableObject {
                 frame++;
             }
         }, frameDuration);
-    }  
-    
-        // Hitbox-Padding für Boss
+    }
+
+    // Hitbox-Padding für Boss
     hitboxPadding = {
         top: 200,
         bottom: 30,
@@ -258,7 +258,7 @@ class FinalBoss extends MovableObject {
 
         ctx.beginPath();
         ctx.lineWidth = 2;
-ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; // komplett transparent
         ctx.rect(x, y, width, height);
         ctx.stroke();
     }
