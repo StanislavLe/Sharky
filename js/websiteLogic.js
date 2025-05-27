@@ -164,3 +164,4 @@ function closeLegalNotice() {
     document.getElementById('instructionButton').style.display = 'flex';
     document.getElementById('impressumButton').style.display = 'flex';
 }
+

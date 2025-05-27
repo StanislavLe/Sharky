@@ -106,6 +106,7 @@ function handleOrientationChange() {
         hideOrientationPopup();
         if (touchControls) touchControls.style.display = 'none';
     }
+    
 }
 
 /**
