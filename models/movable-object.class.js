@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     score = 0;
-    ammo = 100;
+    ammo = 0;
     hasPlayedDeathSound = false;
     hasPlayedDeathAnimation = false;
     isAscending = false;
