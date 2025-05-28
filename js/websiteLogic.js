@@ -57,22 +57,59 @@ function startGame() {
 }
 
 /**
- * Setzt das Spiel zurück und initialisiert die Welt neu.
+ * Setzt das Spiel vollständig zurück und startet es neu.
+ * Beinhaltet World-Reset, UI-Reset, Audio-Reset und Initialisierung.
  * @function
  */
 function resetGame() {
+    clearGameWorld();
+    resetSoundState();
+    reinitializeGame();
+    hideEndscreenUI();
+    prepareUIForGame();
+    window.soundManager.initializeMusicState();
+    window.soundManager.startMusicWatcher();
+}
+
+/**
+ * Entfernt die alte Spielwelt und löscht ihre Referenzen.
+ * @function
+ */
+function clearGameWorld() {
     if (world) {
         world.clearAllIntervals();
         world = null;
     }
-    window.soundManager.stopBossMusik();
-    window.soundManager.stopBackgroundMusik();
-    window.soundManager.stopMusicWatcher();
-    window.soundManager.isGameOver = false;
+}
+
+/**
+ * Stoppt alle aktiven Musik-Komponenten und setzt Spielstatus zurück.
+ * @function
+ */
+function resetSoundState() {
+    const sm = window.soundManager;
+    sm.stopBossMusik();
+    sm.stopBackgroundMusik();
+    sm.stopMusicWatcher();
+    sm.isGameOver = false;
+}
+
+/**
+ * Initialisiert Spielwelt, Level und Eingabegeräte neu.
+ * @function
+ */
+function reinitializeGame() {
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
     level = createNewLevel();
     world = new World(canvas, keyboard, level);
+}
+
+/**
+ * Blendet Endscreen-Buttons vollständig aus.
+ * @function
+ */
+function hideEndscreenUI() {
     const restartButton = document.getElementById('restartButton');
     const backHomeButton = document.getElementById('backHomeButton');
     const endScreenButtons = document.getElementById('endScreenButtons');
@@ -84,34 +121,75 @@ function resetGame() {
         endScreenButtons.style.display = 'none';
         endScreenButtons.style.opacity = '0';
     }
-    document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('canvas').style.display = 'block';
-    window.soundManager.initializeMusicState();
-    window.soundManager.startMusicWatcher();
 }
 
 /**
- * Kehrt zum Startbildschirm zurück und setzt die Anzeige zurück.
+ * Blendet den Startscreen aus und zeigt das Spiel-Canvas.
+ * @function
+ */
+function prepareUIForGame() {
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
+}
+
+
+/**
+ * Kehrt zum Startbildschirm zurück und setzt das Spiel und UI zurück.
  * @function
  */
 function goHome() {
+    cleanupWorld();
+    resetHomeAudioState();
+    restoreStartScreenUI();
+    resumeMusicIfEnabled();
+}
+
+/**
+ * Beendet die aktuelle Spielwelt und entfernt ihre Referenz.
+ * @function
+ */
+function cleanupWorld() {
     if (world) {
         world.clearAllIntervals();
         world = null;
     }
-    window.soundManager.stopBossMusik();
-    window.soundManager.isGameOver = false;
+}
+
+/**
+ * Stoppt relevante Audio-Komponenten und setzt Game-Status zurück.
+ * @function
+ */
+function resetHomeAudioState() {
+    const sm = window.soundManager;
+    sm.stopBossMusik();
+    sm.isGameOver = false;
+}
+
+/**
+ * Blendet Spielanzeige aus und zeigt Startbildschirm.
+ * @function
+ */
+function restoreStartScreenUI() {
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('startScreen').style.display = 'flex';
     document.getElementById('restartButton').style.display = 'none';
     document.getElementById('backHomeButton').style.display = 'none';
     document.getElementById('gameContainer').style.display = 'none';
     updateMusicButton();
+}
+
+/**
+ * Aktiviert Musiküberwachung nur wenn Musikstatus auf "volume" steht.
+ * @function
+ */
+function resumeMusicIfEnabled() {
     if (localStorage.getItem('musicStatus') === 'volume') {
-        window.soundManager.initializeMusicState();
-        window.soundManager.startMusicWatcher();
+        const sm = window.soundManager;
+        sm.initializeMusicState();
+        sm.startMusicWatcher();
     }
 }
+
 
 /**
  * Öffnet die Spielanleitung und blendet andere Buttons aus.
@@ -164,4 +242,3 @@ function closeLegalNotice() {
     document.getElementById('instructionButton').style.display = 'flex';
     document.getElementById('impressumButton').style.display = 'flex';
 }
-

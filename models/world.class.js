@@ -35,48 +35,67 @@ class World {
 
 
     /**
-     * Zeichnet alle Objekte auf das Canvas und behandelt die Kameraposition.
+     * Haupt-Zeichenschleife: Aktualisiert Canvas, Kameraposition und UI.
      * @function
      */
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.clearCanvas();
         if (!this.endscreenManager.isVisible()) {
             this.ctx.save();
             this.ctx.translate(this.camera_x, 0);
-            this.level.backgroundObjects.forEach(bg => {
-                this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
-            });
-            this.addToMap(this.lightRight);
-            this.addToMap(this.lightLeft);
-            this.level.coins.forEach(coin => {
-                this.addToMap(coin);
-            });
-            this.level.PoisonBottle.forEach(PoisonBottle => {
-                this.addToMap(PoisonBottle);
-            });
-            this.throwableObjects.forEach(bg => {
-                this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height);
-            });
-            this.addToMap(this.character);
-            this.level.enemies.forEach(enemy => {
-                this.addToMap(enemy);
-            });
+            this.drawGameWorld();
             this.ctx.translate(-this.camera_x, 0);
-            this.addToMap(this.statusBar);
-            const boss = this.level.enemies.find(e => e instanceof FinalBoss);
-            if (boss && boss.isActive) {
-                this.addToMap(this.bossStatusBar);
-            }
-            this.addToMap(this.scoreBar);
-            this.addToMap(this.ammoBar);
-            this.ctx.translate(this.camera_x, 0);
-            this.ctx.translate(-this.camera_x, 0);
+            this.drawUI();
             this.ctx.restore();
         }
         this.endscreenManager.draw(this.ctx);
         requestAnimationFrame(() => this.draw());
     }
 
+    /**
+     * Leert das Canvas vor dem nächsten Frame.
+     * @function
+     */
+    clearCanvas() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    /**
+     * Zeichnet Spielfiguren, Gegner, Hintergründe und Objekte.
+     * Berücksichtigt Kameraposition.
+     * @function
+     */
+    drawGameWorld() {
+        this.level.backgroundObjects.forEach(bg =>
+            this.ctx.drawImage(bg.img, bg.x, bg.y, bg.width, bg.height)
+        );
+        this.addToMap(this.lightRight);
+        this.addToMap(this.lightLeft);
+
+        this.level.coins.forEach(c => this.addToMap(c));
+        this.level.PoisonBottle.forEach(p => this.addToMap(p));
+
+        this.throwableObjects.forEach(obj =>
+            this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height)
+        );
+
+        this.addToMap(this.character);
+        this.level.enemies.forEach(enemy => this.addToMap(enemy));
+    }
+
+    /**
+     * Zeichnet UI-Elemente wie Statusleisten und Bossanzeige.
+     * @function
+     */
+    drawUI() {
+        this.addToMap(this.statusBar);
+        const boss = this.level.enemies.find(e => e instanceof FinalBoss);
+        if (boss && boss.isActive) {
+            this.addToMap(this.bossStatusBar);
+        }
+        this.addToMap(this.scoreBar);
+        this.addToMap(this.ammoBar);
+    }
 
     /**
      * Startet die Hauptspiel-Logikschleife (z.B. Kollisionsprüfung, Sieg/Niederlage).
@@ -241,29 +260,54 @@ class World {
     }
 
 
-    /**
-     * Fügt ein Objekt zur Zeichenfläche hinzu (inkl. Spiegelung).
-     * @param {DrawableObject} mo - Das darzustellende Objekt.
-     */
-    addToMap(mo) {
-        this.ctx.save();
-        if (mo === this.character && mo.visualOffsetX) {
-            this.ctx.translate(mo.visualOffsetX, 0);
-        }
-        if (mo instanceof Character) {
-            mo.drawFrameCharacter(this.ctx);
-        } else if (mo instanceof FinalBoss) {
-            mo.drawFrameBoss(this.ctx);
-        } else {
-            mo.drawFrame(this.ctx);
-        }
-        if (mo.otherDirection) {
-            this.flipImage(mo);
-        } else {
-            mo.draw(this.ctx);
-        }
-        this.ctx.restore();
+/**
+ * Fügt ein Drawable-Objekt dem Canvas hinzu und behandelt Spezialfälle (z. B. Spiegelung, Frames).
+ * @param {DrawableObject} mo - Das darzustellende Objekt.
+ */
+addToMap(mo) {
+    this.ctx.save();
+    this.applyOffsetIfNeeded(mo);
+    this.drawFrameDependingOnType(mo);
+    this.renderDrawableObject(mo);
+    this.ctx.restore();
+}
+
+/**
+ * Wendet einen visuellen Offset auf den Character an, wenn gesetzt.
+ * @param {DrawableObject} mo - Das zu überprüfende Objekt.
+ */
+applyOffsetIfNeeded(mo) {
+    if (mo === this.character && mo.visualOffsetX) {
+        this.ctx.translate(mo.visualOffsetX, 0);
     }
+}
+
+/**
+ * Zeichnet das Rahmenbild je nach Objekttyp.
+ * @param {DrawableObject} mo - Das zu überprüfende Objekt.
+ */
+drawFrameDependingOnType(mo) {
+    if (mo instanceof Character) {
+        mo.drawFrameCharacter(this.ctx);
+    } else if (mo instanceof FinalBoss) {
+        mo.drawFrameBoss(this.ctx);
+    } else {
+        mo.drawFrame(this.ctx);
+    }
+}
+
+/**
+ * Zeichnet das Bild (ggf. gespiegelt) auf das Canvas.
+ * @param {DrawableObject} mo - Das zu zeichnende Objekt.
+ */
+renderDrawableObject(mo) {
+    if (mo.otherDirection) {
+        this.flipImage(mo);
+    } else {
+        mo.draw(this.ctx);
+    }
+}
+
 
 
     /**
@@ -296,11 +340,9 @@ class World {
     clearAllIntervals() {
         if (this.logicInterval) clearInterval(this.logicInterval);
         if (this.drawLoopFrameId) cancelAnimationFrame(this.drawLoopFrameId);
-
         if (this.character?.moveInterval) clearInterval(this.character.moveInterval);
         if (this.character?.animationInterval) clearInterval(this.character.animationInterval);
         if (this.character?.gravityInterval) clearInterval(this.character.gravityInterval);
-
         const boss = this.level.enemies.find(e => e instanceof FinalBoss);
         if (boss) {
             if (boss.bossAnimateInterval) clearInterval(boss.bossAnimateInterval);

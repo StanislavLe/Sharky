@@ -87,13 +87,28 @@ class FinalBoss extends MovableObject {
         if (this.isIntroPlayed) return;
         this.isIntroPlayed = true;
         this.currentImage = 0;
+        this.prepareIntroAudio();
+        this.playBossIntroAnimation();
+    }
 
+    /**
+     * Beendet die Hintergrundmusik und startet die Bossmusik, falls nicht stumm.
+     * @function
+     */
+    prepareIntroAudio() {
         const isMuted = localStorage.getItem('musicStatus') === 'mute';
         if (!isMuted) {
             window.soundManager.stopBackgroundMusik();
             window.soundManager.isBossMusicPlaying = true;
             window.soundManager.playBossMusik();
         }
+    }
+
+    /**
+     * Spielt die Intro-Animation des Bosses ab und aktiviert danach Verhalten und Animation.
+     * @function
+     */
+    playBossIntroAnimation() {
         this.introInterval = setInterval(() => {
             this.playAnimation(this.BOSS_INTRO);
             if (this.currentImage >= this.BOSS_INTRO.length) {
@@ -104,6 +119,7 @@ class FinalBoss extends MovableObject {
             }
         }, 150);
     }
+
 
     /**
      * Gibt zurück, ob der Boss aktuell kollidierbar ist.
@@ -120,26 +136,7 @@ class FinalBoss extends MovableObject {
     animate() {
         this.bossAnimateInterval = setInterval(() => {
             if (this.isDead()) {
-                if (!this.isDying) {
-                    this.isDying = true;
-                    this.currentImage = 0;
-                    this.deathFrame = 0;
-
-                    this.world.soundManager.ouch();
-
-                    this.bossDeathInterval = setInterval(() => {
-                        if (this.deathFrame < this.BOSS_DEAD.length) {
-                            const path = this.BOSS_DEAD[this.deathFrame];
-                            this.img = this.imageCache[path];
-                            this.deathFrame++;
-                        } else {
-                            clearInterval(this.bossDeathInterval);
-                            this.img = this.imageCache[this.BOSS_DEAD[this.BOSS_DEAD.length - 1]];
-                            this.dieBoss();
-                            this.startAscend();
-                        }
-                    }, 150);
-                }
+                this.handleBossDeath();
             } else if (this.isHurt()) {
                 this.playAnimation(this.BOSS_HURT);
             } else if (!this.isDying && !this.isAttacking) {
@@ -147,6 +144,41 @@ class FinalBoss extends MovableObject {
             }
         }, 150);
     }
+
+    /**
+     * Startet den Todesprozess des Bosses, falls nicht bereits geschehen.
+     * Initialisiert die Animationsframes und startet das Todes-Interval.
+     * @function
+     */
+    handleBossDeath() {
+        if (this.isDying) return;
+        this.isDying = true;
+        this.currentImage = 0;
+        this.deathFrame = 0;
+        this.world.soundManager.ouch();
+        this.playBossDeathAnimation();
+    }
+
+    /**
+     * Spielt die Todesanimation des Bosses Bild für Bild ab.
+     * Beendet die Animation und startet das "Ascend" nach Abschluss.
+     * @function
+     */
+    playBossDeathAnimation() {
+        this.bossDeathInterval = setInterval(() => {
+            if (this.deathFrame < this.BOSS_DEAD.length) {
+                const path = this.BOSS_DEAD[this.deathFrame];
+                this.img = this.imageCache[path];
+                this.deathFrame++;
+            } else {
+                clearInterval(this.bossDeathInterval);
+                this.img = this.imageCache[this.BOSS_DEAD[this.BOSS_DEAD.length - 1]];
+                this.dieBoss();
+                this.startAscend();
+            }
+        }, 150);
+    }
+
 
     /**
      * Beendet das Bossverhalten und stoppt die Bossmusik.
@@ -158,42 +190,64 @@ class FinalBoss extends MovableObject {
     }
 
     /**
-     * Startet das Verhalten des Bosses (Bewegung, Angriff, etc.).
+     * Startet das Verhalten des Bosses: Bewegung, Angriff und Zustandsschleife.
      * @function
      */
     startBossBehavior() {
         this.behaviorActive = true;
-        const loop = () => {
-            if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
-            this.state = 'idle';
-
-            this.bossMoveInterval = setTimeout(() => {
-                if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
-                this.state = 'moveLeft';
-
-                const moveInterval = setInterval(() => {
-                    if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) {
-                        clearInterval(moveInterval);
-                        return;
-                    }
-                    this.moveLeft();
-                }, 60);
-
-                this.bossAttackTimeout = setTimeout(() => {
-                    clearInterval(moveInterval);
-                    if (!this.behaviorActive || this.isDead() || this.isDying || this.world.character.isDead()) return;
-                    this.state = 'attack';
-                    this.isAttacking = true;
-                    this.playAnimationOnce(this.BOSS_ATTACK, 100, () => {
-                        this.isAttacking = false;
-                        this.checkAttackHit();
-                        loop();
-                    });
-                }, 2000);
-            }, 500);
-        };
-        loop();
+        this.bossBehaviorLoop();
     }
+
+    /**
+     * Führt die Hauptlogikschleife des Bosses aus.
+     * Prüft Tod/Zustand, startet Bewegung und plant Angriff.
+     * @function
+     */
+    bossBehaviorLoop() {
+        if (!this.canPerformBehavior()) return;
+        this.state = 'idle';
+
+        this.bossMoveInterval = setTimeout(() => {
+            if (!this.canPerformBehavior()) return;
+            this.state = 'moveLeft';
+            this.startBossMovement();
+        }, 500);
+    }
+
+    /**
+     * Startet die Bewegungsphase des Bosses und plant Angriff nach Ablauf.
+     * @function
+     */
+    startBossMovement() {
+        const moveInterval = setInterval(() => {
+            if (!this.canPerformBehavior()) {
+                clearInterval(moveInterval);
+                return;
+            }
+            this.moveLeft();
+        }, 60);
+
+        this.bossAttackTimeout = setTimeout(() => {
+            clearInterval(moveInterval);
+            if (!this.canPerformBehavior()) return;
+            this.state = 'attack';
+            this.isAttacking = true;
+            this.playAnimationOnce(this.BOSS_ATTACK, 100, () => {
+                this.isAttacking = false;
+                this.checkAttackHit();
+                this.bossBehaviorLoop();
+            });
+        }, 2000);
+    }
+
+    /**
+     * Prüft, ob der Boss aktiv ist und agieren darf.
+     * @returns {boolean} true wenn alle Bedingungen erfüllt sind.
+     */
+    canPerformBehavior() {
+        return this.behaviorActive && !this.isDead() && !this.isDying && !this.world.character.isDead();
+    }
+
 
     /**
      * Prüft, ob der Angriff des Bosses den Charakter trifft.
@@ -212,30 +266,61 @@ class FinalBoss extends MovableObject {
     }
 
     /**
-     * Spielt eine Animation einmalig ab und ruft danach einen Callback auf.
-     * @param {string[]} images - Array mit Bildpfaden.
-     * @param {number} [frameDuration=100] - Dauer pro Frame in ms.
-     * @param {Function} [callback] - Funktion, die nach der Animation aufgerufen wird.
+     * Spielt eine Animation einmalig ab und ruft danach eine Callback-Funktion auf.
+     * @param {string[]} images - Array mit Bildpfaden der Animation.
+     * @param {number} [frameDuration=100] - Dauer pro Frame in Millisekunden.
+     * @param {Function} [callback=() => {}] - Callback-Funktion nach Ende der Animation.
+     * @function
      */
     playAnimationOnce(images, frameDuration = 100, callback = () => { }) {
         this.currentImage = 0;
+        this.runOneTimeAnimation(images, frameDuration, callback);
+    }
+
+    /**
+     * Führt den Animationsablauf framebasiert aus.
+     * @param {string[]} images - Array mit Bildpfaden.
+     * @param {number} frameDuration - Dauer pro Frame in Millisekunden.
+     * @param {Function} callback - Funktion, die nach der Animation aufgerufen wird.
+     * @function
+     */
+    runOneTimeAnimation(images, frameDuration, callback) {
         let frame = 0;
         const interval = setInterval(() => {
-            if (this.isDead()) {
+            if (this.shouldCancelAnimation()) {
                 clearInterval(interval);
                 callback();
                 return;
             }
+
             if (frame >= images.length) {
                 clearInterval(interval);
                 callback();
             } else {
-                const path = images[frame];
-                this.img = this.imageCache[path];
+                this.updateAnimationFrame(images, frame);
                 frame++;
             }
         }, frameDuration);
     }
+
+    /**
+     * Prüft, ob die Animation abgebrochen werden sollte (z.B. weil Objekt tot ist).
+     * @returns {boolean} true wenn Animation nicht fortgesetzt werden soll.
+     */
+    shouldCancelAnimation() {
+        return this.isDead?.();
+    }
+
+    /**
+     * Aktualisiert das aktuelle Bild der Animation.
+     * @param {string[]} images - Array mit Bildpfaden.
+     * @param {number} frame - Der aktuelle Frame-Index.
+     */
+    updateAnimationFrame(images, frame) {
+        const path = images[frame];
+        this.img = this.imageCache[path];
+    }
+
 
     // Hitbox-Padding für Boss
     hitboxPadding = {

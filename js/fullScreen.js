@@ -18,30 +18,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Passt die Canvas-Größe dynamisch an das Seitenverhältnis (720x480) an.
-     * Wird im Vollbildmodus auf Fenstergröße skaliert, außerhalb auf Standardgröße zurückgesetzt.
+     * Aktualisiert die Canvas-Größe abhängig vom Vollbildmodus und Bildschirmgröße.
+     * Passt bei aktiviertem Vollbildmodus das Seitenverhältnis (720x480) an.
      * @function
      */
     function updateCanvasSize() {
         const canvas = document.getElementById('canvas');
         if (!canvas) return;
+
         if (document.fullscreenElement) {
-            const aspectRatio = 720 / 480;
-            let newWidth = window.innerWidth;
-            let newHeight = window.innerHeight;
-            if (newWidth / newHeight > aspectRatio) {
-                newWidth = newHeight * aspectRatio;
-            } else {
-                newHeight = newWidth / aspectRatio;
-            }
-            canvas.style.width = `${newWidth}px`;
-            canvas.style.height = `${newHeight}px`;
+            applyFullscreenCanvasSize(canvas);
         } else {
-            canvas.style.width = '720px';
-            canvas.style.height = '480px';
+            applyDefaultCanvasSize(canvas);
         }
+
         refreshGameContext();
     }
+
+    /**
+     * Setzt die Canvas-Größe auf ein dynamisch berechnetes Seitenverhältnis (720x480),
+     * basierend auf der aktuellen Fenstergröße.
+     * @param {HTMLCanvasElement} canvas - Das Canvas-Element, das skaliert werden soll.
+     * @function
+     */
+    function applyFullscreenCanvasSize(canvas) {
+        const aspectRatio = 720 / 480;
+        const { width, height } = calculateAspectFit(window.innerWidth, window.innerHeight, aspectRatio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+    }
+
+    /**
+     * Setzt die Canvas-Größe auf die Standardwerte 720x480 (Pixel).
+     * Wird verwendet, wenn kein Vollbildmodus aktiv ist.
+     * @param {HTMLCanvasElement} canvas - Das Canvas-Element, das zurückgesetzt werden soll.
+     * @function
+     */
+    function applyDefaultCanvasSize(canvas) {
+        canvas.style.width = '720px';
+        canvas.style.height = '480px';
+    }
+
+    /**
+     * Berechnet eine neue Breite und Höhe, um ein Seitenverhältnis korrekt innerhalb
+     * eines gegebenen Rechtecks (z.B. Fenstergröße) zu erhalten.
+     * @param {number} maxWidth - Maximale verfügbare Breite.
+     * @param {number} maxHeight - Maximale verfügbare Höhe.
+     * @param {number} aspectRatio - Zielseitenverhältnis (z. B. 720/480).
+     * @returns {{width: number, height: number}} - Angepasstes Breiten-Höhen-Verhältnis.
+     * @function
+     */
+    function calculateAspectFit(maxWidth, maxHeight, aspectRatio) {
+        let width = maxWidth;
+        let height = maxHeight;
+
+        if (width / height > aspectRatio) {
+            width = height * aspectRatio;
+        } else {
+            height = width / aspectRatio;
+        }
+
+        return { width, height };
+    }
+
 
     /**
      * Aktualisiert den Canvas-Kontext im globalen world-Objekt.

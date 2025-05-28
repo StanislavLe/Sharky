@@ -41,24 +41,52 @@ class Endscreen {
         const restartButton = document.getElementById('restartButton');
         const backHomeButton = document.getElementById('backHomeButton');
         const endScreenButtons = document.getElementById('endScreenButtons');
+
         if (restartButton && backHomeButton && endScreenButtons) {
-            restartButton.style.display = 'block';
-            backHomeButton.style.display = 'block';
-            restartButton.style.visibility = 'visible';
-            backHomeButton.style.visibility = 'visible';
-            endScreenButtons.classList.remove('winButtons', 'loseButtons');
-            const isWin = this.image.src.includes('trabajo');
-            if (isWin) {
-                endScreenButtons.classList.add('winButtons');
-            } else {
-                endScreenButtons.classList.add('loseButtons');
-            }
-            endScreenButtons.style.display = 'flex';
-            endScreenButtons.style.zIndex = '1000';
-            endScreenButtons.style.opacity = '1';
+            this.showEndButtons(restartButton, backHomeButton);
+            this.setEndscreenStyle(endScreenButtons);
+            this.setWinLoseStyles(endScreenButtons);
         }
     }
 
+    /**
+     * Zeigt die Buttons für Neustart und Zurücksetzen an.
+     * @param {HTMLElement} restartButton - Der Restart-Button.
+     * @param {HTMLElement} backHomeButton - Der Home-Button.
+     * @function
+     */
+    showEndButtons(restartButton, backHomeButton) {
+        restartButton.style.display = 'block';
+        backHomeButton.style.display = 'block';
+        restartButton.style.visibility = 'visible';
+        backHomeButton.style.visibility = 'visible';
+    }
+
+    /**
+     * Setzt die allgemeinen Endscreen-Stileigenschaften.
+     * @param {HTMLElement} endScreenButtons - Container für Endscreen-Buttons.
+     * @function
+     */
+    setEndscreenStyle(endScreenButtons) {
+        endScreenButtons.classList.remove('winButtons', 'loseButtons');
+        endScreenButtons.style.display = 'flex';
+        endScreenButtons.style.zIndex = '1000';
+        endScreenButtons.style.opacity = '1';
+    }
+
+    /**
+     * Bestimmt, ob Sieg oder Niederlage angezeigt wird, und wendet passenden Stil an.
+     * @param {HTMLElement} endScreenButtons - Container für Endscreen-Buttons.
+     * @function
+     */
+    setWinLoseStyles(endScreenButtons) {
+        const isWin = this.image.src.includes('trabajo');
+        if (isWin) {
+            endScreenButtons.classList.add('winButtons');
+        } else {
+            endScreenButtons.classList.add('loseButtons');
+        }
+    }
 
     /**
      * Versteckt den Endscreen und die Buttons.

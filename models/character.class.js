@@ -6,8 +6,6 @@ class Character extends MovableObject {
     speed = 10;
     idleTimer = 0;
     hasSnored = false;
-
-    // Gemeinsames Padding für Frame & Kollision
     hitboxPadding = {
         top: 110,
         bottom: 50,
@@ -139,75 +137,137 @@ class Character extends MovableObject {
      * @function
      */
     animate() {
-        this.moveInterval = setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.otherDirection = false;
-                this.moveRight();
-                this.resetIdleState();
-            }
-            if (this.world.keyboard.LEFT && this.x > 0) {
-                this.otherDirection = true;
-                this.moveLeft();
-                this.resetIdleState();
-            }
-            if (this.world.keyboard.UP && !this.isAboveGround()) {
-                this.jump();
-                this.resetIdleState();
-            }
-            if (this.world.keyboard.D && !this.isPunching) {
-                this.punch();
-                this.resetIdleState();
-            }
+        this.startMovementLoop();
+        this.startAnimationLoop();
+    }
 
+    /**
+     * Startet die Logik zur Bewegung basierend auf Tasteneingaben.
+     * @function
+     */
+    startMovementLoop() {
+        this.moveInterval = setInterval(() => {
+            this.handleDirectionalMovement();
+            this.handleJumpAndPunch();
             this.world.camera_x = -this.x;
         }, 1000 / 60);
+    }
 
+    /**
+     * Reagiert auf Rechts-/Links-Bewegung.
+     * @function
+     */
+    handleDirectionalMovement() {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.otherDirection = false;
+            this.moveRight();
+            this.resetIdleState();
+        }
+        if (this.world.keyboard.LEFT && this.x > 0) {
+            this.otherDirection = true;
+            this.moveLeft();
+            this.resetIdleState();
+        }
+    }
+
+    /**
+     * Reagiert auf Sprung und Schlag.
+     * @function
+     */
+    handleJumpAndPunch() {
+        if (this.world.keyboard.UP && !this.isAboveGround()) {
+            this.jump();
+            this.resetIdleState();
+        }
+        if (this.world.keyboard.D && !this.isPunching) {
+            this.punch();
+            this.resetIdleState();
+        }
+    }
+
+    /**
+     * Startet die Animationslogik des Charakters, abhängig vom Zustand.
+     * @function
+     */
+    startAnimationLoop() {
         this.animationInterval = setInterval(() => {
             if (this.isDead()) {
-                this.resetIdleState();
-                if (!this.deathStarted) {
-                    this.deathStarted = true;
-                    this.currentImage = 0;
-                    if (!this.hasStartedAscend) {
-                        this.hasStartedAscend = true;
-                        this.isAscending = true;
-                        this.startAscend();
-                    }
-                }
-
-                if (this.currentImage < this.IMAGES_DEAD.length) {
-                    this.playAnimation(this.IMAGES_DEAD);
-                } else {
-                    let lastFrame = this.IMAGES_DEAD[this.IMAGES_DEAD.length - 1];
-                    this.img = this.imageCache[lastFrame];
-                    if (!this.hasPlayedDeathSound) {
-                        this.hasPlayedDeathSound = true;
-                        this.character_dead_sound.play();
-                    }
-                }
-
-                this.idleTimer = 0;
+                this.handleDeathAnimation();
                 return;
             }
-
-            if (this.isAscending) return;
-            if (this.isPunching) return;
+            if (this.isAscending || this.isPunching) return;
 
             if (this.isHurt()) {
-                this.resetIdleState();
-                this.playAnimation(this.IMAGES_HURT);
-                this.idleTimer = 0;
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-                this.idleTimer = 0;
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALKING);
-                this.idleTimer = 0;
+                this.handleHurtAnimation();
             } else {
-                this.idleTimer += 1;
-                this.checkIdleTimer();
+                this.handleMovementAnimation();
             }
         }, 150);
+    }
+
+    /**
+     * Führt die Animation und Logik beim Sterben aus.
+     * @function
+     */
+    handleDeathAnimation() {
+        this.resetIdleState();
+        if (!this.deathStarted) {
+            this.deathStarted = true;
+            this.currentImage = 0;
+            if (!this.hasStartedAscend) {
+                this.hasStartedAscend = true;
+                this.isAscending = true;
+                this.startAscend();
+            }
+        }
+
+        if (this.currentImage < this.IMAGES_DEAD.length) {
+            this.playAnimation(this.IMAGES_DEAD);
+        } else {
+            this.displayLastDeathFrame();
+        }
+
+        this.idleTimer = 0;
+    }
+
+    /**
+     * Zeigt das letzte Bild der Todesanimation und spielt ggf. Sound ab.
+     * @function
+     */
+    displayLastDeathFrame() {
+        const lastFrame = this.IMAGES_DEAD[this.IMAGES_DEAD.length - 1];
+        this.img = this.imageCache[lastFrame];
+        if (!this.hasPlayedDeathSound) {
+            this.hasPlayedDeathSound = true;
+            this.character_dead_sound.play();
+        }
+    }
+
+    /**
+     * Führt die Animation bei Verletzung aus.
+     * @function
+     */
+    handleHurtAnimation() {
+        this.resetIdleState();
+        this.playAnimation(this.IMAGES_HURT);
+        this.idleTimer = 0;
+    }
+
+    /**
+     * Wechselt zur Bewegung- oder Idle-Animation.
+     * @function
+     */
+    handleMovementAnimation() {
+        if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_JUMPING);
+            this.idleTimer = 0;
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.idleTimer = 0;
+        } else {
+            this.idleTimer += 1;
+            this.checkIdleTimer();
+        }
     }
 
 
@@ -235,32 +295,63 @@ class Character extends MovableObject {
 
 
     /**
-     * Führt die Schlag-Animation aus und prüft auf Kollision mit Gegnern.
-     * @function
-     */
+    * Führt die Schlag-Animation aus und prüft auf Kollision mit Gegnern.
+    * @function
+    */
     punch() {
         if (this.isPunching || this.isDead()) return;
+        this.preparePunch();
+        this.startPunchAnimation();
+        this.checkEnemiesInPunchRange();
+        this.resetPunchAfterDelay(this.IMAGES_PUNCH.length * 100);
+    }
+
+    /**
+     * Initialisiert den Schlagzustand des Charakters.
+     * @function
+     */
+    preparePunch() {
         this.isPunching = true;
         this.currentImage = 0;
-        this.world.soundManager.punch?.();
-        const punchOffset = 15;
-        const punchEndTime = 100 * this.IMAGES_PUNCH.length;
         this.resetIdleState();
-        this.visualOffsetX = punchOffset;
+        this.visualOffsetX = 15;
+        this.world.soundManager.punch?.();
+    }
+
+    /**
+     * Startet die Animationsschleife für den Schlag.
+     * @function
+     */
+    startPunchAnimation() {
         const punchInterval = setInterval(() => {
             if (this.currentImage < this.IMAGES_PUNCH.length) {
                 this.playAnimation(this.IMAGES_PUNCH);
             } else {
                 clearInterval(punchInterval);
-                this.isPunching = false;
-                this.currentImage = 0;
-                this.visualOffsetX = 0;
+                this.endPunchAnimation();
             }
         }, 100);
-        this.world.level.enemies.forEach((enemy) => {
-            const withinXRange = enemy.x > this.x + punchOffset && enemy.x < this.x + punchOffset + this.width * 1.10;
-            const sameHeight = enemy.y < this.y + this.height && enemy.y + enemy.height > this.y;
-            if (withinXRange && sameHeight && !enemy.isDead?.()) {
+    }
+
+    /**
+     * Setzt die visuelle Darstellung nach dem Schlag zurück.
+     * @function
+     */
+    endPunchAnimation() {
+        this.isPunching = false;
+        this.currentImage = 0;
+        this.visualOffsetX = 0;
+    }
+
+    /**
+     * Prüft, ob sich Gegner im Bereich des Schlags befinden, und behandelt Treffer.
+     * @function
+     */
+    checkEnemiesInPunchRange() {
+        this.world.level.enemies.forEach(enemy => {
+            const withinX = enemy.x > this.x + 15 && enemy.x < this.x + 15 + this.width * 1.10;
+            const sameY = enemy.y < this.y + this.height && enemy.y + enemy.height > this.y;
+            if (withinX && sameY && !enemy.isDead?.()) {
                 if (enemy instanceof FinalBoss) {
                     enemy.hit();
                 } else {
@@ -268,9 +359,17 @@ class Character extends MovableObject {
                 }
             }
         });
+    }
+
+    /**
+     * Setzt den Schlagzustand nach einem Timeout zurück.
+     * @param {number} delay - Zeit in Millisekunden bis zum Zurücksetzen.
+     * @function
+     */
+    resetPunchAfterDelay(delay) {
         setTimeout(() => {
             this.isPunching = false;
-        }, punchEndTime);
+        }, delay);
     }
 
     drawFrameCharacter(ctx) {
@@ -279,10 +378,9 @@ class Character extends MovableObject {
         const y = this.y + p.top;
         const width = this.width - (p.left + p.right);
         const height = this.height - (p.top + p.bottom);
-
         ctx.beginPath();
         ctx.lineWidth = 2;
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; 
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0)';
         ctx.rect(x, y, width, height);
         ctx.stroke();
     }
@@ -296,5 +394,4 @@ class Character extends MovableObject {
             height: this.height - (p.top + p.bottom)
         };
     }
-
 }

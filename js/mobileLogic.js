@@ -48,7 +48,7 @@ function bindTouchControls() {
 function onLoadHandler() {
     window.addEventListener('resize', () => setTimeout(handleOrientationChange, 100));
     window.addEventListener('orientationchange', () => setTimeout(handleOrientationChange, 100));
-    handleOrientationChange(); 
+    handleOrientationChange();
     startOrientationMonitor();
 }
 
@@ -85,29 +85,69 @@ function hideOrientationPopup() {
 }
 
 /**
- * Behandelt Änderungen der Bildschirmorientierung und zeigt/versteckt die Touch-Steuerung und das Popup.
+ * Hauptfunktion zur Reaktion auf Änderungen der Bildschirmorientierung.
+ * Steuert Anzeige von Touch-Controls und Popup je nach Gerät und Ausrichtung.
  * @function
  */
 function handleOrientationChange() {
-    const isLandscape = screen.orientation
-        ? screen.orientation.type.startsWith('landscape')
-        : window.innerWidth > window.innerHeight;
+    const isLandscape = detectLandscapeOrientation();
     const isMobile = isMobileDevice();
     const touchControls = document.getElementById('touchControls');
+
     if (isMobile) {
-        if (isLandscape) {
-            hideOrientationPopup();
-            if (touchControls) touchControls.style.display = 'flex';
-        } else {
-            showOrientationPopup();
-            if (touchControls) touchControls.style.display = 'none';
-        }
+        handleMobileOrientationUI(isLandscape, touchControls);
     } else {
         hideOrientationPopup();
-        if (touchControls) touchControls.style.display = 'none';
+        hideTouchControls(touchControls);
     }
-    
 }
+
+/**
+ * Prüft, ob das Gerät aktuell im Querformat ist.
+ * Nutzt screen.orientation, fallback: Breitenvergleich.
+ * @returns {boolean} True, wenn Querformat erkannt wurde.
+ * @function
+ */
+function detectLandscapeOrientation() {
+    return screen.orientation
+        ? screen.orientation.type.startsWith('landscape')
+        : window.innerWidth > window.innerHeight;
+}
+
+/**
+ * Steuert die Sichtbarkeit von Popup und Touch-Controls auf Mobilgeräten.
+ * @param {boolean} isLandscape - Ob das Gerät im Querformat ist.
+ * @param {HTMLElement|null} touchControls - Das DOM-Element für die Touch-Buttons.
+ * @function
+ */
+function handleMobileOrientationUI(isLandscape, touchControls) {
+    if (isLandscape) {
+        hideOrientationPopup();
+        showTouchControls(touchControls);
+    } else {
+        showOrientationPopup();
+        hideTouchControls(touchControls);
+    }
+}
+
+/**
+ * Zeigt die Touch-Steuerung an, falls vorhanden.
+ * @param {HTMLElement|null} element - Das Element, das sichtbar gemacht werden soll.
+ * @function
+ */
+function showTouchControls(element) {
+    if (element) element.style.display = 'flex';
+}
+
+/**
+ * Versteckt die Touch-Steuerung, falls vorhanden.
+ * @param {HTMLElement|null} element - Das Element, das versteckt werden soll.
+ * @function
+ */
+function hideTouchControls(element) {
+    if (element) element.style.display = 'none';
+}
+
 
 /**
  * Startet einen Intervall, der die Bildschirmorientierung überwacht und bei Änderung handleOrientationChange aufruft.

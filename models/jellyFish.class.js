@@ -33,29 +33,50 @@ class JellyFish extends MovableObject {
 
     /**
      * Startet die Bewegungs- und Animationsintervalle für die Qualle.
+     * Führt Bewegungslogik, Richtungswechsel und Tod-Handling durch.
      * @function
      */
     animate() {
-        setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.JELLYFISH_DIE);
-                this.removeEnemy();
-            } else {
-                if (this.direction === -1) {
-                    this.moveLeft();
-                } else {
-                    this.moveRight();
-                }
-                this.playAnimation(this.JELLYFISH_WALKING);
-                this.currentDirectionTime += 150;
-                if (this.currentDirectionTime >= 6000) {
-                    this.direction *= -1;
-                    this.otherDirection = this.direction === 1;
-                    this.currentDirectionTime = 0;
-                }
-            }
-        }, 150);
+        setInterval(() => this.updateJellyfishState(), 150);
     }
+
+    /**
+     * Aktualisiert Zustand der Qualle pro Frame.
+     * Entscheidet ob sie stirbt oder sich bewegt.
+     * @function
+     */
+    updateJellyfishState() {
+        if (this.isDead()) {
+            this.playAnimation(this.JELLYFISH_DIE);
+            this.removeEnemy();
+        } else {
+            this.handleJellyfishMovement();
+            this.updateDirectionLogic();
+        }
+    }
+
+    /**
+     * Führt die Bewegung und Abspielung der Lauf-Animation durch.
+     * @function
+     */
+    handleJellyfishMovement() {
+        this.direction === -1 ? this.moveLeft() : this.moveRight();
+        this.playAnimation(this.JELLYFISH_WALKING);
+    }
+
+    /**
+     * Verwalte Richtungswechsel nach Zeitintervall.
+     * @function
+     */
+    updateDirectionLogic() {
+        this.currentDirectionTime += 150;
+        if (this.currentDirectionTime >= 6000) {
+            this.direction *= -1;
+            this.otherDirection = this.direction === 1;
+            this.currentDirectionTime = 0;
+        }
+    }
+
 
     /**
      * Entfernt die Qualle nach dem Abspielen der Sterbeanimation aus dem Level.
