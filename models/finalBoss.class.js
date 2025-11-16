@@ -12,56 +12,56 @@ class FinalBoss extends MovableObject {
 
 
     BOSS_INTRO = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/6.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/7.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/8.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/9.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/1.Introduce/10.png'
+        'img/worldBuilding/finalEnemy/Introduce/1.png',
+        'img/worldBuilding/finalEnemy/Introduce/2.png',
+        'img/worldBuilding/finalEnemy/Introduce/3.png',
+        'img/worldBuilding/finalEnemy/Introduce/4.png',
+        'img/worldBuilding/finalEnemy/Introduce/5.png',
+        'img/worldBuilding/finalEnemy/Introduce/6.png',
+        'img/worldBuilding/finalEnemy/Introduce/7.png',
+        'img/worldBuilding/finalEnemy/Introduce/8.png',
+        'img/worldBuilding/finalEnemy/Introduce/9.png',
+        'img/worldBuilding/finalEnemy/Introduce/10.png'
     ]
 
     BOSS_WALKING = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/6.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/7.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/8.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/9.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/10.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/11.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/12.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/2.floating/13.png',
+        'img/worldBuilding/finalEnemy/floating/1.png',
+        'img/worldBuilding/finalEnemy/floating/2.png',
+        'img/worldBuilding/finalEnemy/floating/3.png',
+        'img/worldBuilding/finalEnemy/floating/4.png',
+        'img/worldBuilding/finalEnemy/floating/5.png',
+        'img/worldBuilding/finalEnemy/floating/6.png',
+        'img/worldBuilding/finalEnemy/floating/7.png',
+        'img/worldBuilding/finalEnemy/floating/8.png',
+        'img/worldBuilding/finalEnemy/floating/9.png',
+        'img/worldBuilding/finalEnemy/floating/10.png',
+        'img/worldBuilding/finalEnemy/floating/11.png',
+        'img/worldBuilding/finalEnemy/floating/12.png',
+        'img/worldBuilding/finalEnemy/floating/13.png',
     ]
 
     BOSS_HURT = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Hurt/4.png',
+        'img/worldBuilding/finalEnemy/hurt/1.png',
+        'img/worldBuilding/finalEnemy/hurt/2.png',
+        'img/worldBuilding/finalEnemy/hurt/3.png',
+        'img/worldBuilding/finalEnemy/hurt/4.png',
     ]
 
     BOSS_ATTACK = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Attack/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Attack/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Attack/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Attack/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Attack/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Attack/6.png',
+        'img/worldBuilding/finalEnemy/attack/1.png',
+        'img/worldBuilding/finalEnemy/attack/2.png',
+        'img/worldBuilding/finalEnemy/attack/3.png',
+        'img/worldBuilding/finalEnemy/attack/4.png',
+        'img/worldBuilding/finalEnemy/attack/5.png',
+        'img/worldBuilding/finalEnemy/attack/6.png',
     ]
 
     BOSS_DEAD = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
+        'img/worldBuilding/finalEnemy/dead/dead6.png',
+        'img/worldBuilding/finalEnemy/dead/dead7.png',
+        'img/worldBuilding/finalEnemy/dead/dead8.png',
+        'img/worldBuilding/finalEnemy/dead/dead9.png',
+        'img/worldBuilding/finalEnemy/dead/dead10.png'
     ]
 
     /**

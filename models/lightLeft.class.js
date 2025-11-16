@@ -9,7 +9,7 @@ class LightLeft extends MovableObject {
      * @constructor
      */
     constructor() {
-        super().loadImage('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/3. Background/Layers/1. Light/2.png');
+        super().loadImage('img/worldBuilding/layers/light/2.png');
         this.moveLeftOverTime();
     }
 

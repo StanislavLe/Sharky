@@ -4,8 +4,8 @@ class EndscreenManager {
      * @constructor
      */
     constructor() {
-        this.winScreen = new Endscreen('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/6.Botones/Try again/Mesa de trabajo 1.png');
-        this.loseScreen = new Endscreen('img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/6.Botones/Tittles/Game Over/Recurso 13.png');
+        this.winScreen = new Endscreen('img/worldBuilding/tryAgain/youWin.png');
+        this.loseScreen = new Endscreen('img/worldBuilding/tittles/gameOver/Recurso13.png');
         this.activeScreen = null;
         this._timeout = null;
         this.isPending = false;

@@ -3,14 +3,14 @@ class PoisonBottle extends CollectableObject {
     height = 100;
 
     WARPING_BOTTLE = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/6.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/7.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Posión/Animada/8.png'
+        'img/worldBuilding/poison/Animada/1.png',
+        'img/worldBuilding/poison/Animada/2.png',
+        'img/worldBuilding/poison/Animada/3.png',
+        'img/worldBuilding/poison/Animada/4.png',
+        'img/worldBuilding/poison/Animada/5.png',
+        'img/worldBuilding/poison/Animada/6.png',
+        'img/worldBuilding/poison/Animada/7.png',
+        'img/worldBuilding/poison/Animada/8.png'
     ]
 
     /**

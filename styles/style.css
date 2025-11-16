@@ -11,28 +11,14 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: swimmingPool;
-    background-image: url('../img/Alternative_Grafiken-Sharkie/Alternative_Grafiken-Sharkie/IMG/watercolor-1325656.jpg');
-    padding: 0px;
+    background-image: url('../img/worldBuilding/img/browserBackground.jpg');
+    background-repeat: no-repeat;       
+    background-size: cover;             
+    background-position: center center; 
+    background-attachment: fixed; 
+    padding: 0;
     margin: 0;
     height: 100%;
-}
-
-
-
-.adsimple-312964252 {
-    text-decoration: none;
-    color: #07363d;
-}
-
-
-.adsimple-312964252:visited {
-    text-decoration: none;
-    color: #07363d;
-}
-
-
-.adsimple-322964240 {
-    margin: 4px;
 }
 
 
@@ -44,6 +30,12 @@ body {
 .impressum {
     font-family: Arial, Helvetica, sans-serif;
     color: #07363d;
+}
+
+.mainContent {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 
@@ -200,7 +192,7 @@ canvas {
 
 
 .startScreen {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/gameCover.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/worldBuilding/img/gameCover.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

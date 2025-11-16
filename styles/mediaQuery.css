@@ -44,6 +44,14 @@
         display: none;
     }
 
+    .impressumHeadline {
+        display: block;
+    }
+
+    .privacyPolicyHeadline {
+        display: block;
+    }
+
     #fullscreenToggleOpen {
         display: none;
     }

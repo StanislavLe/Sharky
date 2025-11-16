@@ -4,17 +4,17 @@ class JellyFish extends MovableObject {
     currentDirectionTime = 0;
 
     JELLYFISH_WALKING = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png'
+        'img/worldBuilding/jellyFish/RegularDamage/Lila1.png',
+        'img/worldBuilding/jellyFish/RegularDamage/Lila2.png',
+        'img/worldBuilding/jellyFish/RegularDamage/Lila3.png',
+        'img/worldBuilding/jellyFish/RegularDamage/Lila4.png'
     ];
 
     JELLYFISH_DIE = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Dead/Lila/L2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Dead/Lila/L3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/2.Enemy/2 Jelly fish/Dead/Lila/L4.png',
+        'img/worldBuilding/jellyFish/Dead/Lila/L1.png',
+        'img/worldBuilding/jellyFish/Dead/Lila/L2.png',
+        'img/worldBuilding/jellyFish/Dead/Lila/L3.png',
+        'img/worldBuilding/jellyFish/Dead/Lila/L4.png',
     ];
 
     /**

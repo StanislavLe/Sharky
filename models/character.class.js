@@ -14,93 +14,93 @@ class Character extends MovableObject {
     };
 
     IMAGES_WALKING = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/6.png'
+        'img/worldBuilding/sharkie/swim/1.png',
+        'img/worldBuilding/sharkie/swim/2.png',
+        'img/worldBuilding/sharkie/swim/3.png',
+        'img/worldBuilding/sharkie/swim/4.png',
+        'img/worldBuilding/sharkie/swim/5.png',
+        'img/worldBuilding/sharkie/swim/6.png'
     ];
 
     IMAGES_JUMPING = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/3.Swim/6.png'
+        'img/worldBuilding/sharkie/swim/1.png',
+        'img/worldBuilding/sharkie/swim/2.png',
+        'img/worldBuilding/sharkie/swim/3.png',
+        'img/worldBuilding/sharkie/swim/4.png',
+        'img/worldBuilding/sharkie/swim/5.png',
+        'img/worldBuilding/sharkie/swim/6.png'
     ];
 
     IMAGES_DEAD = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00000.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00001.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00002.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00003.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00004.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00005.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00006.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00007.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00008.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00009.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00010.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00011.png'
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/0.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/1.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/2.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/3.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/4.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/5.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/6.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/7.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/8.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/9.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/10.png',
+        'img/worldBuilding/sharkie/dead/poisoned/sinSubir/11.png'
     ];
 
     IMAGES_HURT = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/5.Hurt/2.Electric shock/01.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/5.Hurt/2.Electric shock/02.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/5.Hurt/2.Electric shock/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/5.Hurt/2.Electric shock/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/5.Hurt/2.Electric shock/3.png'
+        'img/worldBuilding/sharkie/hurt/electricShock/01.png',
+        'img/worldBuilding/sharkie/hurt/electricShock/02.png',
+        'img/worldBuilding/sharkie/hurt/electricShock/1.png',
+        'img/worldBuilding/sharkie/hurt/electricShock/2.png',
+        'img/worldBuilding/sharkie/hurt/electricShock/3.png'
     ];
 
     IMAGES_IDLE = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/6.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/7.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/8.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/9.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/10.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/11.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/12.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/13.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/14.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/15.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/16.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/17.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/1.IDLE/18.png',
+        'img/worldBuilding/sharkie/IDLE/1.png',
+        'img/worldBuilding/sharkie/IDLE/2.png',
+        'img/worldBuilding/sharkie/IDLE/3.png',
+        'img/worldBuilding/sharkie/IDLE/4.png',
+        'img/worldBuilding/sharkie/IDLE/5.png',
+        'img/worldBuilding/sharkie/IDLE/6.png',
+        'img/worldBuilding/sharkie/IDLE/7.png',
+        'img/worldBuilding/sharkie/IDLE/8.png',
+        'img/worldBuilding/sharkie/IDLE/9.png',
+        'img/worldBuilding/sharkie/IDLE/10.png',
+        'img/worldBuilding/sharkie/IDLE/11.png',
+        'img/worldBuilding/sharkie/IDLE/12.png',
+        'img/worldBuilding/sharkie/IDLE/13.png',
+        'img/worldBuilding/sharkie/IDLE/14.png',
+        'img/worldBuilding/sharkie/IDLE/15.png',
+        'img/worldBuilding/sharkie/IDLE/16.png',
+        'img/worldBuilding/sharkie/IDLE/17.png',
+        'img/worldBuilding/sharkie/IDLE/18.png',
     ]
 
     IMAGES_LONG_IDLE = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/i1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I6.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I7.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I8.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I9.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I10.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I11.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I12.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I13.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/2.Long_IDLE/I14.png',
+        'img/worldBuilding/sharkie/long_IDLE/i1.png',
+        'img/worldBuilding/sharkie/long_IDLE/I2.png',
+        'img/worldBuilding/sharkie/long_IDLE/I3.png',
+        'img/worldBuilding/sharkie/long_IDLE/I4.png',
+        'img/worldBuilding/sharkie/long_IDLE/I5.png',
+        'img/worldBuilding/sharkie/long_IDLE/I6.png',
+        'img/worldBuilding/sharkie/long_IDLE/I7.png',
+        'img/worldBuilding/sharkie/long_IDLE/I8.png',
+        'img/worldBuilding/sharkie/long_IDLE/I9.png',
+        'img/worldBuilding/sharkie/long_IDLE/I10.png',
+        'img/worldBuilding/sharkie/long_IDLE/I11.png',
+        'img/worldBuilding/sharkie/long_IDLE/I12.png',
+        'img/worldBuilding/sharkie/long_IDLE/I13.png',
+        'img/worldBuilding/sharkie/long_IDLE/I14.png',
     ]
 
     IMAGES_PUNCH = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/4.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/5.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/6.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/7.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/1.Sharkie/4.Attack/Fin slap/8.png',
+        'img/worldBuilding/sharkie/attack/finSlap/1.png',
+        'img/worldBuilding/sharkie/attack/finSlap/2.png',
+        'img/worldBuilding/sharkie/attack/finSlap/3.png',
+        'img/worldBuilding/sharkie/attack/finSlap/4.png',
+        'img/worldBuilding/sharkie/attack/finSlap/5.png',
+        'img/worldBuilding/sharkie/attack/finSlap/6.png',
+        'img/worldBuilding/sharkie/attack/finSlap/7.png',
+        'img/worldBuilding/sharkie/attack/finSlap/8.png',
     ]
 
     world;
@@ -121,6 +121,7 @@ class Character extends MovableObject {
         this.applyGravity();
         this.animate();
     }
+
 
     /**
      * Setzt den Idle-Zustand zurück und stoppt das Schnarchgeräusch.
@@ -239,9 +240,12 @@ class Character extends MovableObject {
         this.img = this.imageCache[lastFrame];
         if (!this.hasPlayedDeathSound) {
             this.hasPlayedDeathSound = true;
-            this.character_dead_sound.play();
+            if (this.character_dead_sound && typeof this.character_dead_sound.play === 'function') {
+                this.character_dead_sound.play();
+            }
         }
     }
+
 
     /**
      * Führt die Animation bei Verletzung aus.

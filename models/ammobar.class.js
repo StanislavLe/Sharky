@@ -1,12 +1,12 @@
 class AmmoBar extends DrawableObject {
 
     IMAGES = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/0_ copia.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/20_ copia.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/40_ copia.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/60_ copia.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/80_ copia.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/orange/100_ copia.png',
+        'img/worldBuilding/orange/0.png',
+        'img/worldBuilding/orange/20.png',
+        'img/worldBuilding/orange/40.png',
+        'img/worldBuilding/orange/60.png',
+        'img/worldBuilding/orange/80.png',
+        'img/worldBuilding/orange/100.png',
     ];
 
     percentage = 0;

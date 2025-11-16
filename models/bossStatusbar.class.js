@@ -1,12 +1,12 @@
 class BossStatusBar extends DrawableObject {
 
     BOSS_STATUS_BAR = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/0_ .png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/20__1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/40_ .png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/60_ .png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/80_ .png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/Purple/100_ .png',
+        'img/worldBuilding/purple/heart0.png',
+        'img/worldBuilding/purple/heart20.png',
+        'img/worldBuilding/purple/heart40.png',
+        'img/worldBuilding/purple/heart60.png',
+        'img/worldBuilding/purple/heart80.png',
+        'img/worldBuilding/purple/heart100.png',
     ];
 
     percentage = 100;

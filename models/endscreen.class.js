@@ -10,10 +10,10 @@ class Endscreen {
         };
         this.image.onerror = () => {
             console.warn(`[Endscreen] ⚠️ Failed to load: ${imageSrc}. Fallback used.`);
-            this.image.src = 'img/defaultEndscreen.png';
+            this.image.src = 'img/worldBuilding/img/defaultEndscreen.png';
         };
 
-        this.image.src = imageSrc || 'img/defaultEndscreen.png';
+        this.image.src = imageSrc || 'img/worldBuilding/img/defaultEndscreen.png';
         this.visible = false;
     }
 
@@ -25,8 +25,8 @@ class Endscreen {
      */
     getImagePath(type) {
         const images = {
-            win: 'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/6.Botones/Try again/Mesa de trabajo 1.png',
-            lose: 'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/6.Botones/Tittles/Game Over/Recurso 13.png'
+            win: 'img/worldBuilding/tryAgain/youWin.png',
+            lose: 'img/worldBuilding/tittles/gameOver/Recurso13.png'
         };
         return images[type] || images.lose;
     }

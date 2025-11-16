@@ -3,10 +3,10 @@ class Coin extends CollectableObject {
     height = 50;
 
     WARPING_COINS = [
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/1. Coins/1.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/1. Coins/2.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/1. Coins/3.png',
-        'img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/4. Marcadores/1. Coins/4.png',
+        'img/worldBuilding/coins/1.png',
+        'img/worldBuilding/coins/2.png',
+        'img/worldBuilding/coins/3.png',
+        'img/worldBuilding/coins/4.png',
     ]
 
     /**
