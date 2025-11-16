@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: swimmingPool;
-    background-image: url('httpdocs/img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
+    background-image: url('../httpdocs/img/Alternative_Grafiken-Sharkie/Alternative Grafiken - Sharkie/IMG/watercolor-1325656.jpg');
     padding: 0px;
     margin: 0;
     height: 100%;
