@@ -1,12 +1,12 @@
 class ScoreBar extends DrawableObject {
 
     IMAGES = [
-        'img/worldBuilding/green/Coin/0.png',
-        'img/worldBuilding/green/Coin/20.png',
-        'img/worldBuilding/green/Coin/40.png',
-        'img/worldBuilding/green/Coin/60.png',
-        'img/worldBuilding/green/Coin/80.png',
-        'img/worldBuilding/green/Coin/100.png',
+        'img/worldBuilding/green/coin/0.png',
+        'img/worldBuilding/green/coin/20.png',
+        'img/worldBuilding/green/coin/40.png',
+        'img/worldBuilding/green/coin/60.png',
+        'img/worldBuilding/green/coin/80.png',
+        'img/worldBuilding/green/coin/100.png',
     ];
 
     percentage = 0;
