@@ -4,10 +4,10 @@ class JellyFish extends MovableObject {
     currentDirectionTime = 0;
 
     JELLYFISH_WALKING = [
-        'img/worldBuilding/jellyFish/RegularDamage/Lila1.png',
-        'img/worldBuilding/jellyFish/RegularDamage/Lila2.png',
-        'img/worldBuilding/jellyFish/RegularDamage/Lila3.png',
-        'img/worldBuilding/jellyFish/RegularDamage/Lila4.png'
+        'img/worldBuilding/jellyFish/regularDamage/Lila1.png',
+        'img/worldBuilding/jellyFish/regularDamage/Lila2.png',
+        'img/worldBuilding/jellyFish/regularDamage/Lila3.png',
+        'img/worldBuilding/jellyFish/regularDamage/Lila4.png'
     ];
 
     JELLYFISH_DIE = [
