@@ -3,14 +3,14 @@ class PoisonBottle extends CollectableObject {
     height = 100;
 
     WARPING_BOTTLE = [
-        'img/worldBuilding/poison/Animada/1.png',
-        'img/worldBuilding/poison/Animada/2.png',
-        'img/worldBuilding/poison/Animada/3.png',
-        'img/worldBuilding/poison/Animada/4.png',
-        'img/worldBuilding/poison/Animada/5.png',
-        'img/worldBuilding/poison/Animada/6.png',
-        'img/worldBuilding/poison/Animada/7.png',
-        'img/worldBuilding/poison/Animada/8.png'
+        'img/worldBuilding/poison/animada/1.png',
+        'img/worldBuilding/poison/animada/2.png',
+        'img/worldBuilding/poison/animada/3.png',
+        'img/worldBuilding/poison/animada/4.png',
+        'img/worldBuilding/poison/animada/5.png',
+        'img/worldBuilding/poison/animada/6.png',
+        'img/worldBuilding/poison/animada/7.png',
+        'img/worldBuilding/poison/animada/8.png'
     ]
 
     /**

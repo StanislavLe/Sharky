@@ -11,10 +11,10 @@ class JellyFish extends MovableObject {
     ];
 
     JELLYFISH_DIE = [
-        'img/worldBuilding/jellyFish/Dead/Lila/L1.png',
-        'img/worldBuilding/jellyFish/Dead/Lila/L2.png',
-        'img/worldBuilding/jellyFish/Dead/Lila/L3.png',
-        'img/worldBuilding/jellyFish/Dead/Lila/L4.png',
+        'img/worldBuilding/jellyFish/dead/Lila/L1.png',
+        'img/worldBuilding/jellyFish/dead/Lila/L2.png',
+        'img/worldBuilding/jellyFish/dead/Lila/L3.png',
+        'img/worldBuilding/jellyFish/dead/Lila/L4.png',
     ];
 
     /**
